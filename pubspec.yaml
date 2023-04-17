@@ -5,11 +5,15 @@ description: A new Flutter project.
 environment: 
   sdk: '>=2.19.3 <3.0.0'
 
-dependencies: 
-  cupertino_icons: ^1.0.2
+dependencies:
+  cupertino_icons: ^1.0.5
   get: 4.6.5
   flutter: 
     sdk: flutter
+  flutter_native_splash: ^2.2.19
+  flutter_svg: ^2.0.5
+  flutter_screenutil: ^5.7.0
+  google_fonts: ^4.0.3
 
 dev_dependencies: 
   flutter_lints: 2.0.1
@@ -18,4 +22,16 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
+  assets:
+    - assets/images/
+
+flutter_native_splash:
+  color: "#FFCDD7"
+  image: assets/images/logo2.png
+  android_12:
+    image: assets/images/logo2.png
+    color: "#FFCDD7"
+
+
+
 
