@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "53187888252",
+    "project_id": "mamanote-21b82",
+    "storage_bucket": "mamanote-21b82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53187888252:android:6b8798f1b34395e0fef5f9",
+        "android_client_info": {
+          "package_name": "org.d3ifcool.mamanote.mamanote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53187888252-0tgq7r208cjp69t25nljr8mj4prdqu22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXwhehYfgaRbcj6KCIJ6x_Uu8DRugx7K8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53187888252-0tgq7r208cjp69t25nljr8mj4prdqu22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53187888252:android:bce848a694cb3a80fef5f9",
+        "android_client_info": {
+          "package_name": "org.d3ifcool.mamanotes.mamanotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53187888252-0tgq7r208cjp69t25nljr8mj4prdqu22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXwhehYfgaRbcj6KCIJ6x_Uu8DRugx7K8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53187888252-0tgq7r208cjp69t25nljr8mj4prdqu22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
