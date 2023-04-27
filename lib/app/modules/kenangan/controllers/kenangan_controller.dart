@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class SplashScreenController extends GetxController {
-  //TODO: Implement SplashScreenController
+class KenanganController extends GetxController {
+  //TODO: Implement KenanganController
 
   final count = 0.obs;
   @override

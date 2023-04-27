@@ -1,23 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupController extends GetxController {
-  //TODO: Implement SignupController
-
-  final count = 0.obs;
+  final FocusNode focusNode = FocusNode();
+  RxBool isHidden = true.obs;
+  RxBool isLoading = false.obs;
   @override
   void onInit() {
     super.onInit();
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
+  onClose() {
+    focusNode.dispose();
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
