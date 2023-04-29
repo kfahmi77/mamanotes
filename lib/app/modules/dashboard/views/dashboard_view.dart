@@ -6,6 +6,7 @@ import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/modules/home/views/home_view.dart';
 import 'package:mamanotes/app/modules/kenangan/views/kenangan_view.dart';
 import 'package:mamanotes/app/modules/profile/views/profile_view.dart';
+import 'package:mamanotes/app/modules/tentang/views/tentang_view.dart';
 
 import '../../../data/common/custom_bottom_navigation.dart';
 
@@ -22,10 +23,10 @@ class _DashboardViewState extends State<DashboardView> {
   final _inactiveColor = Colors.grey;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: getBody(), bottomNavigationBar: _buildBottomBar());
+    return Scaffold(body: getBody(), bottomNavigationBar: buildBottomBar());
   }
 
-  Widget _buildBottomBar() {
+  Widget buildBottomBar() {
     return CustomAnimatedBottomBar(
       containerHeight: 70,
       backgroundColor: Colors.white,
@@ -66,7 +67,7 @@ class _DashboardViewState extends State<DashboardView> {
     List<Widget> pages = [
       const HomeView(),
       KenanganView(),
-      const ProfileView(),
+      ProfileView(),
     ];
     return IndexedStack(
       index: _currentIndex,

@@ -104,18 +104,14 @@ class KenanganView extends GetView<KenanganController> {
                         children: [
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                10, 0, 0, 0),
-                            child: Text(
-                              "tanggal \n ${DateTime.now().day} \n ${DateTime.now().month} \n ${DateTime.now().year}  ",
-                              style: redTextStyle.copyWith(
-                                  fontSize: 14.sp,
-                                  fontWeight: normal,
-                                  color: black),
-                            ),
+                                16, 0, 0, 0),
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
+                              SizedBox(
+                                height: 10.h,
+                              ),
                               Column(
                                 children: [
                                   FaIcon(
@@ -124,8 +120,11 @@ class KenanganView extends GetView<KenanganController> {
                                   ),
                                 ],
                               ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
                               Container(
-                                height: 200.h,
+                                height: 150.h,
                                 width: 5.w,
                                 decoration: BoxDecoration(color: red),
                               ),
@@ -133,17 +132,48 @@ class KenanganView extends GetView<KenanganController> {
                           ),
                           Expanded(
                             child: SizedBox(
-                              height: 180.h,
+                              height: 160.h,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 8.r),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "20 Oktober 2022",
+                                          style: redTextStyle.copyWith(
+                                            fontSize: 14.0,
+                                          ),
+                                        ),
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 10.r)),
+                                        Text(
+                                          "Bandung, Jawa Barat",
+                                          style: redTextStyle.copyWith(
+                                              fontSize: 14.0,
+                                              fontWeight: semiBold),
+                                        ),
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 5.r)),
+                                        FaIcon(
+                                          FontAwesomeIcons.locationDot,
+                                          color: red,
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                   Expanded(
                                     child: SizedBox(
                                       height: 200.0.h,
                                       child: Row(
                                         children: [
                                           SizedBox(
-                                            width: 230.0.w,
+                                            width: 300.0.w,
                                             child: ListView.builder(
                                               scrollDirection: Axis.horizontal,
                                               itemCount: 10,
@@ -178,7 +208,7 @@ class KenanganView extends GetView<KenanganController> {
                                                                     0.4),
                                                             child: Center(
                                                               child: Text(
-                                                                "text",
+                                                                "Kenangan",
                                                                 style: redTextStyle.copyWith(
                                                                     fontSize:
                                                                         15.0.r,

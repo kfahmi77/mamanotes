@@ -9,18 +9,18 @@ import 'package:mamanotes/app/modules/home/views/home_view.dart';
 import 'package:mamanotes/app/modules/signup/bindings/signup_binding.dart';
 import 'package:mamanotes/app/modules/signup/views/signup_view.dart';
 import '../../../data/common/style.dart';
+import '../../../data/repository/auth.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/signin_controller.dart';
 
 class SigninView extends GetView<SigninController> {
   const SigninView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController =
-        TextEditingController(text: 'admin@gmail.com');
-    final TextEditingController passwordController =
-        TextEditingController(text: 'fahmi0810');
+    final AuthController authC = Get.find<AuthController>();
     ScreenUtil.init(context, designSize: const Size(376, 667));
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF1F4F8),
       body: SafeArea(
         child: Container(
@@ -70,9 +70,8 @@ class SigninView extends GetView<SigninController> {
                       child: SizedBox(
                         height: 50.h,
                         child: TextField(
-                          focusNode: controller.focusNode,
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
+                          controller: controller.emailController,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -93,7 +92,7 @@ class SigninView extends GetView<SigninController> {
                         child: Obx(
                           () => TextField(
                             obscureText: controller.isHidden.value,
-                            controller: passwordController,
+                            controller: controller.passwordController,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -153,8 +152,29 @@ class SigninView extends GetView<SigninController> {
                                 ),
                                 backgroundColor: background,
                               ),
-                              onPressed: () {
-                                Get.to(() => DashboardView());
+                              onPressed: () async {
+                                if (controller.isLoading.isFalse) {
+                                  if (controller
+                                          .emailController.text.isNotEmpty &&
+                                      controller
+                                          .passwordController.text.isNotEmpty) {
+                                    controller.isLoading(true);
+                                    Map<String, dynamic> hasil =
+                                        await authC.login(
+                                            controller.emailController.text,
+                                            controller.passwordController.text);
+                                    controller.isLoading(false);
+
+                                    if (hasil["error"] == true) {
+                                      Get.snackbar("Error", hasil["message"]);
+                                    } else {
+                                      Get.offAllNamed(Routes.dashboard);
+                                    }
+                                  } else {
+                                    Get.snackbar("Error",
+                                        "Email dan password wajib diisi.");
+                                  }
+                                }
                               },
                               child: Text("Masuk",
                                   style:

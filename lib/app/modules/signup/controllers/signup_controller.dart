@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupController extends GetxController {
-  final FocusNode focusNode = FocusNode();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   RxBool isHidden = true.obs;
   RxBool isLoading = false.obs;
   @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  onClose() {
-    focusNode.dispose();
-    super.onClose();
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

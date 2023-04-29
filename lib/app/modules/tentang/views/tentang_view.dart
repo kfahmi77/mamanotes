@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:mamanotes/app/modules/dashboard/views/dashboard_view.dart';
 
 import '../controllers/tentang_controller.dart';
 

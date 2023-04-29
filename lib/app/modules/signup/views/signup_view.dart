@@ -4,21 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../data/common/style.dart';
+import '../../../data/repository/auth.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
   const SignupView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final TextEditingController nameController =
-        TextEditingController(text: "dewi");
-    final TextEditingController emailController =
-        TextEditingController(text: 'admin@gmail.com');
-    final TextEditingController passwordController =
-        TextEditingController(text: 'fahmi0810');
+    final AuthController authC = Get.find<AuthController>();
+    SignupController signupBinding = Get.find<SignupController>();
     ScreenUtil.init(context, designSize: const Size(376, 667));
     return Scaffold(
       backgroundColor: const Color(0xFFF1F4F8),
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width * 1.0,
@@ -67,8 +66,7 @@ class SignupView extends GetView<SignupController> {
                       child: SizedBox(
                         height: 50,
                         child: TextField(
-                          focusNode: controller.focusNode,
-                          controller: nameController,
+                          controller: controller.nameController,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             filled: true,
@@ -88,7 +86,7 @@ class SignupView extends GetView<SignupController> {
                       child: SizedBox(
                         height: 50,
                         child: TextField(
-                          controller: emailController,
+                          controller: signupBinding.emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             filled: true,
@@ -110,7 +108,7 @@ class SignupView extends GetView<SignupController> {
                         child: Obx(
                           () => TextField(
                             obscureText: controller.isHidden.value,
-                            controller: passwordController,
+                            controller: signupBinding.passwordController,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -146,7 +144,30 @@ class SignupView extends GetView<SignupController> {
                               ),
                               backgroundColor: white,
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (controller.isLoading.isFalse) {
+                                if (controller
+                                        .emailController.text.isNotEmpty &&
+                                    controller
+                                        .passwordController.text.isNotEmpty) {
+                                  controller.isLoading(true);
+                                  Map<String, dynamic> hasil =
+                                      await authC.register(
+                                          controller.emailController.text,
+                                          controller.passwordController.text);
+                                  controller.isLoading(false);
+
+                                  if (hasil["error"] == true) {
+                                    Get.snackbar("Error", hasil["message"]);
+                                  } else {
+                                    Get.offAllNamed(Routes.signin);
+                                  }
+                                } else {
+                                  Get.snackbar("Error",
+                                      "Email dan password wajib diisi.");
+                                }
+                              }
+                            },
                             child: Text("Daftar",
                                 style: redTextStyle.copyWith(
                                     fontWeight: bold, color: red)),
