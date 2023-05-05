@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../data/common/style.dart';
 import '../../../data/repository/auth.dart';
@@ -14,7 +15,6 @@ class SignupView extends GetView<SignupController> {
   Widget build(BuildContext context) {
     final AuthController authC = Get.find<AuthController>();
     SignupController signupBinding = Get.find<SignupController>();
-    ScreenUtil.init(context, designSize: const Size(376, 667));
     return Scaffold(
       backgroundColor: const Color(0xFFF1F4F8),
       resizeToAvoidBottomInset: false,
@@ -54,10 +54,64 @@ class SignupView extends GetView<SignupController> {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 50.0, 0.0, 0.0),
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        fit: BoxFit.fill,
+                      child: GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SafeArea(
+                                  child: Wrap(
+                                    children: <Widget>[
+                                      ListTile(
+                                        leading:
+                                            const Icon(Icons.photo_library),
+                                        title: const Text('Ambil dari Galeri'),
+                                        onTap: () {
+                                          authC.getImage(ImageSource.gallery);
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(Icons.photo_camera),
+                                        title: const Text('Ambil dari Kamera'),
+                                        onTap: () {
+                                          authC.getImage(ImageSource.camera);
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              });
+                        },
+                        child: Obx(
+                          () => Container(
+                            width: 150,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: authC.image.value != null
+                                    ? FileImage(authC.image.value!)
+                                    : const AssetImage(
+                                            "assets/images/daughter.png")
+                                        as ImageProvider<Object>,
+                              ),
+                            ),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black26,
+                              ),
+                              child: const Icon(
+                                Icons.camera_alt,
+                                size: 50,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     Padding(
@@ -154,7 +208,8 @@ class SignupView extends GetView<SignupController> {
                                   Map<String, dynamic> hasil =
                                       await authC.register(
                                           controller.emailController.text,
-                                          controller.passwordController.text);
+                                          controller.passwordController.text,
+                                          controller.nameController.text);
                                   controller.isLoading(false);
 
                                   if (hasil["error"] == true) {
@@ -164,7 +219,7 @@ class SignupView extends GetView<SignupController> {
                                   }
                                 } else {
                                   Get.snackbar("Error",
-                                      "Email dan password wajib diisi.");
+                                      "Email,Password,Nama wajib diisi.");
                                 }
                               }
                             },

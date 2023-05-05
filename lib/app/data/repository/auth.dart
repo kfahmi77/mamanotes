@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:mamanotes/app/modules/profile/controllers/profile_controller.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mamanotes/app/modules/signup/controllers/signup_controller.dart';
 
 class AuthController extends GetxController {
@@ -12,8 +15,12 @@ class AuthController extends GetxController {
   String? uid;
 
   late FirebaseAuth auth;
-  final firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+  final _firestore = FirebaseFirestore.instance;
   late SignupController authC = Get.find<SignupController>();
+  final picker = ImagePicker();
+
+  Rx<File?> image = Rx<File?>(null);
 
   Future<Map<String, dynamic>> login(String email, String pass) async {
     try {
@@ -43,13 +50,54 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<Map<String, dynamic>> register(String email, String password) async {
+  Future<void> getImage(ImageSource source) async {
+    final pickedFile = await picker.getImage(source: source);
+    if (pickedFile != null) {
+      image.value = File(pickedFile.path);
+    } else {
+      print('No image selected.');
+    }
+  }
+
+  Future<String> uploadImage(File file, String uid) async {
+    Reference ref = _storage.ref().child("user/$uid.jpg");
+    await ref.putFile(file);
+    final downloadUrl = await ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  Future<String> uploadDefaultImage(String uid) async {
+    String url = '';
+    final ByteData bytes = await rootBundle.load('assets/images/daughter.png');
+    final Uint8List data = bytes.buffer.asUint8List();
+
+    final Reference ref = _storage.ref().child('user/$uid.jpg');
+    final UploadTask task = ref.putData(data);
+
+    await task.whenComplete(() async {
+      url = await ref.getDownloadURL();
+      image.value = null;
+    });
+    return url;
+  }
+
+  Future<Map<String, dynamic>> register(
+      String email, String password, String name) async {
     try {
       UserCredential result = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      User? user = result.user;
-      var hasil = await firestore.collection('users').doc(user!.uid).set(
-          {'name': authC.nameController.text, 'email': email, 'uid': user.uid});
+      String imageUrl = await (image.value != null
+          ? uploadImage(image.value!, result.user!.uid)
+          : uploadDefaultImage(result.user!.uid));
+      result.user!.updateDisplayName(name);
+      result.user!.updatePhotoURL(imageUrl);
+
+      await _firestore.collection("users").doc(result.user!.uid).set({
+        "name": name,
+        "email": email,
+        "imageUrl": imageUrl,
+      });
+
       return {
         "error": false,
         "message": "Berhasil daftar.",
