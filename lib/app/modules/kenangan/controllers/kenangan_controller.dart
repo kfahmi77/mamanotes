@@ -1,23 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class KenanganController extends GetxController {
-  //TODO: Implement KenanganController
+  final isSearchVisible = false.obs;
+  final searchController = TextEditingController();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void toggleSearch() {
+    isSearchVisible.value = !isSearchVisible.value;
+    if (!isSearchVisible.value) {
+      clearSearch();
+    }
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void search(String value) {
+    // Perform search here
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void clearSearch() {
+    searchController.clear();
   }
-
-  void increment() => count.value++;
 }

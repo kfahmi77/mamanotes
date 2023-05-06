@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 
+import '../../../data/common/widget/title_image_appbar.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -105,9 +106,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
         Center(
           child: Opacity(
             opacity: shrinkOffset / expandedHeight,
-            child: SizedBox(
-                height: 30.h,
-                child: Image.asset('assets/images/logo_mamanote.png')),
+            child: const BuildLogoWidget(),
           ),
         ),
         Positioned(
@@ -119,10 +118,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
           left: MediaQuery.of(context).size.width / 14,
           child: Opacity(
             opacity: 1 - shrinkOffset / expandedHeight,
-            child: SizedBox(
-              height: 30.h,
-              child: Image.asset('assets/images/logo_mamanote.png'),
-            ),
+            child: const BuildLogoWidget(),
           ),
         ),
         Positioned(
