@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -199,7 +200,7 @@ class SigninView extends GetView<SigninController> {
                               ),
                               backgroundColor: white,
                             ),
-                            onPressed: () {},
+                            onPressed: () => authC.signInWithGoogle(),
                             icon: Image.asset(
                               "assets/images/google.png",
                               height: 20.h,

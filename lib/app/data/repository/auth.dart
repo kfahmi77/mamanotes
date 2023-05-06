@@ -5,7 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mamanotes/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:mamanotes/app/modules/home/views/home_view.dart';
 import 'package:mamanotes/app/modules/signup/controllers/signup_controller.dart';
 
 class AuthController extends GetxController {
@@ -18,9 +21,11 @@ class AuthController extends GetxController {
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final _firestore = FirebaseFirestore.instance;
   late SignupController authC = Get.find<SignupController>();
+  late GoogleSignIn _googleSignIn;
   final picker = ImagePicker();
 
   Rx<File?> image = Rx<File?>(null);
+  Rx<GoogleSignInAccount?> googleSignInAccount = Rx<GoogleSignInAccount?>(null);
 
   Future<Map<String, dynamic>> login(String email, String pass) async {
     try {
@@ -122,6 +127,26 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return;
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await auth.signInWithCredential(credential);
+      Get.offAll(() => const DashboardView());
+    } catch (e) {
+      print('Google sign in error: $e');
+    }
+  }
+
   Future<Map<String, dynamic>> logout() async {
     try {
       await auth.signOut();
@@ -147,7 +172,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     auth = FirebaseAuth.instance;
-
+    _googleSignIn = GoogleSignIn();
     auth.authStateChanges().listen((event) {
       uid = event?.uid;
     });

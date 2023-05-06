@@ -21,6 +21,7 @@ dependencies:
   cloud_firestore: ^4.5.3
   firebase_storage: ^11.1.2
   image_picker: ^0.8.7+4
+  google_sign_in: ^6.1.0
 
 dev_dependencies: 
   flutter_lints: 2.0.1
