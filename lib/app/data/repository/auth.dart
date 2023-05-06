@@ -149,6 +149,7 @@ class AuthController extends GetxController {
 
   Future<Map<String, dynamic>> logout() async {
     try {
+      await _googleSignIn.signOut();
       await auth.signOut();
 
       return {
