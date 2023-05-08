@@ -11,6 +11,7 @@ abstract class Routes {
   static const dashboard = _Paths.dashboard;
   static const kenangan = _Paths.kenangan;
   static const tentang = _Paths.tentang;
+  static const addKenangan = _Paths.addKenangan;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const dashboard = '/dashboard';
   static const kenangan = '/kenangan';
   static const tentang = '/tentang';
+  static const addKenangan = '/add-kenangan';
 }

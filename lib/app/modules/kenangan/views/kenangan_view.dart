@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/widget/title_image_appbar.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/kenangan_controller.dart';
 
 class KenanganView extends GetView<KenanganController> {
@@ -197,7 +198,9 @@ class KenanganView extends GetView<KenanganController> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.transparent,
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed(Routes.addKenangan);
+        },
         child: Image.asset(
           'assets/images/plus_icon.png',
           width: 80.w,

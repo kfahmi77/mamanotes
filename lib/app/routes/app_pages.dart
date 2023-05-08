@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mamanotes/app/modules/kenangan/views/kenangan_add_view.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
@@ -51,6 +52,11 @@ class AppPages {
     GetPage(
       name: _Paths.kenangan,
       page: () => KenanganView(),
+      binding: KenanganBinding(),
+    ),
+    GetPage(
+      name: _Paths.addKenangan,
+      page: () => const KenanganAddView(),
       binding: KenanganBinding(),
     ),
     GetPage(
