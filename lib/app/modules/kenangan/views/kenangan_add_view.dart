@@ -14,7 +14,10 @@ class KenanganAddView extends GetView<KenanganAddController> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthController authC = Get.find<AuthController>();
+    final KenanganAddController authC = Get.find<KenanganAddController>();
+    TextEditingController captionController = TextEditingController();
+    TextEditingController dateController = TextEditingController();
+    TextEditingController imageController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const BuildLogoWidget(),
@@ -74,6 +77,7 @@ class KenanganAddView extends GetView<KenanganAddController> {
               padding: const EdgeInsets.all(12),
               child: TextFormField(
                 maxLength: 30,
+                controller: captionController,
                 decoration: const InputDecoration(
                   labelText: 'Caption',
                   labelStyle: TextStyle(
@@ -179,7 +183,30 @@ class KenanganAddView extends GetView<KenanganAddController> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            if (controller.isLoading.isFalse) {
+                              if (captionController.text.isNotEmpty) {
+                                controller.isLoading(true);
+                                Map<String, dynamic> hasil =
+                                    await controller.addKenangan({
+                                  "caption": captionController.text,
+                                  "create_at": controller.selectedDate.value,
+                                });
+                                controller.isLoading(false);
+
+                                Get.back();
+
+                                Get.snackbar(
+                                    hasil["error"] == true
+                                        ? "Error"
+                                        : "Success",
+                                    hasil["message"]);
+                              } else {
+                                Get.snackbar(
+                                    "Error", "Semua data wajib diisi.");
+                              }
+                            }
+                          },
                           child: Text(
                             'Simpan',
                             style: redTextStyle.copyWith(
