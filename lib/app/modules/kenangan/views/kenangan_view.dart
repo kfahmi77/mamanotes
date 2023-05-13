@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,15 +11,11 @@ import 'package:mamanotes/app/data/common/widget/title_image_appbar.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/kenangan_controller.dart';
-import '../models/kenangan_model.dart';
 
 class KenanganView extends GetView<KenanganController> {
   KenanganView({Key? key}) : super(key: key);
 
   final _isSearchVisible = false.obs;
-  final CollectionReference kenanganCollection =
-      FirebaseFirestore.instance.collection('kenangan');
-  final DateFormat _dateFormat = DateFormat('dd MMMM yyyy, HH:mm', 'id');
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +49,23 @@ class KenanganView extends GetView<KenanganController> {
             child: Container(
               margin: const EdgeInsets.only(top: 5),
               child: Obx(() {
-                if (controller.daftarKenangan.isEmpty) {
-                  return Center(
+                if (controller.dataList.isEmpty) {
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else {
+                  final groupedData = groupBy(
+                      controller.dataList,
+                      (data) => DateFormat('d MMM yy', 'id_ID')
+                          .format(data.createdAt.toDate()));
+                  final keys = groupedData.keys.toList()
+                    ..sort((a, b) => a.compareTo(b))
+                    ..reversed.toList();
                   return ListView.builder(
-                    itemCount: controller.daftarKenangan.length,
+                    itemCount: groupedData.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final KenanganModel kenangan =
-                          controller.daftarKenangan[index];
+                      final key = keys[index];
+                      final values = groupedData[key];
                       return Row(
                         children: [
                           const Padding(
@@ -86,7 +90,7 @@ class KenanganView extends GetView<KenanganController> {
                                 height: 10.h,
                               ),
                               //ganti panjang data dari firebase
-                              index == controller.daftarKenangan.length - 1
+                              index == groupedData.length - 1
                                   ? Container(
                                       height: 150.h,
                                       width: 5.w,
@@ -97,6 +101,9 @@ class KenanganView extends GetView<KenanganController> {
                                       height: 150.h,
                                       width: 5.w,
                                       decoration: BoxDecoration(color: red),
+                                      // final RxList<KenanganModel> _daftarKenangan = RxList<KenanganModel>([]);
+
+                                      // List<KenanganModel> get daftarKenangan => _daftarKenangan;                    )
                                     )
                             ],
                           ),
@@ -113,8 +120,7 @@ class KenanganView extends GetView<KenanganController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          controller.ubahFormatTanggal(
-                                              kenangan.createdAt),
+                                          key,
                                           style: redTextStyle.copyWith(
                                             fontSize: 14.0,
                                           ),
@@ -131,11 +137,11 @@ class KenanganView extends GetView<KenanganController> {
                                             width: 300.0.w,
                                             child: ListView.builder(
                                               scrollDirection: Axis.horizontal,
-                                              itemCount: controller
-                                                  .daftarKenangan.length,
+                                              itemCount: values?.length,
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
+                                                final data = values![index];
                                                 return SizedBox(
                                                   width: 200.0.w,
                                                   child: Card(
@@ -149,7 +155,7 @@ class KenanganView extends GetView<KenanganController> {
                                                                   top: 30,
                                                                   left: 20),
                                                           child: Image.network(
-                                                            kenangan.imageUrl,
+                                                            data.imageUrl,
                                                             fit: BoxFit.fill,
                                                           ),
                                                         ),
@@ -164,8 +170,7 @@ class KenanganView extends GetView<KenanganController> {
                                                                     0.4),
                                                             child: Center(
                                                               child: Text(
-                                                                kenangan
-                                                                    .caption,
+                                                                data.caption,
                                                                 style: redTextStyle.copyWith(
                                                                     fontSize:
                                                                         15.0.r,

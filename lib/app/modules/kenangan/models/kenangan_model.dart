@@ -13,21 +13,22 @@ class KenanganModel {
     required this.kenanganId,
   });
 
-  factory KenanganModel.fromJson(Map<String, dynamic> json) {
+  factory KenanganModel.fromJson(DocumentSnapshot json) {
+    Map data = json.data() as Map<String, dynamic>;
     return KenanganModel(
-      caption: json['caption'] ?? '',
-      createdAt: json['created_at'] != null
+      caption: data['caption'] ?? '',
+      createdAt: data['create_at'] != null
           ? Timestamp.fromMillisecondsSinceEpoch(
-              json['created_at'].millisecondsSinceEpoch)
+              data['create_at'].millisecondsSinceEpoch)
           : Timestamp.now(),
-      imageUrl: json['image_url'] ?? '',
-      kenanganId: json['kenanganId'] ?? '',
+      imageUrl: data['image_url'] ?? '',
+      kenanganId: data['kenanganId'] ?? '',
     );
   }
   Map<String, dynamic> toJson() {
     return {
       'caption': caption,
-      'created_at': createdAt,
+      'create_at': createdAt,
       'image_url': imageUrl,
       'kenanganId': kenanganId,
     };
