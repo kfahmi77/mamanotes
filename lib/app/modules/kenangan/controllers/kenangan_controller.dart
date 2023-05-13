@@ -14,6 +14,7 @@ class KenanganController extends GetxController {
   final CollectionReference koleksiKenangan =
       FirebaseFirestore.instance.collection('kenangan');
   final DateFormat _dateFormat = DateFormat('dd MMMM yyyy, HH:mm', 'id');
+  var isLoading = false.obs;
 
   String ubahFormatTanggal(Timestamp timestamp) {
     DateTime dateTime = timestamp.toDate();
@@ -28,12 +29,19 @@ class KenanganController extends GetxController {
   }
 
   void search(String value) {
-    // Perform search here
+    if (value.isNotEmpty) {
+      filterData(value);
+    } else {
+      dataList.assignAll(_allData);
+    }
   }
 
   void clearSearch() {
     searchController.clear();
+    dataList.assignAll(_allData);
   }
+
+  late List<KenanganModel> _allData = [];
 
   @override
   void onInit() {
@@ -47,13 +55,23 @@ class KenanganController extends GetxController {
           .orderBy('create_at', descending: false)
           .snapshots()
           .listen((querySnapshot) {
-        dataList.assignAll(querySnapshot.docs
+        _allData = querySnapshot.docs
             .map((doc) => KenanganModel.fromJson(doc))
-            .toList());
+            .toList();
+        dataList.assignAll(_allData);
+        isLoading.value = false;
       });
     } catch (e) {
       Get.snackbar('Error', 'Gagal mengambil data $e}',
           snackPosition: SnackPosition.BOTTOM);
     }
+  }
+
+  void filterData(String keyword) {
+    final List<KenanganModel> result = _allData
+        .where((kenangan) =>
+            kenangan.caption.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+    dataList.assignAll(result);
   }
 }

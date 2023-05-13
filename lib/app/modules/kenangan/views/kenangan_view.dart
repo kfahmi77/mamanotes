@@ -18,6 +18,7 @@ class KenanganView extends GetView<KenanganController> {
   KenanganView({Key? key}) : super(key: key);
 
   final _isSearchVisible = false.obs;
+  bool dataLoaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,163 +51,168 @@ class KenanganView extends GetView<KenanganController> {
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(top: 5),
-              child: Obx(() {
-                if (controller.dataList.isEmpty) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  final groupedData = groupBy(
-                      controller.dataList,
-                      (data) => DateFormat('d MMM yy', 'id_ID')
-                          .format(data.createdAt.toDate()));
-                  final keys = groupedData.keys.toList()
-                    ..sort((a, b) => a.compareTo(b))
-                    ..reversed.toList();
-                  return ListView.builder(
-                    itemCount: groupedData.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final key = keys[index];
-                      final values = groupedData[key];
-                      return Row(
-                        children: [
-                          const Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Column(
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.circle,
-                                    color: red,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              //ganti panjang data dari firebase
-                              index == groupedData.length - 1
-                                  ? Container(
-                                      height: 150.h,
-                                      width: 5.w,
-                                      decoration: const BoxDecoration(
-                                          color: Colors.transparent),
-                                    )
-                                  : Container(
-                                      height: 150.h,
-                                      width: 5.w,
-                                      decoration: BoxDecoration(color: red),
-                                      // final RxList<KenanganModel> _daftarKenangan = RxList<KenanganModel>([]);
-
-                                      // List<KenanganModel> get daftarKenangan => _daftarKenangan;                    )
-                                    )
-                            ],
-                          ),
-                          Expanded(
-                            child: SizedBox(
-                              height: 160.h,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 8.r),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          key,
-                                          style: redTextStyle.copyWith(
-                                            fontSize: 14.0,
-                                          ),
-                                        ),
-                                      ],
+              child: Obx(
+                () {
+                  if (controller.isLoading.isTrue) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (controller.isLoading.isFalse &&
+                      controller.dataList.isNotEmpty) {
+                    final groupedData = groupBy(
+                        controller.dataList,
+                        (data) => DateFormat('d MMM yy', 'id_ID')
+                            .format(data.createdAt.toDate()));
+                    final keys = groupedData.keys.toList()
+                      ..sort((a, b) => a.compareTo(b))
+                      ..reversed.toList();
+                    return ListView.builder(
+                        itemCount: groupedData.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final key = keys[index];
+                          final values = groupedData[key];
+                          return Row(children: [
+                            const Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Column(
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.circle,
+                                      color: red,
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: SizedBox(
-                                      height: 200.0.h,
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                //ganti panjang data dari firebase
+                                index == groupedData.length - 1
+                                    ? Container(
+                                        height: 150.h,
+                                        width: 5.w,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.transparent),
+                                      )
+                                    : Container(
+                                        height: 150.h,
+                                        width: 5.w,
+                                        decoration: BoxDecoration(color: red),
+                                        // final RxList<KenanganModel> _daftarKenangan = RxList<KenanganModel>([]);
+
+                                        // List<KenanganModel> get daftarKenangan => _daftarKenangan;                    )
+                                      )
+                              ],
+                            ),
+                            Expanded(
+                              child: SizedBox(
+                                height: 160.h,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 8.r),
                                       child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(
-                                            width: 300.w,
-                                            child: ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: values?.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                final data = values![index];
-                                                return Card(
-                                                  color: background,
-                                                  child: Stack(
-                                                    children: [
-                                                      CachedNetworkImage(
-                                                        imageUrl: data.imageUrl,
-                                                        width: 200.w,
-                                                        fit: BoxFit.cover,
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                const Center(
-                                                          child:
-                                                              CircularProgressIndicator(),
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            const Icon(
-                                                                Icons.error),
-                                                      ),
-                                                      Align(
-                                                        alignment: Alignment
-                                                            .bottomLeft,
-                                                        child: Container(
-                                                          width: 200.w,
-                                                          height: 20.h,
-                                                          color: black
-                                                              .withOpacity(0.4),
-                                                          child: Center(
-                                                            child: Text(
-                                                              data.caption,
-                                                              style: redTextStyle
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          15.0
-                                                                              .r,
-                                                                      fontWeight:
-                                                                          semiBold,
-                                                                      color:
-                                                                          white),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
+                                          Text(
+                                            key,
+                                            style: redTextStyle.copyWith(
+                                              fontSize: 14.0,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      child: SizedBox(
+                                        height: 200.0.h,
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 300.w,
+                                              child: ListView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: values?.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  final data = values![index];
+                                                  return Card(
+                                                    color: background,
+                                                    child: Stack(
+                                                      children: [
+                                                        CachedNetworkImage(
+                                                          imageUrl:
+                                                              data.imageUrl,
+                                                          width: 200.w,
+                                                          fit: BoxFit.cover,
+                                                          placeholder:
+                                                              (context, url) =>
+                                                                  const Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          ),
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              const Icon(
+                                                                  Icons.error),
+                                                        ),
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .bottomLeft,
+                                                          child: Container(
+                                                            width: 200.w,
+                                                            height: 20.h,
+                                                            color: black
+                                                                .withOpacity(
+                                                                    0.4),
+                                                            child: Center(
+                                                              child: Text(
+                                                                data.caption,
+                                                                style: redTextStyle.copyWith(
+                                                                    fontSize:
+                                                                        15.0.r,
+                                                                    fontWeight:
+                                                                        semiBold,
+                                                                    color:
+                                                                        white),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          )
-                        ],
-                      );
-                    },
-                  );
-                }
-              }),
+                          ]);
+                        });
+                  } else {
+                    return const Center(
+                      child: Text("Belum ada kenangan"),
+                    );
+                  }
+                },
+              ),
             ),
           ),
         ],
