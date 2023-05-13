@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mamanotes/app/modules/dashboard/views/dashboard_view.dart';
-import 'package:mamanotes/app/modules/home/views/home_view.dart';
-import 'package:mamanotes/app/modules/signup/controllers/signup_controller.dart';
+
+import '../../modules/dashboard/views/dashboard_view.dart';
+import '../../modules/signup/controllers/signup_controller.dart';
 
 class AuthController extends GetxController {
   // untuk cek kondisi ada auth atau tidak -> uid

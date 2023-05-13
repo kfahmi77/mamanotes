@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/widget/title_image_appbar.dart';
 
+import '../../../data/common/style.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/kenangan_controller.dart';
 
@@ -134,7 +136,7 @@ class KenanganView extends GetView<KenanganController> {
                                       child: Row(
                                         children: [
                                           SizedBox(
-                                            width: 300.0.w,
+                                            width: 300.w,
                                             child: ListView.builder(
                                               scrollDirection: Axis.horizontal,
                                               itemCount: values?.length,
@@ -142,48 +144,50 @@ class KenanganView extends GetView<KenanganController> {
                                                   (BuildContext context,
                                                       int index) {
                                                 final data = values![index];
-                                                return SizedBox(
-                                                  width: 200.0.w,
-                                                  child: Card(
-                                                    color: grey,
-                                                    child: Stack(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 30,
-                                                                  left: 20),
-                                                          child: Image.network(
-                                                            data.imageUrl,
-                                                            fit: BoxFit.fill,
-                                                          ),
+                                                return Card(
+                                                  color: background,
+                                                  child: Stack(
+                                                    children: [
+                                                      CachedNetworkImage(
+                                                        imageUrl: data.imageUrl,
+                                                        width: 200.w,
+                                                        fit: BoxFit.cover,
+                                                        placeholder:
+                                                            (context, url) =>
+                                                                const Center(
+                                                          child:
+                                                              CircularProgressIndicator(),
                                                         ),
-                                                        Align(
-                                                          alignment: Alignment
-                                                              .bottomLeft,
-                                                          child: Container(
-                                                            width: 200.w,
-                                                            height: 20.h,
-                                                            color: black
-                                                                .withOpacity(
-                                                                    0.4),
-                                                            child: Center(
-                                                              child: Text(
-                                                                data.caption,
-                                                                style: redTextStyle.copyWith(
-                                                                    fontSize:
-                                                                        15.0.r,
-                                                                    fontWeight:
-                                                                        semiBold,
-                                                                    color:
-                                                                        white),
-                                                              ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            const Icon(
+                                                                Icons.error),
+                                                      ),
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .bottomLeft,
+                                                        child: Container(
+                                                          width: 200.w,
+                                                          height: 20.h,
+                                                          color: black
+                                                              .withOpacity(0.4),
+                                                          child: Center(
+                                                            child: Text(
+                                                              data.caption,
+                                                              style: redTextStyle
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          15.0
+                                                                              .r,
+                                                                      fontWeight:
+                                                                          semiBold,
+                                                                      color:
+                                                                          white),
                                                             ),
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 );
                                               },

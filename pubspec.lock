@@ -201,6 +201,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.3.2"
+  firebase_cached_image:
+    dependency: "direct main"
+    description:
+      name: firebase_cached_image
+      sha256: f0cb9885413d01107b0dcd7acfc3f0f923d3b209530c8f69eacf1622d4baba92
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.2"
   firebase_core:
     dependency: "direct main"
     description:

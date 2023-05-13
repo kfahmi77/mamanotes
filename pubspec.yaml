@@ -25,6 +25,7 @@ dependencies:
   intl: ^0.17.0
   cached_network_image: ^3.2.3
   collection: ^1.15.0
+  firebase_cached_image: ^0.4.2
 
 dev_dependencies: 
   flutter_lints: 2.0.1
