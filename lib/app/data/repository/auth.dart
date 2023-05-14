@@ -56,7 +56,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> getImage(ImageSource source) async {
-    final pickedFile = await picker.getImage(source: source);
+    final pickedFile = await picker.pickImage(source: source);
     if (pickedFile != null) {
       image.value = File(pickedFile.path);
     } else {

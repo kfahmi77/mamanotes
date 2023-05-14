@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +9,7 @@ import 'package:intl/intl.dart';
 import '../models/kenangan_model.dart';
 
 class KenanganController extends GetxController {
+  final User? user = FirebaseAuth.instance.currentUser;
   final isSearchVisible = false.obs;
   final searchController = TextEditingController();
   late RxList<KenanganModel> dataList = <KenanganModel>[].obs;
@@ -45,6 +47,7 @@ class KenanganController extends GetxController {
 
   @override
   void onInit() {
+    print(user!.uid);
     super.onInit();
     _fetchData();
   }
@@ -52,7 +55,7 @@ class KenanganController extends GetxController {
   Future<void> _fetchData() async {
     try {
       koleksiKenangan
-          .orderBy('create_at', descending: false)
+          .where('uid', isEqualTo: user!.uid)
           .snapshots()
           .listen((querySnapshot) {
         _allData = querySnapshot.docs

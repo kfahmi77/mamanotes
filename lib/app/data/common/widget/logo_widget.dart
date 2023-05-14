@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BuildLogoWidget extends StatelessWidget {
-  const BuildLogoWidget({super.key});
+class LogoWidget extends StatelessWidget {
+  const LogoWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

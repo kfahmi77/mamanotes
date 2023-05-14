@@ -7,8 +7,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mamanotes/app/data/common/style.dart';
-import 'package:mamanotes/app/data/common/widget/title_image_appbar.dart';
+import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 
 import '../../../data/common/style.dart';
 import '../../../routes/app_pages.dart';
@@ -18,16 +19,14 @@ class KenanganView extends GetView<KenanganController> {
   KenanganView({Key? key}) : super(key: key);
 
   final _isSearchVisible = false.obs;
-  bool dataLoaded = false;
 
   @override
   Widget build(BuildContext context) {
-    Get.put(KenanganController(), permanent: true);
+    Get.put(KenanganController());
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => _isSearchVisible.value
-            ? _buildSearchField()
-            : const BuildLogoWidget()),
+        title: Obx(() =>
+            _isSearchVisible.value ? _buildSearchField() : const LogoWidget()),
         automaticallyImplyLeading: false,
         backgroundColor: background,
         elevation: 0,
@@ -105,9 +104,6 @@ class KenanganView extends GetView<KenanganController> {
                                         height: 150.h,
                                         width: 5.w,
                                         decoration: BoxDecoration(color: red),
-                                        // final RxList<KenanganModel> _daftarKenangan = RxList<KenanganModel>([]);
-
-                                        // List<KenanganModel> get daftarKenangan => _daftarKenangan;                    )
                                       )
                               ],
                             ),
@@ -207,8 +203,20 @@ class KenanganView extends GetView<KenanganController> {
                           ]);
                         });
                   } else {
-                    return const Center(
-                      child: Text("Belum ada kenangan"),
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Lottie.asset(
+                            'assets/images/no_data.zip',
+                          ),
+                          Text(
+                            "Buat kenanganmu yuk bunda :)",
+                            style: redTextStyle.copyWith(
+                                fontSize: 16.sp, fontWeight: bold, color: red),
+                          ),
+                        ],
+                      ),
                     );
                   }
                 },

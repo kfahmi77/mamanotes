@@ -1,14 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 
-import '../../../data/common/widget/title_image_appbar.dart';
+import '../../../data/common/widget/logo_widget.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -17,7 +19,9 @@ class HomeView extends GetView<HomeController> {
         slivers: [
           SliverPersistentHeader(
             pinned: true,
-            delegate: MySliverAppBar(expandedHeight: 200.0.h),
+            delegate: MySliverAppBar(
+                expandedHeight: 200.0.h,
+                username: _auth.currentUser!.displayName!),
           ),
           SliverPadding(padding: EdgeInsets.only(top: 120.r)),
           SliverPadding(
@@ -88,8 +92,12 @@ class HomeView extends GetView<HomeController> {
 
 class MySliverAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
+  final String username;
 
-  MySliverAppBar({required this.expandedHeight});
+  MySliverAppBar({
+    required this.expandedHeight,
+    required this.username,
+  });
 
   @override
   Widget build(
@@ -106,7 +114,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
         Center(
           child: Opacity(
             opacity: shrinkOffset / expandedHeight,
-            child: const BuildLogoWidget(),
+            child: const LogoWidget(),
           ),
         ),
         Positioned(
@@ -118,7 +126,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
           left: MediaQuery.of(context).size.width / 14,
           child: Opacity(
             opacity: 1 - shrinkOffset / expandedHeight,
-            child: const BuildLogoWidget(),
+            child: const LogoWidget(),
           ),
         ),
         Positioned(
@@ -126,7 +134,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
             left: MediaQuery.of(context).size.width / 14,
             child: Opacity(
               opacity: 1 - shrinkOffset / expandedHeight,
-              child: Text("Hello moms",
+              child: Text("Hello mom $username",
                   style: redTextStyle.copyWith(fontWeight: bold, color: black)),
             )),
         Positioned(
@@ -158,7 +166,9 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                         Text(
                           "Yuk moms isi profil keluarga dulu >.<",
                           style: redTextStyle.copyWith(
-                              fontSize: 14.0, color: black, fontWeight: normal),
+                              fontSize: 14.0.sp,
+                              color: black,
+                              fontWeight: normal),
                         ),
                         const Padding(padding: EdgeInsets.only(top: 10)),
                         SizedBox(

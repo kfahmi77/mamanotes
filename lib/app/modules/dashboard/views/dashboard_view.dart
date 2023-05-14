@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/modules/home/views/home_view.dart';
 import 'package:mamanotes/app/modules/kenangan/views/kenangan_view.dart';
 import 'package:mamanotes/app/modules/profile/views/profile_view.dart';
-import 'package:mamanotes/app/modules/tentang/views/tentang_view.dart';
 
 import '../../../data/common/custom_bottom_navigation.dart';
 
@@ -14,7 +12,7 @@ class DashboardView extends StatefulWidget {
   const DashboardView({super.key});
 
   @override
-  _DashboardViewState createState() => _DashboardViewState();
+  createState() => _DashboardViewState();
 }
 
 class _DashboardViewState extends State<DashboardView> {
@@ -65,7 +63,7 @@ class _DashboardViewState extends State<DashboardView> {
 
   Widget getBody() {
     List<Widget> pages = [
-      const HomeView(),
+      HomeView(),
       KenanganView(),
       ProfileView(),
     ];

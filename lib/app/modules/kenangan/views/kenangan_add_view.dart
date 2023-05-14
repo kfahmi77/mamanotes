@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mamanotes/app/data/common/style.dart';
-import 'package:mamanotes/app/data/common/widget/title_image_appbar.dart';
+import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 import 'package:mamanotes/app/modules/kenangan/controllers/kenangan_add_controller.dart';
 
 import '../../../data/repository/auth.dart';
@@ -20,7 +20,7 @@ class KenanganAddView extends GetView<KenanganAddController> {
     TextEditingController imageController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: const BuildLogoWidget(),
+        title: const LogoWidget(),
         backgroundColor: background,
         centerTitle: true,
         elevation: 0,

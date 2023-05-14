@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:mamanotes/app/data/common/widget/title_image_appbar.dart';
+import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 import 'package:mamanotes/app/data/repository/auth.dart';
 import 'package:mamanotes/app/modules/signin/controllers/signin_controller.dart';
 import 'package:mamanotes/app/modules/tentang/bindings/tentang_binding.dart';
@@ -28,7 +29,7 @@ class ProfileView extends GetView<ProfileController> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: const BuildLogoWidget(),
+        title: const LogoWidget(),
         backgroundColor: background,
         centerTitle: true,
       ),
@@ -69,15 +70,15 @@ class ProfileView extends GetView<ProfileController> {
                             color: Colors.white, shape: BoxShape.circle),
                         child: CircleAvatar(
                             backgroundColor: Colors.transparent,
-                            backgroundImage:
-                                NetworkImage(_auth.currentUser!.photoURL!)),
+                            backgroundImage: CachedNetworkImageProvider(
+                                _auth.currentUser!.photoURL!)),
                       ),
                     ),
                   ),
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0, -0.40),
+                alignment: AlignmentDirectional(0, -0.30.h),
                 child: Text(
                   _auth.currentUser!.displayName.toString(),
                   style: redTextStyle.copyWith(
@@ -88,7 +89,7 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0, -0.30),
+                alignment: const AlignmentDirectional(0, -0.20),
                 child: Text(
                   _auth.currentUser!.email.toString(),
                   style: redTextStyle.copyWith(
@@ -99,7 +100,7 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0, -0.15),
+                alignment: const AlignmentDirectional(0, -0.05),
                 child: TextButton(
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(100, 50),
@@ -116,7 +117,7 @@ class ProfileView extends GetView<ProfileController> {
             ],
           ),
           Align(
-            alignment: const AlignmentDirectional(0, -0.01),
+            alignment: const AlignmentDirectional(0, 0.1),
             child: Divider(
                 height: 20,
                 thickness: 1,
