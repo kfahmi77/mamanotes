@@ -12,6 +12,7 @@ abstract class Routes {
   static const kenangan = _Paths.kenangan;
   static const tentang = _Paths.tentang;
   static const addKenangan = _Paths.addKenangan;
+  static const PROFILE_KELUARGA = _Paths.PROFILE_KELUARGA;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const kenangan = '/kenangan';
   static const tentang = '/tentang';
   static const addKenangan = '/add-kenangan';
+  static const PROFILE_KELUARGA = '/profile-keluarga';
 }

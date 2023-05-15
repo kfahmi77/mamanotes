@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
+import 'package:mamanotes/app/modules/profile_keluarga/views/profile_keluarga_view.dart';
 
 import '../../../data/common/widget/logo_widget.dart';
 import '../controllers/home_controller.dart';
@@ -20,18 +21,19 @@ class HomeView extends GetView<HomeController> {
           SliverPersistentHeader(
             pinned: true,
             delegate: MySliverAppBar(
-                expandedHeight: 200.0.h,
-                username: _auth.currentUser!.displayName!),
+              username: _auth.currentUser?.displayName ?? 'tamu',
+              expandedHeight: 200.0.h,
+            ),
           ),
-          SliverPadding(padding: EdgeInsets.only(top: 120.r)),
+          SliverPadding(padding: EdgeInsets.only(top: 20.h)),
           SliverPadding(
-            padding: EdgeInsets.only(left: 40.r, right: 40.r),
+            padding: EdgeInsets.only(left: 40.h, right: 40.h),
             sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 1,
                   crossAxisCount: 2,
-                  mainAxisSpacing: 30,
-                  crossAxisSpacing: 30),
+                  mainAxisSpacing: 30.h,
+                  crossAxisSpacing: 30.h),
               delegate: SliverChildListDelegate([
                 listCardWidget(
                     text1: 'Catatan', image: 'assets/images/notepad 1.png'),
@@ -91,63 +93,72 @@ class HomeView extends GetView<HomeController> {
 }
 
 class MySliverAppBar extends SliverPersistentHeaderDelegate {
-  final double expandedHeight;
-  final String username;
+  final double expandedHeight; // Tinggi yang diperluas dari app bar
+  final bool
+      hideTitleWhenExpanded; // Apakah judul harus disembunyikan saat diperluas
+
+  var username = '';
 
   MySliverAppBar({
     required this.expandedHeight,
     required this.username,
+    this.hideTitleWhenExpanded = true,
   });
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Stack(
-      clipBehavior: Clip.none,
-      fit: StackFit.expand,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: background,
+    final appBarSize = expandedHeight - shrinkOffset; // Ukuran app bar saat ini
+    final cardTopPosition =
+        expandedHeight / 2 - shrinkOffset; // Posisi atas kartu saat ini
+    final proportion = 2 -
+        (expandedHeight /
+            appBarSize); // Proporsi berdasarkan perubahan tinggi app bar
+    final percent = proportion < 0 || proportion > 1
+        ? 0.0
+        : proportion; // Persentase berdasarkan proporsi
+    return SizedBox(
+      height: expandedHeight + expandedHeight / 2,
+      child: Stack(
+        children: [
+          SizedBox(
+            height: appBarSize < kToolbarHeight ? kToolbarHeight : appBarSize,
+            child: AppBar(
+              centerTitle: true,
+              backgroundColor: background,
+              elevation: 0.0,
+              title: Opacity(
+                  opacity: hideTitleWhenExpanded ? 1.0 - percent : 1.0,
+                  child: const LogoWidget()),
+            ),
           ),
-        ),
-        Center(
-          child: Opacity(
-            opacity: shrinkOffset / expandedHeight,
-            child: const LogoWidget(),
-          ),
-        ),
-        Positioned(
+          Positioned(
+            top: 10.sp,
+            left: 40.h,
             child: Opacity(
-          opacity: 1 - shrinkOffset / expandedHeight,
-        )),
-        Positioned(
-          top: 10.sp,
-          left: MediaQuery.of(context).size.width / 14,
-          child: Opacity(
-            opacity: 1 - shrinkOffset / expandedHeight,
-            child: const LogoWidget(),
+              opacity: percent,
+              child: const LogoWidget(),
+            ),
           ),
-        ),
-        Positioned(
-            top: 55.r,
-            left: MediaQuery.of(context).size.width / 14,
+          Positioned(
+              top: 55.h,
+              left: 40.h,
+              child: Opacity(
+                opacity: percent,
+                child: Text("Hello mom $username",
+                    style:
+                        redTextStyle.copyWith(fontWeight: bold, color: black)),
+              )),
+          Positioned(
+            left: 0.0,
+            right: 0.0,
+            top: cardTopPosition > 0 ? cardTopPosition : 0,
+            bottom: 0.0,
             child: Opacity(
-              opacity: 1 - shrinkOffset / expandedHeight,
-              child: Text("Hello mom $username",
-                  style: redTextStyle.copyWith(fontWeight: bold, color: black)),
-            )),
-        Positioned(
-          top: expandedHeight / 3 - shrinkOffset,
-          left: MediaQuery.of(context).size.width / 14,
-          child: Opacity(
-            opacity: (1 - shrinkOffset / expandedHeight),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 30.r,
-                ),
-                Card(
+              opacity: percent,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30 * percent),
+                child: Card(
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -176,33 +187,36 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                           child: ElevatedButton(
                             style:
                                 ElevatedButton.styleFrom(backgroundColor: red),
-                            onPressed: () {},
-                            child: const Text("isi profil keluarga"),
+                            onPressed: () {
+                              Get.to(const ProfileKeluargaView());
+                            },
+                            child: Text("isi profil keluarga",
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: white,
+                                    fontWeight: normal)),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ],
+          )
+        ],
+      ),
     );
   }
 
   @override
-  // TODO: implement maxExtent
-  double get maxExtent => expandedHeight;
+  double get maxExtent => expandedHeight + expandedHeight / 2;
 
   @override
-  // TODO: implement minExtent
   double get minExtent => kToolbarHeight;
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    // TODO: implement shouldRebuild
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
     return true;
   }
 }

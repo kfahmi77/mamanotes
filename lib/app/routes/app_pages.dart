@@ -1,14 +1,16 @@
 import 'package:get/get.dart';
-import 'package:mamanotes/app/modules/kenangan/views/kenangan_add_view.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/kenangan/bindings/kenangan_binding.dart';
+import '../modules/kenangan/views/kenangan_add_view.dart';
 import '../modules/kenangan/views/kenangan_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/profile_keluarga/bindings/profile_keluarga_binding.dart';
+import '../modules/profile_keluarga/views/profile_keluarga_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -63,6 +65,11 @@ class AppPages {
       name: _Paths.tentang,
       page: () => const TentangView(),
       binding: TentangBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_KELUARGA,
+      page: () => const ProfileKeluargaView(),
+      binding: ProfileKeluargaBinding(),
     ),
   ];
 }

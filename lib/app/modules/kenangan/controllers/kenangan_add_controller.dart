@@ -1,10 +1,8 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,7 +29,7 @@ class KenanganAddController extends GetxController {
 
   Rx<File?> image = Rx<File?>(null);
   Future<void> getImage(ImageSource source) async {
-    final pickedFile = await picker.getImage(source: source);
+    final pickedFile = await picker.pickImage(source: source);
     if (pickedFile != null) {
       image.value = File(pickedFile.path);
     } else {
