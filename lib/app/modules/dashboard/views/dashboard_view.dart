@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:mamanotes/app/data/common/style.dart';
@@ -26,24 +27,24 @@ class _DashboardViewState extends State<DashboardView> {
 
   Widget buildBottomBar() {
     return CustomAnimatedBottomBar(
-      containerHeight: 70,
+      containerHeight: 70.h,
       backgroundColor: Colors.white,
       selectedIndex: _currentIndex,
       showElevation: true,
-      itemCornerRadius: 24,
+      itemCornerRadius: 24.r,
       curve: Curves.easeIn,
       onItemSelected: (index) => setState(() => _currentIndex = index),
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
             icon: const FaIcon(FontAwesomeIcons.houseChimney),
-            title: const Text('Menu Utama'),
+            title: const Text('Home'),
             activeColor: red,
             inactiveColor: _inactiveColor,
             textAlign: TextAlign.center,
             style: redTextStyle.copyWith(fontWeight: normal)),
         BottomNavyBarItem(
           icon: const FaIcon(FontAwesomeIcons.chartArea),
-          title: const Text('Kenangan'),
+          title: const Text('Kenanganku'),
           activeColor: red,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,

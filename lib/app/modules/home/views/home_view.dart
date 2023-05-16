@@ -127,6 +127,9 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
               centerTitle: true,
               backgroundColor: background,
               elevation: 0.0,
+              shape: const RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(16))),
               title: Opacity(
                   opacity: hideTitleWhenExpanded ? 1.0 - percent : 1.0,
                   child: const LogoWidget()),
