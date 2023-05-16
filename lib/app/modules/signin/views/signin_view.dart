@@ -168,8 +168,6 @@ class SigninView extends GetView<SigninController> {
 
                                     if (hasil["error"] == true) {
                                       Get.snackbar("Error", hasil["message"]);
-                                    } else {
-                                      Get.offAllNamed(Routes.dashboard);
                                     }
                                   } else {
                                     Get.snackbar("Error",

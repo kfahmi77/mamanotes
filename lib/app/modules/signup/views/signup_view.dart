@@ -36,9 +36,9 @@ class SignupView extends GetView<SignupController> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: 450.h,
+                height: 500.h,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFF597B),
+                  color: red,
                   boxShadow: const [
                     BoxShadow(
                       blurRadius: 4.0,
@@ -52,8 +52,8 @@ class SignupView extends GetView<SignupController> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          0.0, 50.0, 0.0, 0.0),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 50.0.h, 0.0, 0.0),
                       child: GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
@@ -86,8 +86,8 @@ class SignupView extends GetView<SignupController> {
                         },
                         child: Obx(
                           () => Container(
-                            width: 150,
-                            height: 150,
+                            width: 100.w,
+                            height: 100.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
@@ -104,9 +104,9 @@ class SignupView extends GetView<SignupController> {
                                 shape: BoxShape.circle,
                                 color: Colors.black26,
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.camera_alt,
-                                size: 50,
+                                size: 50.sp,
                                 color: Colors.white,
                               ),
                             ),
@@ -215,6 +215,8 @@ class SignupView extends GetView<SignupController> {
                                   if (hasil["error"] == true) {
                                     Get.snackbar("Error", hasil["message"]);
                                   } else {
+                                    Get.snackbar("Berhasil",
+                                        "Berhasil registrasi,silahkan cek email untuk verifikasi");
                                     Get.offAllNamed(Routes.signin);
                                   }
                                 } else {

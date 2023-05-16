@@ -42,13 +42,22 @@ class MyApp extends StatelessWidget {
               );
             }
             return GetMaterialApp(
-              title: "QR Code",
-              initialRoute: snapAuth.hasData ? Routes.dashboard : Routes.signin,
+              title: "Mamanote",
+              initialRoute: determineInitialRoute(),
               getPages: AppPages.routes,
             );
           },
         );
       },
     );
+  }
+}
+
+String determineInitialRoute() {
+  final user = FirebaseAuth.instance.currentUser;
+  if (user != null && user.emailVerified) {
+    return Routes.dashboard;
+  } else {
+    return Routes.signin;
   }
 }
