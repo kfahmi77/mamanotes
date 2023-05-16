@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mamanotes/app/modules/my_diary/views/add_diary_view.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
@@ -7,6 +8,9 @@ import '../modules/home/views/home_view.dart';
 import '../modules/kenangan/bindings/kenangan_binding.dart';
 import '../modules/kenangan/views/kenangan_add_view.dart';
 import '../modules/kenangan/views/kenangan_view.dart';
+import '../modules/my_diary/bindings/my_diary_binding.dart';
+import '../modules/my_diary/views/edit_diary_view.dart';
+import '../modules/my_diary/views/my_diary_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_keluarga/bindings/profile_keluarga_binding.dart';
@@ -67,9 +71,24 @@ class AppPages {
       binding: TentangBinding(),
     ),
     GetPage(
-      name: _Paths.PROFILE_KELUARGA,
+      name: _Paths.profilKeluarga,
       page: () => const ProfileKeluargaView(),
       binding: ProfileKeluargaBinding(),
+    ),
+    GetPage(
+      name: _Paths.myDiary,
+      page: () => const MyDiaryView(),
+      binding: MyDiaryBinding(),
+    ),
+    GetPage(
+      name: _Paths.addDiary,
+      page: () => const AddDiaryView(),
+      binding: MyDiaryBinding(),
+    ),
+    GetPage(
+      name: _Paths.editDiary,
+      page: () => const EditDiaryView(),
+      binding: MyDiaryBinding(),
     ),
   ];
 }

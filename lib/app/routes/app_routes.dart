@@ -12,7 +12,10 @@ abstract class Routes {
   static const kenangan = _Paths.kenangan;
   static const tentang = _Paths.tentang;
   static const addKenangan = _Paths.addKenangan;
-  static const PROFILE_KELUARGA = _Paths.PROFILE_KELUARGA;
+  static const profilKeluarga = _Paths.profilKeluarga;
+  static const myDiary = _Paths.myDiary;
+  static const addDiary = _Paths.addDiary;
+  static const editDiary = _Paths.editDiary;
 }
 
 abstract class _Paths {
@@ -26,5 +29,8 @@ abstract class _Paths {
   static const kenangan = '/kenangan';
   static const tentang = '/tentang';
   static const addKenangan = '/add-kenangan';
-  static const PROFILE_KELUARGA = '/profile-keluarga';
+  static const profilKeluarga = '/profile-keluarga';
+  static const myDiary = '/my-diary';
+  static const addDiary = '/add-diary';
+  static const editDiary = '/edit-diary';
 }

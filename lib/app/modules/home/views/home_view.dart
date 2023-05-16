@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
+import 'package:mamanotes/app/modules/my_diary/bindings/my_diary_binding.dart';
+import 'package:mamanotes/app/modules/my_diary/views/my_diary_view.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/views/profile_keluarga_view.dart';
 
 import '../../../data/common/widget/logo_widget.dart';
@@ -36,21 +38,56 @@ class HomeView extends GetView<HomeController> {
                   crossAxisSpacing: 30.h),
               delegate: SliverChildListDelegate([
                 listCardWidget(
-                    text1: 'Catatan', image: 'assets/images/notepad 1.png'),
-                listCardWidget(text1: 'Budi', image: 'assets/images/son.png'),
+                  text1: 'Catatan',
+                  image: 'assets/images/notepad 1.png',
+                  onTap: () =>
+                      Get.to(const MyDiaryView(), binding: MyDiaryBinding()),
+                ),
                 listCardWidget(
-                    text1: 'Ani', image: 'assets/images/daughter.png'),
-                listCardWidget(text1: 'Budi', image: 'assets/images/son.png'),
+                  text1: 'Budi',
+                  image: 'assets/images/son.png',
+                  onTap: () {},
+                ),
                 listCardWidget(
-                    text1: 'Ani', image: 'assets/images/daughter.png'),
-                listCardWidget(text1: 'Budi', image: 'assets/images/son.png'),
+                  text1: 'Ani',
+                  image: 'assets/images/daughter.png',
+                  onTap: () {},
+                ),
                 listCardWidget(
-                    text1: 'Ani', image: 'assets/images/daughter.png'),
-                listCardWidget(text1: 'Budi', image: 'assets/images/son.png'),
+                  text1: 'Budi',
+                  image: 'assets/images/son.png',
+                  onTap: () {},
+                ),
                 listCardWidget(
-                    text1: 'Ani', image: 'assets/images/daughter.png'),
+                  text1: 'Ani',
+                  image: 'assets/images/daughter.png',
+                  onTap: () {},
+                ),
                 listCardWidget(
-                    text1: 'Tambah anak', image: 'assets/images/+.png'),
+                  text1: 'Budi',
+                  image: 'assets/images/son.png',
+                  onTap: () {},
+                ),
+                listCardWidget(
+                  text1: 'Ani',
+                  image: 'assets/images/daughter.png',
+                  onTap: () {},
+                ),
+                listCardWidget(
+                  text1: 'Budi',
+                  image: 'assets/images/son.png',
+                  onTap: () {},
+                ),
+                listCardWidget(
+                  text1: 'Ani',
+                  image: 'assets/images/daughter.png',
+                  onTap: () {},
+                ),
+                listCardWidget(
+                  text1: 'Tambah anak',
+                  image: 'assets/images/+.png',
+                  onTap: () {},
+                ),
               ]),
             ),
           )
@@ -59,36 +96,40 @@ class HomeView extends GetView<HomeController> {
     ));
   }
 
-  Widget listCardWidget({required String text1, required image}) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
-        ),
-        child: Column(children: [
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  //custom widgets
-                  Image.asset(image),
-                ]),
-          )),
-          Container(
-              height: 30.h,
-              decoration: BoxDecoration(
-                  color: background,
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
-              child: Center(
-                  child: Text(
-                text1,
-                style: redTextStyle.copyWith(
-                    fontWeight: normal, fontSize: 13.0.sp, color: white),
-              )))
-        ]));
+  Widget listCardWidget(
+      {required String text1, required image, required Function() onTap}) {
+    return InkWell(
+      onTap: () => onTap(),
+      child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          child: Column(children: [
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    //custom widgets
+                    Image.asset(image),
+                  ]),
+            )),
+            Container(
+                height: 30.h,
+                decoration: BoxDecoration(
+                    color: background,
+                    borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20))),
+                child: Center(
+                    child: Text(
+                  text1,
+                  style: redTextStyle.copyWith(
+                      fontWeight: normal, fontSize: 13.0.sp, color: white),
+                )))
+          ])),
+    );
   }
 }
 
