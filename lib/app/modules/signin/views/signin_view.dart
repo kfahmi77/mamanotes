@@ -215,9 +215,12 @@ class SigninView extends GetView<SigninController> {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 20.0, 0.0, 0.0),
-                      child: Text('lupa sandi?',
-                          style: redTextStyle.copyWith(
-                              fontWeight: bold, color: white)),
+                      child: InkWell(
+                        onTap: () => Get.toNamed(Routes.resetPassword),
+                        child: Text('lupa sandi?',
+                            style: redTextStyle.copyWith(
+                                fontWeight: bold, color: white)),
+                      ),
                     ),
                   ],
                 ),
