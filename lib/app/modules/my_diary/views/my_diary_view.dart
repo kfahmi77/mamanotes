@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:mamanotes/app/modules/my_diary/bindings/my_diary_binding.dart';
 
 import '../../../data/common/style.dart';
 import '../../../routes/app_pages.dart';

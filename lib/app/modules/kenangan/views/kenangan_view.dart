@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart'
+    show CachedNetworkImage;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +11,6 @@ import 'package:lottie/lottie.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 
-import '../../../data/common/style.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/kenangan_controller.dart';
 

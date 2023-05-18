@@ -1,12 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:mamanotes/app/modules/dashboard/bindings/dashboard_binding.dart';
-import 'package:mamanotes/app/modules/dashboard/views/dashboard_view.dart';
-import 'package:mamanotes/app/modules/home/bindings/home_binding.dart';
-import 'package:mamanotes/app/modules/home/views/home_view.dart';
 import 'package:mamanotes/app/modules/signup/bindings/signup_binding.dart';
 import 'package:mamanotes/app/modules/signup/views/signup_view.dart';
 import '../../../data/common/style.dart';

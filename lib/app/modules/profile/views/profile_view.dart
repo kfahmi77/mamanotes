@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,8 +7,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 import 'package:mamanotes/app/data/repository/auth.dart';
-import 'package:mamanotes/app/modules/signin/controllers/signin_controller.dart';
-import 'package:mamanotes/app/modules/tentang/bindings/tentang_binding.dart';
 import 'package:mamanotes/app/modules/tentang/views/tentang_view.dart';
 
 import '../../../data/common/style.dart';
