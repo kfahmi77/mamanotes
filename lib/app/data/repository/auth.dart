@@ -107,7 +107,7 @@ class AuthController extends GetxController {
     if (pickedFile != null) {
       image.value = File(pickedFile.path);
     } else {
-      print('No image selected.');
+      debugPrint('No image selected.');
     }
   }
 

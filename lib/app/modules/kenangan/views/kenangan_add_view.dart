@@ -7,8 +7,6 @@ import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 import 'package:mamanotes/app/modules/kenangan/controllers/kenangan_add_controller.dart';
 
-import '../../../data/repository/auth.dart';
-
 class KenanganAddView extends GetView<KenanganAddController> {
   const KenanganAddView({super.key});
 
@@ -16,8 +14,6 @@ class KenanganAddView extends GetView<KenanganAddController> {
   Widget build(BuildContext context) {
     final KenanganAddController authC = Get.find<KenanganAddController>();
     TextEditingController captionController = TextEditingController();
-    TextEditingController dateController = TextEditingController();
-    TextEditingController imageController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const LogoWidget(),
@@ -60,6 +56,7 @@ class KenanganAddView extends GetView<KenanganAddController> {
                       },
                       child: Obx(
                         () => Text(
+                          // ignore: unnecessary_null_comparison
                           controller.selectedDate.value == null
                               ? 'Pilih Tanggal'
                               : DateFormat.yMMMMEEEEd('id')
@@ -130,7 +127,8 @@ class KenanganAddView extends GetView<KenanganAddController> {
                     height: 150.h,
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10.0)),
                       border: Border.all(color: Colors.red, width: 1.0),
                       image: DecorationImage(
                         fit: BoxFit.cover,

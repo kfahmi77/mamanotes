@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 
-import '../../../routes/app_pages.dart';
-
 class AddDiaryController extends GetxController {
   final titleC = TextEditingController();
   final descriptionC = TextEditingController();
