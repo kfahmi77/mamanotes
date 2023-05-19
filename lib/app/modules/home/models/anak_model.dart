@@ -33,4 +33,16 @@ class AnakModel {
       tempat: json['tempat'],
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'arti_nama': artisNama,
+      'foto_anak': fotoAnak,
+      'golongan_darah': golonganDarah,
+      'jenis_kelamin': jenisKelamin,
+      'nama_lengkap': namaLengkap,
+      'nama_panggilan': namaPanggilan,
+      'tanggal_lahir': tanggalLahir,
+      'tempat': tempat,
+    };
+  }
 }

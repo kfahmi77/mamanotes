@@ -17,6 +17,7 @@ abstract class Routes {
   static const addDiary = _Paths.addDiary;
   static const editDiary = _Paths.editDiary;
   static const resetPassword = _Paths.resetPassword;
+  static const tambahAnak = _Paths.tambahAnak;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const addDiary = '/add-diary';
   static const editDiary = '/edit-diary';
   static const resetPassword = '/forget-password';
+  static const tambahAnak = '/data-anak';
 }

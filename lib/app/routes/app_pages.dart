@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/data_anak/bindings/data_anak_binding.dart';
+import '../modules/data_anak/views/data_anak_view.dart';
 import '../modules/forget_password/bindings/forget_password_binding.dart';
 import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -96,6 +98,11 @@ class AppPages {
       name: _Paths.resetPassword,
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.tambahAnak,
+      page: () => const DataAnakView(),
+      binding: DataAnakBinding(),
     ),
   ];
 }

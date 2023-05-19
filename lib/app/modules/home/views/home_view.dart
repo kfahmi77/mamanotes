@@ -4,10 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
+import 'package:mamanotes/app/modules/data_anak/bindings/data_anak_binding.dart';
+import 'package:mamanotes/app/modules/data_anak/views/data_anak_view.dart';
 import 'package:mamanotes/app/modules/home/models/anak_model.dart';
 import 'package:mamanotes/app/modules/my_diary/bindings/my_diary_binding.dart';
 import 'package:mamanotes/app/modules/my_diary/views/my_diary_view.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/views/profile_keluarga_view.dart';
+import 'package:mamanotes/app/routes/app_pages.dart';
 
 import '../../../data/common/widget/logo_widget.dart';
 import '../controllers/home_controller.dart';
@@ -66,7 +69,9 @@ class HomeView extends GetView<HomeController> {
                                     text1: 'Tambah Anak',
                                     image:
                                         'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
-                                    onTap: () {});
+                                    onTap: () => Get.to(
+                                        () => const DataAnakView(),
+                                        binding: DataAnakBinding()));
                               } else {
                                 // Index di antara listCardWidget
                                 int menuItemIndex = index - 1;
@@ -99,12 +104,14 @@ class HomeView extends GetView<HomeController> {
                                 text1: 'Catatan',
                                 image:
                                     'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2Fnotepad%201.png?alt=media&token=3332698c-ace9-40f9-bcc7-f958dbb92886',
-                                onTap: () {}),
+                                onTap: () => Get.to(() => const MyDiaryView(),
+                                    binding: MyDiaryBinding())),
                             listCardWidget(
                                 text1: 'Tambah Anak',
                                 image:
                                     'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
-                                onTap: () {})
+                                onTap: () => Get.to(() => const DataAnakView(),
+                                    binding: DataAnakBinding())),
                           ]),
                         );
                       }
