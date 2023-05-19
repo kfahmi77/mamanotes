@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
+import 'package:mamanotes/app/modules/home/models/anak_model.dart';
 import 'package:mamanotes/app/modules/my_diary/bindings/my_diary_binding.dart';
 import 'package:mamanotes/app/modules/my_diary/views/my_diary_view.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/views/profile_keluarga_view.dart';
@@ -14,6 +15,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final HomeController homeController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,68 +29,101 @@ class HomeView extends GetView<HomeController> {
               expandedHeight: 200.0.h,
             ),
           ),
-          SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+          SliverPadding(padding: EdgeInsets.only(top: 10.h)),
           SliverPadding(
             padding: EdgeInsets.only(left: 40.h, right: 40.h),
-            sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 30.h,
-                  crossAxisSpacing: 30.h),
-              delegate: SliverChildListDelegate([
-                listCardWidget(
-                  text1: 'Catatan',
-                  image: 'assets/images/notepad 1.png',
-                  onTap: () =>
-                      Get.to(const MyDiaryView(), binding: MyDiaryBinding()),
-                ),
-                listCardWidget(
-                  text1: 'Budi',
-                  image: 'assets/images/son.png',
-                  onTap: () {},
-                ),
-                listCardWidget(
-                  text1: 'Ani',
-                  image: 'assets/images/daughter.png',
-                  onTap: () {},
-                ),
-                listCardWidget(
-                  text1: 'Budi',
-                  image: 'assets/images/son.png',
-                  onTap: () {},
-                ),
-                listCardWidget(
-                  text1: 'Ani',
-                  image: 'assets/images/daughter.png',
-                  onTap: () {},
-                ),
-                listCardWidget(
-                  text1: 'Budi',
-                  image: 'assets/images/son.png',
-                  onTap: () {},
-                ),
-                listCardWidget(
-                  text1: 'Ani',
-                  image: 'assets/images/daughter.png',
-                  onTap: () {},
-                ),
-                listCardWidget(
-                  text1: 'Budi',
-                  image: 'assets/images/son.png',
-                  onTap: () {},
-                ),
-                listCardWidget(
-                  text1: 'Ani',
-                  image: 'assets/images/daughter.png',
-                  onTap: () {},
-                ),
-                listCardWidget(
-                  text1: 'Tambah anak',
-                  image: 'assets/images/+.png',
-                  onTap: () {},
-                ),
-              ]),
+            sliver: GetBuilder<HomeController>(
+              init: homeController,
+              builder: (controller) {
+                return StreamBuilder<List<AnakModel>>(
+                  stream: controller.getMenuItems(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<AnakModel>? menuItems = snapshot.data;
+                      if (menuItems != null && menuItems.isNotEmpty) {
+                        return SliverGrid(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                              if (index == 0) {
+                                // Widget pertama
+                                return listCardWidget(
+                                    text1: 'Catatan',
+                                    image:
+                                        'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2Fnotepad%201.png?alt=media&token=3332698c-ace9-40f9-bcc7-f958dbb92886',
+                                    onTap: () {
+                                      Get.to(() => const MyDiaryView(),
+                                          binding: MyDiaryBinding());
+                                    });
+                              } else if (index == menuItems.length + 1) {
+                                // Widget terakhir
+                                return listCardWidget(
+                                    text1: 'Tambah Anak',
+                                    image:
+                                        'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
+                                    onTap: () {});
+                              } else {
+                                // Index di antara listCardWidget
+                                int menuItemIndex = index - 1;
+                                AnakModel menuItem = menuItems[menuItemIndex];
+                                return GridTile(
+                                  child: listCardWidget(
+                                    text1: menuItem.namaPanggilan,
+                                    image: menuItem.fotoAnak,
+                                    onTap: () {
+                                      // Handle menu item tap
+                                    },
+                                  ),
+                                );
+                              }
+                            },
+                            childCount: menuItems.length +
+                                2, // Jumlah total item termasuk widget lain
+                          ),
+                        );
+                      } else {
+                        return SliverGrid(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          delegate: SliverChildListDelegate([
+                            listCardWidget(
+                                text1: 'Catatan',
+                                image:
+                                    'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2Fnotepad%201.png?alt=media&token=3332698c-ace9-40f9-bcc7-f958dbb92886',
+                                onTap: () {}),
+                            listCardWidget(
+                                text1: 'Tambah Anak',
+                                image:
+                                    'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
+                                onTap: () {})
+                          ]),
+                        );
+                      }
+                    } else if (snapshot.hasError) {
+                      return const SliverFillRemaining(
+                        child: Center(
+                          child: Text('Error fetching menu items'),
+                        ),
+                      );
+                    } else {
+                      return const SliverFillRemaining(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                  },
+                );
+              },
             ),
           )
         ],
@@ -112,7 +147,7 @@ class HomeView extends GetView<HomeController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     //custom widgets
-                    Image.asset(image),
+                    Image.network(image),
                   ]),
             )),
             Container(
