@@ -47,7 +47,7 @@ class KenanganController extends GetxController {
 
   @override
   void onInit() {
-    print(user!.uid);
+    debugPrint(user!.uid);
     super.onInit();
     _fetchData();
   }

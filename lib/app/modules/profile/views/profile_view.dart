@@ -44,33 +44,47 @@ class ProfileView extends GetView<ProfileController> {
                 child: Container(
                   width: 120.w,
                   height: 120.h,
-                  clipBehavior: Clip.antiAlias,
+                  clipBehavior: Clip.none,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
                   child: Container(
-                    height: 80,
-                    width: 80,
+                    height: 80.h,
+                    width: 80.w,
                     decoration: const BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                          Colors.green,
-                          Colors.yellow,
-                          Colors.red,
-                          Colors.purple
-                        ]),
-                        shape: BoxShape.circle),
+                        color: Colors.white, shape: BoxShape.circle),
                     child: Padding(
-                      //this padding will be you border size
-                      padding: const EdgeInsets.all(3.0),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
-                        child: CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            backgroundImage: CachedNetworkImageProvider(
-                                _auth.currentUser!.photoURL!)),
-                      ),
-                    ),
+                        //this padding will be you border size
+                        padding: const EdgeInsets.all(3.0),
+                        child: SizedBox(
+                          height: 115.h,
+                          width: 115.h,
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            fit: StackFit.expand,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                backgroundImage: CachedNetworkImageProvider(
+                                    _auth.currentUser!.photoURL!),
+                              ),
+                              Positioned(
+                                  bottom: 0,
+                                  right: -25,
+                                  child: RawMaterialButton(
+                                    onPressed: () {},
+                                    padding: const EdgeInsets.all(2.0),
+                                    shape: const CircleBorder(),
+                                    child: Image.asset(
+                                      "assets/images/camera.png",
+                                      width: 40.0.h,
+                                      height: 40.0.h,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        )),
                   ),
                 ),
               ),
@@ -86,7 +100,7 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0, -0.20),
+                alignment: AlignmentDirectional(0, -0.20.h),
                 child: Text(
                   _auth.currentUser!.email.toString(),
                   style: redTextStyle.copyWith(
@@ -97,10 +111,10 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0, -0.05),
+                alignment: AlignmentDirectional(0, -0.05.h),
                 child: TextButton(
                   style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(100, 50),
+                    fixedSize: Size(100.w, 50.h),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(9),
                     ),

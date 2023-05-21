@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,7 +34,7 @@ class KenanganAddController extends GetxController {
     if (pickedFile != null) {
       image.value = File(pickedFile.path);
     } else {
-      print('No image selected.');
+      debugPrint('No image selected.');
     }
   }
 
@@ -79,7 +80,7 @@ class KenanganAddController extends GetxController {
       };
     } catch (e) {
       // Error general
-      print(e);
+      debugPrint(e.toString());
       return {
         "error": true,
         "message": "Tidak dapat menambah kenangan.",

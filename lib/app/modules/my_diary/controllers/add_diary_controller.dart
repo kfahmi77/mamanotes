@@ -41,7 +41,7 @@ class AddDiaryController extends GetxController {
         );
       } catch (e) {
         isLoading.value = false;
-        if (kDebugMode) print(e);
+        if (kDebugMode) debugPrint(e.toString());
         Get.snackbar('Error', 'Failed to save data!');
       }
     } else {

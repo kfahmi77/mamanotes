@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 
-import '../../home/models/anak_model.dart';
 import '../controllers/data_anak_controller.dart';
 
 class DataAnakView extends GetView<DataAnakController> {
@@ -16,10 +14,8 @@ class DataAnakView extends GetView<DataAnakController> {
   Widget build(BuildContext context) {
     String? selectedValue;
     final TextEditingController artiNamaController = TextEditingController();
-    final TextEditingController fotoAnakController = TextEditingController();
     final TextEditingController golonganDarahController =
         TextEditingController();
-    String selectedJenisKelamin = 'Pilih Jenis Kelamin';
     final TextEditingController namaLengkapController = TextEditingController();
     final TextEditingController namaPanggilanController =
         TextEditingController();
@@ -30,7 +26,10 @@ class DataAnakView extends GetView<DataAnakController> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: red,
-          title: const Text('Tambah Data Anak'),
+          title: Text(
+            'Tambah Data Anak',
+            style: redTextStyle.copyWith(fontWeight: bold, color: white),
+          ),
           elevation: 0,
         ),
         body: SingleChildScrollView(
@@ -311,6 +310,12 @@ class DataAnakView extends GetView<DataAnakController> {
                 width: 155.h,
                 height: 40.h,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
                   onPressed: () async {
                     if (controller.isLoading.isFalse) {
                       if (namaLengkapController.text.isNotEmpty &&
@@ -344,8 +349,12 @@ class DataAnakView extends GetView<DataAnakController> {
                       }
                     }
                   },
-                  child: Text('Tambah Data'),
+                  child: const Text('Simpan',
+                      style: TextStyle(color: Colors.white)),
                 ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 12.h),
               ),
             ],
           ),

@@ -16,7 +16,7 @@ class EditDiaryController extends GetxController {
       final doc = await _firestore.collection('catatanku').doc(docId).get();
       return doc.data();
     } catch (e) {
-      if (kDebugMode) print(e);
+      if (kDebugMode) debugPrint(e.toString());
       return null;
     }
   }
@@ -46,7 +46,7 @@ class EditDiaryController extends GetxController {
         isLoading.value = false;
       } catch (e) {
         isLoading.value = false;
-        if (kDebugMode) print(e);
+        if (kDebugMode) debugPrint(e.toString());
         Get.snackbar('Error', 'Gagal edit data!');
       }
     } else {

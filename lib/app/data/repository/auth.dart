@@ -191,7 +191,7 @@ class AuthController extends GetxController {
       await auth.signInWithCredential(credential);
       Get.offAll(() => const DashboardView());
     } catch (e) {
-      print('Google sign in error: $e');
+      debugPrint('Google sign in error: $e');
     }
   }
 

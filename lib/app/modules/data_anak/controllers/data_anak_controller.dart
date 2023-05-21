@@ -68,7 +68,7 @@ class DataAnakController extends GetxController {
       };
     } catch (e) {
       // Error general
-      print(e);
+      debugPrint(e.toString());
       return {
         "error": true,
         "message": "Tidak dapat menambah data anak.",

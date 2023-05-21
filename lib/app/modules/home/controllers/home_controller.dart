@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/modules/home/models/anak_model.dart';
 
 class HomeController extends GetxController {
-  final CollectionReference _menuCollection =
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final Query<Map<String, dynamic>> _menuCollection =
       FirebaseFirestore.instance.collection('anak');
   RxBool isLoading = true.obs;
   Stream<List<AnakModel>>? menuStream;
@@ -24,9 +26,12 @@ class HomeController extends GetxController {
   }
 
   Stream<List<AnakModel>> getMenuItems() {
-    return _menuCollection.snapshots().map((snapshot) {
+    return _menuCollection
+        .where('uid', isEqualTo: auth.currentUser!.uid)
+        .snapshots()
+        .map((snapshot) {
       return snapshot.docs.map((doc) {
-        return AnakModel.fromJson(doc.data() as Map<String, dynamic>);
+        return AnakModel.fromJson(doc.data());
       }).toList();
     });
   }

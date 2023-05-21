@@ -48,7 +48,7 @@ class MyDiaryView extends GetView<MyDiaryController> {
 
               DateTime date =
                   DateTime.parse(note['tanggal'].toDate().toString());
-              print(docNote.id);
+              debugPrint(docNote.id);
 
               return Material(
                 color: cardDiary,

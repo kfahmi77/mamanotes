@@ -10,7 +10,6 @@ import 'package:mamanotes/app/modules/home/models/anak_model.dart';
 import 'package:mamanotes/app/modules/my_diary/bindings/my_diary_binding.dart';
 import 'package:mamanotes/app/modules/my_diary/views/my_diary_view.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/views/profile_keluarga_view.dart';
-import 'package:mamanotes/app/routes/app_pages.dart';
 
 import '../../../data/common/widget/logo_widget.dart';
 import '../controllers/home_controller.dart';
