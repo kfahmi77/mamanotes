@@ -230,7 +230,7 @@ class KenanganView extends GetView<KenanganController> {
           Get.toNamed(Routes.addKenangan);
         },
         child: Image.asset(
-          'assets/images/plus_icon.png',
+          'assets/images/tambah_icon.png',
           width: 80.w,
         ),
       ),

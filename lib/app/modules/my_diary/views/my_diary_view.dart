@@ -94,11 +94,14 @@ class MyDiaryView extends GetView<MyDiaryController> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: red,
+        backgroundColor: Colors.transparent,
         onPressed: () {
           Get.toNamed(Routes.addDiary);
         },
-        child: const Icon(Icons.add),
+        child: Image.asset(
+          'assets/images/tambah_icon.png',
+          width: 80.w,
+        ),
       ),
     );
   }

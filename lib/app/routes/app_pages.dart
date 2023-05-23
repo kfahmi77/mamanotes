@@ -8,6 +8,8 @@ import '../modules/forget_password/bindings/forget_password_binding.dart';
 import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/jurnal_anak/bindings/jurnal_anak_binding.dart';
+import '../modules/jurnal_anak/views/jurnal_anak_view.dart';
 import '../modules/kenangan/bindings/kenangan_binding.dart';
 import '../modules/kenangan/views/kenangan_add_view.dart';
 import '../modules/kenangan/views/kenangan_view.dart';
@@ -103,6 +105,11 @@ class AppPages {
       name: _Paths.tambahAnak,
       page: () => const DataAnakView(),
       binding: DataAnakBinding(),
+    ),
+    GetPage(
+      name: _Paths.JURNAL_ANAK,
+      page: () => const JurnalAnakView(),
+      binding: JurnalAnakBinding(),
     ),
   ];
 }

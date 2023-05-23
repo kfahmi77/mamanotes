@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/controllers/jurnal_anak_controller.dart';
 
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../my_diary/bindings/my_diary_binding.dart';
@@ -13,6 +14,8 @@ class DetailAnakView extends GetView {
   const DetailAnakView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    JurnalAnakController controller = Get.find<JurnalAnakController>();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -243,15 +246,16 @@ class DetailAnakView extends GetView {
               ),
               children: [
                 listCardWidget(
-                    text1: 'Kontrol Kehamilan',
-                    image: 'assets/images/notepad 1.png',
-                    onTap: () => Get.to(() => const MyDiaryView(),
-                        binding: MyDiaryBinding())),
+                  text1: 'Kelahiranku',
+                  image: 'assets/images/kelahiranku.png',
+                  onTap: () {
+                    controller.navigateTo('kelahiranku');
+                  },
+                ),
                 listCardWidget(
-                    text1: 'Catatan',
-                    image: 'assets/images/notepad 1.png',
-                    onTap: () => Get.to(() => const MyDiaryView(),
-                        binding: MyDiaryBinding())),
+                    text1: 'Stimulasi perkembangan',
+                    image: 'assets/images/stimulus.png',
+                    onTap: () => controller.navigateTo('stimulus')),
                 listCardWidget(
                     text1: 'Catatan',
                     image: 'assets/images/notepad 1.png',
