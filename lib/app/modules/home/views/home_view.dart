@@ -6,11 +6,13 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/modules/data_anak/bindings/data_anak_binding.dart';
 import 'package:mamanotes/app/modules/data_anak/views/data_anak_view.dart';
+import 'package:mamanotes/app/modules/data_anak/views/detail_anak_view.dart';
 import 'package:mamanotes/app/modules/home/models/anak_model.dart';
 import 'package:mamanotes/app/modules/my_diary/bindings/my_diary_binding.dart';
 import 'package:mamanotes/app/modules/my_diary/views/my_diary_view.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/views/profile_keluarga_view.dart';
 
+import '../../../data/common/widget/card_list_widget.dart';
 import '../../../data/common/widget/logo_widget.dart';
 import '../controllers/home_controller.dart';
 
@@ -54,7 +56,7 @@ class HomeView extends GetView<HomeController> {
                             (BuildContext context, int index) {
                               if (index == 0) {
                                 // Widget pertama
-                                return listCardWidget(
+                                return listCardNetworkWidget(
                                     text1: 'Catatan',
                                     image:
                                         'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2Fnotepad%201.png?alt=media&token=3332698c-ace9-40f9-bcc7-f958dbb92886',
@@ -64,7 +66,7 @@ class HomeView extends GetView<HomeController> {
                                     });
                               } else if (index == menuItems.length + 1) {
                                 // Widget terakhir
-                                return listCardWidget(
+                                return listCardNetworkWidget(
                                     text1: 'Tambah Anak',
                                     image:
                                         'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
@@ -76,11 +78,12 @@ class HomeView extends GetView<HomeController> {
                                 int menuItemIndex = index - 1;
                                 AnakModel menuItem = menuItems[menuItemIndex];
                                 return GridTile(
-                                  child: listCardWidget(
+                                  child: listCardNetworkWidget(
                                     text1: menuItem.namaPanggilan,
                                     image: menuItem.fotoAnak,
                                     onTap: () {
-                                      // Handle menu item tap
+                                      Get.to(() => const DetailAnakView(),
+                                          binding: DataAnakBinding());
                                     },
                                   ),
                                 );
@@ -99,13 +102,13 @@ class HomeView extends GetView<HomeController> {
                             mainAxisSpacing: 10,
                           ),
                           delegate: SliverChildListDelegate([
-                            listCardWidget(
+                            listCardNetworkWidget(
                                 text1: 'Catatan',
                                 image:
                                     'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2Fnotepad%201.png?alt=media&token=3332698c-ace9-40f9-bcc7-f958dbb92886',
                                 onTap: () => Get.to(() => const MyDiaryView(),
                                     binding: MyDiaryBinding())),
-                            listCardWidget(
+                            listCardNetworkWidget(
                                 text1: 'Tambah Anak',
                                 image:
                                     'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
@@ -135,42 +138,6 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
     ));
-  }
-
-  Widget listCardWidget(
-      {required String text1, required image, required Function() onTap}) {
-    return InkWell(
-      onTap: () => onTap(),
-      child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: Column(children: [
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    //custom widgets
-                    Image.network(image),
-                  ]),
-            )),
-            Container(
-                height: 30.h,
-                decoration: BoxDecoration(
-                    color: background,
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20))),
-                child: Center(
-                    child: Text(
-                  text1,
-                  style: redTextStyle.copyWith(
-                      fontWeight: normal, fontSize: 13.0.sp, color: white),
-                )))
-          ])),
-    );
   }
 }
 

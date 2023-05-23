@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "53187888252-0tgq7r208cjp69t25nljr8mj4prdqu22.apps.googleusercontent.com",
+          "client_id": "53187888252-tpei839m9dqj76vhpq399e8jv5rt1hd5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.d3ifcool.mamanote.mamanote",
+            "certificate_hash": "08317371e07c0c1508be91fc280b73326fddd945"
+          }
+        },
+        {
+          "client_id": "53187888252-6j2k8duq4vl8cqusegauq33gbamk0fd1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -43,7 +51,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "53187888252-0tgq7r208cjp69t25nljr8mj4prdqu22.apps.googleusercontent.com",
+          "client_id": "53187888252-a66gvlq7bs1rd8142trq9ru1tk4iu26v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.d3ifcool.mamanotes.mamanotes",
+            "certificate_hash": "08317371e07c0c1508be91fc280b73326fddd945"
+          }
+        },
+        {
+          "client_id": "53187888252-6j2k8duq4vl8cqusegauq33gbamk0fd1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

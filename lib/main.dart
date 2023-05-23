@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
               );
             }
             return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
               title: "Mamanote",
               initialRoute: determineInitialRoute(),
               getPages: AppPages.routes,
