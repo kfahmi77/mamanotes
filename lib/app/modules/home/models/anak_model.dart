@@ -9,6 +9,8 @@ class AnakModel {
   final String namaPanggilan;
   final Timestamp tanggalLahir;
   final String tempat;
+  final String uid;
+  final String docId;
 
   AnakModel({
     required this.artisNama,
@@ -19,6 +21,8 @@ class AnakModel {
     required this.namaPanggilan,
     required this.tanggalLahir,
     required this.tempat,
+    required this.uid,
+    required this.docId
   });
 
   factory AnakModel.fromJson(Map<String, dynamic> json) {
@@ -31,8 +35,11 @@ class AnakModel {
       namaPanggilan: json['nama_panggilan'],
       tanggalLahir: json['tanggal_lahir'],
       tempat: json['tempat'],
+      uid: json['uid'],
+      docId: json['anakId']
     );
   }
+
   Map<String, dynamic> toJson() {
     return {
       'arti_nama': artisNama,
@@ -43,6 +50,8 @@ class AnakModel {
       'nama_panggilan': namaPanggilan,
       'tanggal_lahir': tanggalLahir,
       'tempat': tempat,
+      'uid': uid,
+      'anakId': docId
     };
   }
 }

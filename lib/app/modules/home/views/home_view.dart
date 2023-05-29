@@ -83,7 +83,10 @@ class HomeView extends GetView<HomeController> {
                                     text1: menuItem.namaPanggilan,
                                     image: menuItem.fotoAnak,
                                     onTap: () {
-                                      Get.to(() => const DetailAnakView(),
+                                      print(menuItem.docId);
+                                      Get.to(
+                                          () => DetailAnakView(
+                                              anakId: menuItem.docId),
                                           binding: JurnalAnakBinding());
                                     },
                                   ),
