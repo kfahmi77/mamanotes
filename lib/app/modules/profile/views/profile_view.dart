@@ -120,7 +120,9 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     backgroundColor: background,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.editProfile);
+                  },
                   child: Text("Edit ",
                       style: redTextStyle.copyWith(fontWeight: bold)),
                 ),

@@ -18,7 +18,8 @@ abstract class Routes {
   static const editDiary = _Paths.editDiary;
   static const resetPassword = _Paths.resetPassword;
   static const tambahAnak = _Paths.tambahAnak;
-  static const JURNAL_ANAK = _Paths.JURNAL_ANAK;
+  static const jurnalAnak = _Paths.jurnalAnak;
+  static const editProfile = _Paths.editProfile;
 }
 
 abstract class _Paths {
@@ -27,16 +28,23 @@ abstract class _Paths {
   static const splashScreen = '/splash-screen';
   static const signin = '/signin';
   static const signup = '/signup';
+
   static const profile = '/profile';
+  static const editProfile = '/edit-profile';
+
+
   static const dashboard = '/dashboard';
   static const kenangan = '/kenangan';
   static const tentang = '/tentang';
   static const addKenangan = '/add-kenangan';
   static const profilKeluarga = '/profile-keluarga';
+
   static const myDiary = '/my-diary';
   static const addDiary = '/add-diary';
   static const editDiary = '/edit-diary';
+
   static const resetPassword = '/forget-password';
+
   static const tambahAnak = '/data-anak';
-  static const JURNAL_ANAK = '/jurnal-anak';
+  static const jurnalAnak = '/jurnal-anak';
 }

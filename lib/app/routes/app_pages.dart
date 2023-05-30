@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mamanotes/app/modules/profile/views/edit_profile_view.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
@@ -56,6 +57,11 @@ class AppPages {
       page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
+     GetPage(
+      name: _Paths.editProfile,
+      page: () => EditProfileView(),
+      binding: ProfileBinding(),
+    ),
     GetPage(
       name: _Paths.dashboard,
       page: () => const DashboardView(),
@@ -107,7 +113,7 @@ class AppPages {
       binding: DataAnakBinding(),
     ),
     GetPage(
-      name: _Paths.JURNAL_ANAK,
+      name: _Paths.jurnalAnak,
       page: () => const JurnalAnakView(),
       binding: JurnalAnakBinding(),
     ),

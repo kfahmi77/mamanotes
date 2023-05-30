@@ -119,7 +119,8 @@ class KenanganAddView extends GetView<KenanganAddController> {
                             ],
                           ),
                         );
-                      });
+                      }
+                      );
                 },
                 child: Obx(
                   () => Container(
