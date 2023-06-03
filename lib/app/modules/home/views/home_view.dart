@@ -63,7 +63,8 @@ class HomeView extends GetView<HomeController> {
                                         'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2Fnotepad%201.png?alt=media&token=3332698c-ace9-40f9-bcc7-f958dbb92886',
                                     onTap: () {
                                       Get.to(() => const MyDiaryView(),
-                                          binding: MyDiaryBinding());
+                                          binding: MyDiaryBinding(),
+                                          transition: Transition.rightToLeft);
                                     });
                               } else if (index == menuItems.length + 1) {
                                 // Widget terakhir
@@ -72,8 +73,11 @@ class HomeView extends GetView<HomeController> {
                                     image:
                                         'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
                                     onTap: () => Get.to(
-                                        () => const DataAnakView(),
-                                        binding: DataAnakBinding()));
+                                          () => const DataAnakView(),
+                                          binding: DataAnakBinding(),
+                                          transition:
+                                              Transition.leftToRightWithFade,
+                                        ));
                               } else {
                                 // Index di antara listCardWidget
                                 int menuItemIndex = index - 1;
@@ -244,7 +248,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                             style:
                                 ElevatedButton.styleFrom(backgroundColor: red),
                             onPressed: () {
-                              Get.to(const ProfileKeluargaView());
+                              Get.to(ProfileKeluargaView());
                             },
                             child: Text("isi profil keluarga",
                                 style: TextStyle(

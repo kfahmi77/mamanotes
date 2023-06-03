@@ -20,6 +20,7 @@ abstract class Routes {
   static const tambahAnak = _Paths.tambahAnak;
   static const jurnalAnak = _Paths.jurnalAnak;
   static const editProfile = _Paths.editProfile;
+  static const addProfilKeluarga = _Paths.addProfilKeluarga;
 }
 
 abstract class _Paths {
@@ -37,7 +38,9 @@ abstract class _Paths {
   static const kenangan = '/kenangan';
   static const tentang = '/tentang';
   static const addKenangan = '/add-kenangan';
+
   static const profilKeluarga = '/profile-keluarga';
+  static const addProfilKeluarga = '/add-profil-keluarga';
 
   static const myDiary = '/my-diary';
   static const addDiary = '/add-diary';

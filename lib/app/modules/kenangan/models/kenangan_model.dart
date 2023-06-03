@@ -25,12 +25,5 @@ class KenanganModel {
       kenanganId: data['kenanganId'] ?? '',
     );
   }
-  Map<String, dynamic> toJson() {
-    return {
-      'caption': caption,
-      'create_at': createdAt,
-      'image_url': imageUrl,
-      'kenanganId': kenanganId,
-    };
-  }
+  
 }

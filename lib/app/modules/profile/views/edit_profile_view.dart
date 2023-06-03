@@ -143,7 +143,7 @@ class EditProfileView extends GetView<EditProfileController> {
                   controller: controller.nameController,
                   decoration: const InputDecoration(
                     labelText: 'Nama Lengkap',
-                    prefixIcon: Icon(Icons.person),
+                    prefixIcon: Icon(FontAwesomeIcons.user),
                   ),
                 ),
               ],

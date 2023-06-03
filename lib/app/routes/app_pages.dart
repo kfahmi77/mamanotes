@@ -21,6 +21,7 @@ import '../modules/my_diary/views/my_diary_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_keluarga/bindings/profile_keluarga_binding.dart';
+import '../modules/profile_keluarga/views/add_profile_keluarga_view.dart';
 import '../modules/profile_keluarga/views/profile_keluarga_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
@@ -57,9 +58,9 @@ class AppPages {
       page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
-     GetPage(
+    GetPage(
       name: _Paths.editProfile,
-      page: () => EditProfileView(),
+      page: () => const EditProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -84,7 +85,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.profilKeluarga,
-      page: () => const ProfileKeluargaView(),
+      page: () => ProfileKeluargaView(),
+      binding: ProfileKeluargaBinding(),
+    ),
+    GetPage(
+      name: _Paths.addProfilKeluarga,
+      page: () => AddProfileKeluargaView(),
       binding: ProfileKeluargaBinding(),
     ),
     GetPage(

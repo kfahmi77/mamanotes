@@ -65,6 +65,7 @@ class KenanganView extends GetView<KenanganController> {
                       ..sort((a, b) => a.compareTo(b))
                       ..reversed.toList();
                     return ListView.builder(
+                
                         itemCount: groupedData.length,
                         itemBuilder: (BuildContext context, int index) {
                           final key = keys[index];
