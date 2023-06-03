@@ -65,7 +65,6 @@ class KenanganView extends GetView<KenanganController> {
                       ..sort((a, b) => a.compareTo(b))
                       ..reversed.toList();
                     return ListView.builder(
-                
                         itemCount: groupedData.length,
                         itemBuilder: (BuildContext context, int index) {
                           final key = keys[index];
@@ -150,7 +149,16 @@ class KenanganView extends GetView<KenanganController> {
                                                         CachedNetworkImage(
                                                           imageUrl:
                                                               data.imageUrl,
-                                                          width: 200.w,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.56,
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              1,
                                                           fit: BoxFit.cover,
                                                           placeholder:
                                                               (context, url) =>
@@ -167,7 +175,11 @@ class KenanganView extends GetView<KenanganController> {
                                                           alignment: Alignment
                                                               .bottomLeft,
                                                           child: Container(
-                                                            width: 200.w,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.56,
                                                             height: 20.h,
                                                             color: black
                                                                 .withOpacity(
@@ -203,21 +215,33 @@ class KenanganView extends GetView<KenanganController> {
                           ]);
                         });
                   } else {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Lottie.asset(
-                            'assets/images/no_data.zip',
-                          ),
-                          Text(
-                            "Buat kenanganmu yuk bunda :)",
-                            style: redTextStyle.copyWith(
-                                fontSize: 16.sp, fontWeight: bold, color: red),
-                          ),
-                        ],
-                      ),
-                    );
+                    if (controller.searchController.text.isNotEmpty) {
+                      return Center(
+                        child: Text(
+                          "Data tidak ditemukan",
+                          style: redTextStyle.copyWith(
+                              fontSize: 16.sp, fontWeight: bold, color: red),
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Lottie.asset(
+                              'assets/images/no_data.zip',
+                            ),
+                            Text(
+                              "Buat kenanganmu yuk bunda :)",
+                              style: redTextStyle.copyWith(
+                                  fontSize: 16.sp,
+                                  fontWeight: bold,
+                                  color: red),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
                   }
                 },
               ),
