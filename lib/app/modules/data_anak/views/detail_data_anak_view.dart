@@ -14,6 +14,7 @@ import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
 import '../../my_diary/bindings/my_diary_binding.dart';
 import '../../my_diary/views/my_diary_view.dart';
+import 'edit_data_anak_view.dart';
 
 class DetailAnakView extends GetView<DetailAnakController> {
   final String anakId;
@@ -92,7 +93,7 @@ class DetailAnakView extends GetView<DetailAnakController> {
                       return <PopupMenuEntry<AnakModel>>[
                         PopupMenuItem<AnakModel>(
                           child: SizedBox(
-                            height: 100.h, // Tinggi maksimum PopupMenu
+                            height: 110.h, // Tinggi maksimum PopupMenu
                             child: SingleChildScrollView(
                               child: Column(
                                 children: anakList.map((AnakModel anak) {
@@ -106,7 +107,11 @@ class DetailAnakView extends GetView<DetailAnakController> {
                                           radius: 15.0,
                                         ),
                                         SizedBox(width: 10.0),
-                                        Text(anak.namaLengkap),
+                                        Text(
+                                          anak.namaLengkap.length > 20
+                                              ? '${anak.namaLengkap.substring(0, 15)}...' // Display only the first 10 characters with ellipsis
+                                              : anak.namaLengkap,
+                                        ),
                                       ],
                                     ),
                                   );
@@ -242,7 +247,7 @@ class GridJurnalWidget extends StatelessWidget {
             },
           ),
           listCardWidget(
-              text1: 'Stimulasi perkembangan',
+              text1: 'Stimulasi ',
               image: 'assets/images/stimulus.png',
               onTap: () => jurnalController.navigateTo('stimulus')),
           listCardWidget(
@@ -366,16 +371,15 @@ class CardAnakWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            'Nama: ${anak.namaPanggilan}',
+                            anak.namaPanggilan,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 4.h),
                           Text(
-                            'Lahir: ${anak.tempat} ${formatTanggalLahir(anak.tanggalLahir.toDate())}',
+                            '${anak.tempat} ${formatTanggalLahir(anak.tanggalLahir.toDate())}',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16.sp,
@@ -396,7 +400,7 @@ class CardAnakWidget extends StatelessWidget {
                       icon: const Icon(Icons.edit, color: Colors.white),
                       onPressed: () {
                         // Implementasi logika aksi edit di sini
-                        print('object');
+                        Get.to(() => EditDataAnakView(anak: anak));
                       },
                     ),
                   ),

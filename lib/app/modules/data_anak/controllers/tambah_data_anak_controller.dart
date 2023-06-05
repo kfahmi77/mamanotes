@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class DataAnakController extends GetxController {
+class TambahDataAnakController extends GetxController {
   Rx<File?> image = Rx<File?>(null);
   final picker = ImagePicker();
   var selectedDate = DateTime.now().obs;

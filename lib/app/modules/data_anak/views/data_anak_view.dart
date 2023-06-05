@@ -6,10 +6,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 
-import '../controllers/data_anak_controller.dart';
+import '../controllers/tambah_data_anak_controller.dart';
 
-class DataAnakView extends GetView<DataAnakController> {
-  const DataAnakView({Key? key}) : super(key: key);
+class TambahDataAnakView extends GetView<TambahDataAnakController> {
+  const TambahDataAnakView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     String? selectedValue;

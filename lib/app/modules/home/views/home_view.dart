@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/modules/data_anak/bindings/data_anak_binding.dart';
 import 'package:mamanotes/app/modules/data_anak/views/data_anak_view.dart';
-import 'package:mamanotes/app/modules/data_anak/views/detail_anak_view.dart';
+import 'package:mamanotes/app/modules/data_anak/views/detail_data_anak_view.dart';
 import 'package:mamanotes/app/modules/home/models/anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/bindings/jurnal_anak_binding.dart';
 import 'package:mamanotes/app/modules/my_diary/bindings/my_diary_binding.dart';
@@ -73,7 +73,7 @@ class HomeView extends GetView<HomeController> {
                                     image:
                                         'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
                                     onTap: () => Get.to(
-                                          () => const DataAnakView(),
+                                          () => const TambahDataAnakView(),
                                           binding: DataAnakBinding(),
                                           transition:
                                               Transition.leftToRightWithFade,
@@ -83,11 +83,11 @@ class HomeView extends GetView<HomeController> {
                                 int menuItemIndex = index - 1;
                                 AnakModel menuItem = menuItems[menuItemIndex];
                                 return GridTile(
-                                  child: listCardNetworkWidget(
+                                  child: listCardNetworAnakkWidget(
                                     text1: menuItem.namaPanggilan,
                                     image: menuItem.fotoAnak,
                                     onTap: () {
-                                      print(menuItem.docId);
+                                      debugPrint(menuItem.docId);
                                       Get.to(
                                           () => DetailAnakView(
                                               anakId: menuItem.docId),
@@ -120,7 +120,8 @@ class HomeView extends GetView<HomeController> {
                                 text1: 'Tambah Anak',
                                 image:
                                     'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
-                                onTap: () => Get.to(() => const DataAnakView(),
+                                onTap: () => Get.to(
+                                    () => const TambahDataAnakView(),
                                     binding: DataAnakBinding())),
                           ]),
                         );

@@ -115,7 +115,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.tambahAnak,
-      page: () => const DataAnakView(),
+      page: () => const TambahDataAnakView(),
       binding: DataAnakBinding(),
     ),
     GetPage(

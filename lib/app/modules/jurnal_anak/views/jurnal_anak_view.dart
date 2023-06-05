@@ -20,11 +20,13 @@ class JurnalAnakView extends GetView<JurnalAnakController> {
           print(argument);
           switch (argument) {
             case 'kelahiranku':
-              return KelahirankuView();
+              return const KelahirankuView();
             case 'stimulus':
-              return StimulasiPerkembanganView();
+              return const StimulasiPerkembanganView();
             default:
-              return Container();
+              return const Center(
+                child: Text('No Data'),
+              );
           }
         }));
   }
