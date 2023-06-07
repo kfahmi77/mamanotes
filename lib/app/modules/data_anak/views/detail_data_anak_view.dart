@@ -12,8 +12,7 @@ import 'package:mamanotes/app/modules/jurnal_anak/controllers/jurnal_anak_contro
 
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
-import '../../my_diary/bindings/my_diary_binding.dart';
-import '../../my_diary/views/my_diary_view.dart';
+import '../../kelahiran_anak/views/stimulus_anak_view.dart';
 import 'edit_data_anak_view.dart';
 
 class DetailAnakView extends GetView<DetailAnakController> {
@@ -31,7 +30,8 @@ class DetailAnakView extends GetView<DetailAnakController> {
           padding: EdgeInsets.only(top: 16.h),
           child: Text(
             'Detail Anak',
-            style: redTextStyle.copyWith(color: white, fontWeight: bold),
+            style:
+                redTextStyle.copyWith(color: white, fontWeight: superExtraBold),
           ),
         ),
         leading: Padding(
@@ -213,7 +213,10 @@ class DetailAnakView extends GetView<DetailAnakController> {
           SizedBox(
             height: 8.h,
           ),
-          GridJurnalWidget(jurnalController: jurnalController)
+          GridJurnalWidget(
+            jurnalController: jurnalController,
+            anakId: anakId,
+          )
         ],
       ),
     );
@@ -224,8 +227,9 @@ class GridJurnalWidget extends StatelessWidget {
   const GridJurnalWidget({
     super.key,
     required this.jurnalController,
+    required this.anakId,
   });
-
+  final String anakId;
   final JurnalAnakController jurnalController;
 
   @override
@@ -243,23 +247,32 @@ class GridJurnalWidget extends StatelessWidget {
             text1: 'Kelahiranku',
             image: 'assets/images/kelahiranku.png',
             onTap: () {
-              jurnalController.navigateTo('kelahiranku');
+              Get.to(() => StimulusAnakView(
+                    documentId: anakId,
+                  ));
             },
           ),
-          listCardWidget(
-              text1: 'Stimulasi ',
-              image: 'assets/images/stimulus.png',
-              onTap: () => jurnalController.navigateTo('stimulus')),
-          listCardWidget(
-              text1: 'Catatan',
-              image: 'assets/images/notepad 1.png',
-              onTap: () =>
-                  Get.to(() => const MyDiaryView(), binding: MyDiaryBinding())),
-          listCardWidget(
-              text1: 'Catatan',
-              image: 'assets/images/notepad 1.png',
-              onTap: () =>
-                  Get.to(() => const MyDiaryView(), binding: MyDiaryBinding())),
+          // listCardWidget(
+          //   text1: 'Kelahiranku',
+          //   image: 'assets/images/kelahiranku.png',
+          //   onTap: () {
+          //     jurnalController.navigateTo('kelahiranku');
+          //   },
+          // ),
+          // listCardWidget(
+          //     text1: 'Stimulasi ',
+          //     image: 'assets/images/stimulus.png',
+          //     onTap: () => jurnalController.navigateTo('stimulus')),
+          // listCardWidget(
+          //     text1: 'Catatan',
+          //     image: 'assets/images/notepad 1.png',
+          //     onTap: () =>
+          //         Get.to(() => const MyDiaryView(), binding: MyDiaryBinding())),
+          // listCardWidget(
+          //     text1: 'Catatan',
+          //     image: 'assets/images/notepad 1.png',
+          //     onTap: () =>
+          //         Get.to(() => const MyDiaryView(), binding: MyDiaryBinding())),
         ],
       ),
     );

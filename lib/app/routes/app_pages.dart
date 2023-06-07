@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:mamanotes/app/modules/profile/views/edit_profile_view.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
@@ -19,6 +18,7 @@ import '../modules/my_diary/views/add_diary_view.dart';
 import '../modules/my_diary/views/edit_diary_view.dart';
 import '../modules/my_diary/views/my_diary_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/edit_profile_view.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_keluarga/bindings/profile_keluarga_binding.dart';
 import '../modules/profile_keluarga/views/add_profile_keluarga_view.dart';
@@ -27,6 +27,8 @@ import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/kelahiran_anak/bindings/stimulus_anak_binding.dart';
+import '../modules/kelahiran_anak/views/stimulus_anak_view.dart';
 import '../modules/tentang/bindings/tentang_binding.dart';
 import '../modules/tentang/views/tentang_view.dart';
 
