@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/modules/data_anak/bindings/data_anak_binding.dart';
+import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controller.dart';
 import 'package:mamanotes/app/modules/data_anak/views/data_anak_view.dart';
 import 'package:mamanotes/app/modules/data_anak/views/detail_data_anak_view.dart';
 import 'package:mamanotes/app/modules/home/models/anak_model.dart';
-import 'package:mamanotes/app/modules/jurnal_anak/bindings/jurnal_anak_binding.dart';
 import 'package:mamanotes/app/modules/my_diary/bindings/my_diary_binding.dart';
 import 'package:mamanotes/app/modules/my_diary/views/my_diary_view.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/views/profile_keluarga_view.dart';
@@ -89,9 +89,10 @@ class HomeView extends GetView<HomeController> {
                                     onTap: () {
                                       debugPrint(menuItem.docId);
                                       Get.to(
-                                          () => DetailAnakView(
-                                              anakId: menuItem.docId),
-                                          binding: JurnalAnakBinding());
+                                        () => DetailAnakView(
+                                            anakId: menuItem.docId),
+                                        binding: DataAnakBinding(),
+                                      );
                                     },
                                   ),
                                 );

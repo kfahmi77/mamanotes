@@ -5,14 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 
-import '../../../data/common/widget/custom_card.dart';
+import '../../../../data/common/widget/custom_card.dart';
 import '../models/kelahiran_anak_model.dart';
 import 'add_jurnal_kelahiran_anak_view.dart';
 
 class StimulusAnakView extends StatelessWidget {
   final String documentId;
+  final String jurnalAnakId;
 
-  const StimulusAnakView({super.key, required this.documentId});
+  const StimulusAnakView(
+      {super.key, required this.documentId, required this.jurnalAnakId});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +27,15 @@ class StimulusAnakView extends StatelessWidget {
               fontWeight: bold, fontSize: 20.sp, color: white),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection('anak')
             .doc(documentId)
             .collection('jurnal_anak')
+            .doc(jurnalAnakId)
             .snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
             return const Center(
               child: Text('Terjadi kesalahan'),
@@ -44,13 +48,13 @@ class StimulusAnakView extends StatelessWidget {
             );
           }
 
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          if (!snapshot.hasData || !snapshot.data!.exists) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Tidak ada data anak',
+                    'Tidak ada data kelahiran anak',
                     style: TextStyle(fontSize: 18.0),
                   ),
                   const SizedBox(height: 16.0),
@@ -61,6 +65,7 @@ class StimulusAnakView extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => AddStimulusAnakView(
+                            kelahiranAnakId: jurnalAnakId,
                             anakId: documentId,
                           ),
                         ),
@@ -74,8 +79,7 @@ class StimulusAnakView extends StatelessWidget {
           }
 
           // Mendapatkan data dari Firestore
-          final document = snapshot.data!.docs.first;
-          final data = document.data()! as Map<String, dynamic>;
+          final data = snapshot.data!.data()! as Map<String, dynamic>;
           final kelahiranAnak = KelahiranAnak.fromJson(data);
 
           return KelahiranAnakView(kelahiranAnak: kelahiranAnak);

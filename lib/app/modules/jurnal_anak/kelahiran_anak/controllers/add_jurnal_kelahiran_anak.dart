@@ -74,7 +74,7 @@ class AddStimulusAnakController extends GetxController {
     }
   }
 
-  void submitForm(String anakId) async {
+  void submitForm(String anakId,String kelahiranAnakId) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       if (!isBirthPhotoSelected.value ||
@@ -113,25 +113,25 @@ class AddStimulusAnakController extends GetxController {
             await (await deliveryUploadTask).ref.getDownloadURL();
 
         // Simpan data ke Firestore
-        var hasil = await FirebaseFirestore.instance
-            .collection('anak')
-            .doc(anakId)
-            .collection('jurnal_anak')
-            .add({
-          'birthTime': timeController.text,
-          'birthPlace': birthPlace,
-          'medicalPersonnel': medicalPersonnel,
-          'weight': weight,
-          'height': height,
-          'motherPrayer': motherPrayer,
-          'fatherPrayer': fatherPrayer,
-          'birthPhotoUrl': birthPhotoUrl,
-          'footPrintPhotoUrl': footPrintPhotoUrl,
-          'deliveryPhotoUrl': deliveryPhotoUrl,
-        });
-        hasil.update({
-          'KelahiranAnakId': hasil.id,
-        });
+        var docRef = FirebaseFirestore.instance
+    .collection('anak')
+    .doc(anakId)
+    .collection('jurnal_anak')
+    .doc(kelahiranAnakId);
+
+await docRef.set({
+  'birthTime': timeController.text,
+  'birthPlace': birthPlace,
+  'medicalPersonnel': medicalPersonnel,
+  'weight': weight,
+  'height': height,
+  'motherPrayer': motherPrayer,
+  'fatherPrayer': fatherPrayer,
+  'birthPhotoUrl': birthPhotoUrl,
+  'footPrintPhotoUrl': footPrintPhotoUrl,
+  'deliveryPhotoUrl': deliveryPhotoUrl,
+});
+
 
         Get.back();
         Get.back();

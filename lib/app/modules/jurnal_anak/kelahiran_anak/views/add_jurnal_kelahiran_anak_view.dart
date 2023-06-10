@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,8 +5,11 @@ import '../controllers/add_jurnal_kelahiran_anak.dart';
 
 class AddStimulusAnakView extends StatelessWidget {
   final String anakId;
+  final String kelahiranAnakId;
 
-  AddStimulusAnakView({Key? key, required this.anakId}) : super(key: key);
+  AddStimulusAnakView(
+      {Key? key, required this.anakId, required this.kelahiranAnakId})
+      : super(key: key);
 
   final AddStimulusAnakController controller =
       Get.put(AddStimulusAnakController());
@@ -168,7 +169,8 @@ class AddStimulusAnakView extends StatelessWidget {
                     }),
                     const SizedBox(height: 16),
                     ElevatedButton(
-                      onPressed: () => controller.submitForm(anakId),
+                      onPressed: () =>
+                          controller.submitForm(anakId, kelahiranAnakId),
                       child: const Text('Simpan Data'),
                     ),
                   ],

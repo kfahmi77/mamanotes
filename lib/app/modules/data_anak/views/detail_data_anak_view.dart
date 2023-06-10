@@ -8,11 +8,11 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/utils/date_formatter.dart';
 import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controller.dart';
-import 'package:mamanotes/app/modules/jurnal_anak/controllers/jurnal_anak_controller.dart';
 
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
-import '../../kelahiran_anak/views/stimulus_anak_view.dart';
+import '../../jurnal_anak/kelahiran_anak/bindings/stimulus_anak_binding.dart';
+import '../../jurnal_anak/kelahiran_anak/views/stimulus_anak_view.dart';
 import 'edit_data_anak_view.dart';
 
 class DetailAnakView extends GetView<DetailAnakController> {
@@ -20,7 +20,6 @@ class DetailAnakView extends GetView<DetailAnakController> {
   const DetailAnakView({Key? key, required this.anakId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    JurnalAnakController jurnalController = Get.find<JurnalAnakController>();
     User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
@@ -214,7 +213,6 @@ class DetailAnakView extends GetView<DetailAnakController> {
             height: 8.h,
           ),
           GridJurnalWidget(
-            jurnalController: jurnalController,
             anakId: anakId,
           )
         ],
@@ -226,11 +224,9 @@ class DetailAnakView extends GetView<DetailAnakController> {
 class GridJurnalWidget extends StatelessWidget {
   const GridJurnalWidget({
     super.key,
-    required this.jurnalController,
     required this.anakId,
   });
   final String anakId;
-  final JurnalAnakController jurnalController;
 
   @override
   Widget build(BuildContext context) {
@@ -247,9 +243,12 @@ class GridJurnalWidget extends StatelessWidget {
             text1: 'Kelahiranku',
             image: 'assets/images/kelahiranku.png',
             onTap: () {
-              Get.to(() => StimulusAnakView(
-                    documentId: anakId,
-                  ));
+              Get.to(
+                  () => StimulusAnakView(
+                        documentId: anakId,
+                        jurnalAnakId: 'kelahiranAnak$anakId',
+                      ),
+                  binding: StimulusAnakBinding());
             },
           ),
           // listCardWidget(

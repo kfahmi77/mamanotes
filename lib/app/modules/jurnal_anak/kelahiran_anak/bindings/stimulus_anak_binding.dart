@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../controllers/stimulus_anak_controller.dart';
+import '../controllers/kelahiran_anak_controller.dart';
 
 class StimulusAnakBinding extends Bindings {
   @override
