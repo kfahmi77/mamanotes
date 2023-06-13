@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
+import 'package:mamanotes/app/modules/kenangan/views/testaja.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/kenangan_controller.dart';
@@ -252,7 +253,13 @@ class KenanganView extends GetView<KenanganController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.transparent,
         onPressed: () {
-          Get.toNamed(Routes.addKenangan);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => KolaseFotoView(),
+            ),
+          );
+          // Get.toNamed(Routes.addKenangan);
         },
         child: Image.asset(
           'assets/images/tambah_icon.png',

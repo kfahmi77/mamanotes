@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -176,6 +177,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
     final percent = proportion < 0 || proportion > 1
         ? 0.0
         : proportion; // Persentase berdasarkan proporsi
+    User? user = FirebaseAuth.instance.currentUser;
     return SizedBox(
       height: expandedHeight + expandedHeight / 2,
       child: Stack(
@@ -228,38 +230,94 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                   child: SizedBox(
                     height: expandedHeight,
                     width: MediaQuery.of(context).size.width / 1.2,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 100.h,
-                          width: 100.w,
-                          child: Image.asset('assets/images/photo1.png'),
-                        ),
-                        const Padding(padding: EdgeInsets.only(top: 10)),
-                        Text(
-                          "Yuk moms isi profil keluarga dulu >.<",
-                          style: redTextStyle.copyWith(
-                              fontSize: 14.0.sp,
-                              color: black,
-                              fontWeight: normal),
-                        ),
-                        const Padding(padding: EdgeInsets.only(top: 10)),
-                        SizedBox(
-                          height: 30.h,
-                          child: ElevatedButton(
-                            style:
-                                ElevatedButton.styleFrom(backgroundColor: red),
-                            onPressed: () {
-                              Get.to(ProfileKeluargaView());
-                            },
-                            child: Text("isi profil keluarga",
+                    child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      stream: FirebaseFirestore.instance
+                          .collection('anak')
+                          .where('uid', isEqualTo: user!.uid)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child:
+                                  CircularProgressIndicator()); // Show a loading indicator while waiting for the data
+                        }
+
+                        if (snapshot.hasError) {
+                          return Text(
+                              'Error: ${snapshot.error}'); // Show an error message if there's an error
+                        }
+
+                        if (!snapshot.hasData) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Image.asset('assets/images/photo1.png'),
+                              ),
+                              const Padding(padding: EdgeInsets.only(top: 10)),
+                              const Text(
+                                "Yuk moms isi profil keluarga dulu >.<",
                                 style: TextStyle(
+                                  fontSize: 14.0,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              const Padding(padding: EdgeInsets.only(top: 10)),
+                              SizedBox(
+                                height: 30,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red),
+                                  onPressed: () {
+                                    Get.to(const ProfileKeluargaView());
+                                  },
+                                  child: const Text(
+                                    "isi profil keluarga",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height:
+                                  148.h, // Set the desired height for the image
+                              child:
+                                  Image.asset('assets/images/keluargaku.png'),
+                            ),
+                            const Padding(padding: EdgeInsets.only(top: 6)),
+                            SizedBox(
+                              height: 30.h,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: red),
+                                onPressed: () {
+                                  Get.to(const ProfileKeluargaView());
+                                },
+                                child: Text(
+                                  "profil keluargaku",
+                                  style: TextStyle(
                                     fontSize: 14.sp,
                                     color: white,
-                                    fontWeight: normal)),
-                          ),
-                        ),
-                      ],
+                                    fontWeight: normal,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ),
