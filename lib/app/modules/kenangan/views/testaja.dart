@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
+import 'package:mamanotes/app/modules/kenangan/bindings/kenangan_binding.dart';
 import 'package:mamanotes/app/modules/kenangan/views/kolase2_view.dart';
 
 import 'kolase1_view.dart';
@@ -20,10 +21,7 @@ class _KolaseFotoViewState extends State<KolaseFotoView> {
     // Lakukan navigasi ke halaman berikutnya berdasarkan selectedCollageType
     switch (selectedCollageType) {
       case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Kolase1View()),
-        );
+        Get.off(() => Kolase1View(), binding: KenanganBinding());
         break;
       case 2:
         Navigator.push(

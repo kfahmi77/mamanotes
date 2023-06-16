@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
+import 'package:mamanotes/app/modules/kenangan/views/kenangan_detail_view.dart';
 import 'package:mamanotes/app/modules/kenangan/views/testaja.dart';
 
 import '../../../routes/app_pages.dart';
@@ -63,7 +64,7 @@ class KenanganView extends GetView<KenanganController> {
                         (data) => DateFormat('d MMM yy', 'id_ID')
                             .format(data.createdAt.toDate()));
                     final keys = groupedData.keys.toList()
-                      ..sort((a, b) => a.compareTo(b))
+                      ..sort((a, b) => b.compareTo(a))
                       ..reversed.toList();
                     return ListView.builder(
                         itemCount: groupedData.length,
@@ -107,110 +108,125 @@ class KenanganView extends GetView<KenanganController> {
                                       )
                               ],
                             ),
-                            Expanded(
-                              child: SizedBox(
-                                height: 160.h,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 8.r),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            key,
-                                            style: redTextStyle.copyWith(
-                                              fontSize: 14.0,
-                                            ),
+                            SizedBox(
+                              height: 180.h,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 8.w),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          DateFormat('d MMM yy', 'id_ID')
+                                                      .format(DateTime.now()) ==
+                                                  key
+                                              ? 'Hari ini'
+                                              : key,
+                                          style: redTextStyle.copyWith(
+                                            fontSize: 14.0,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        height: 200.0.h,
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 300.w,
-                                              child: ListView.builder(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemCount: values?.length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  final data = values![index];
-                                                  return Card(
-                                                    color: background,
-                                                    child: Stack(
-                                                      children: [
-                                                        CachedNetworkImage(
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 200.h,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 300.w,
+                                            child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: values?.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                final data = values![index];
+                                                return Hero(
+                                                  tag:
+                                                      'detailKenangan+${data.imageUrl}}',
+                                                  child: GestureDetector(
+                                                    onTap: () => Get.to(
+                                                      () => KenanganDetailView(
                                                           imageUrl:
-                                                              data.imageUrl,
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              0.56,
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              1,
-                                                          fit: BoxFit.cover,
-                                                          placeholder:
-                                                              (context, url) =>
-                                                                  const Center(
-                                                            child:
-                                                                CircularProgressIndicator(),
-                                                          ),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              const Icon(
-                                                                  Icons.error),
-                                                        ),
-                                                        Align(
-                                                          alignment: Alignment
-                                                              .bottomLeft,
-                                                          child: Container(
+                                                              data.imageUrl),
+                                                    ),
+                                                    child: Card(
+                                                      child: Stack(
+                                                        children: [
+                                                          CachedNetworkImage(
+                                                            imageUrl:
+                                                                data.imageUrl,
                                                             width: MediaQuery.of(
                                                                         context)
                                                                     .size
                                                                     .width *
                                                                 0.56,
-                                                            height: 20.h,
-                                                            color: black
-                                                                .withOpacity(
-                                                                    0.4),
-                                                            child: Center(
-                                                              child: Text(
-                                                                data.caption,
-                                                                style: redTextStyle.copyWith(
-                                                                    fontSize:
-                                                                        15.0.r,
-                                                                    fontWeight:
-                                                                        semiBold,
-                                                                    color:
-                                                                        white),
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                1,
+                                                            fit: BoxFit
+                                                                .scaleDown,
+                                                            placeholder:
+                                                                (context,
+                                                                        url) =>
+                                                                    const Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            ),
+                                                            errorWidget: (context,
+                                                                    url,
+                                                                    error) =>
+                                                                const Icon(Icons
+                                                                    .error),
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .bottomLeft,
+                                                            child: Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.56,
+                                                              height: 20.h,
+                                                              color: black
+                                                                  .withOpacity(
+                                                                      0.4),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  data.caption,
+                                                                  style: redTextStyle.copyWith(
+                                                                      fontSize:
+                                                                          15.0
+                                                                              .r,
+                                                                      fontWeight:
+                                                                          semiBold,
+                                                                      color:
+                                                                          white),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
-                                                  );
-                                                },
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ]);
