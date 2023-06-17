@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/modules/data_anak/bindings/data_anak_binding.dart';
-import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controller.dart';
 import 'package:mamanotes/app/modules/data_anak/views/data_anak_view.dart';
 import 'package:mamanotes/app/modules/data_anak/views/detail_data_anak_view.dart';
 import 'package:mamanotes/app/modules/home/models/anak_model.dart';

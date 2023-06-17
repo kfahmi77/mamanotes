@@ -13,7 +13,6 @@ import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 import 'package:mamanotes/app/modules/kenangan/views/kenangan_detail_view.dart';
 import 'package:mamanotes/app/modules/kenangan/views/testaja.dart';
 
-import '../../../routes/app_pages.dart';
 import '../controllers/kenangan_controller.dart';
 
 class KenanganView extends GetView<KenanganController> {
@@ -120,11 +119,7 @@ class KenanganView extends GetView<KenanganController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          DateFormat('d MMM yy', 'id_ID')
-                                                      .format(DateTime.now()) ==
-                                                  key
-                                              ? 'Hari ini'
-                                              : key,
+                                          key,
                                           style: redTextStyle.copyWith(
                                             fontSize: 14.0,
                                           ),
