@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,8 @@ class ProfileKeluargaView extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               image: DecorationImage(
-                                image: NetworkImage(keluarga.ayah.foto),
+                                image: CachedNetworkImageProvider(
+                                    keluarga.ayah.foto),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -81,7 +83,8 @@ class ProfileKeluargaView extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               image: DecorationImage(
-                                image: NetworkImage(keluarga.ibu.foto),
+                                image: CachedNetworkImageProvider(
+                                    keluarga.ibu.foto),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -242,7 +245,7 @@ class ProfileKeluargaView extends StatelessWidget {
                   backgroundColor: red,
                 ),
                 onPressed: () {
-                  Get.to(() => AddProfileKeluargaView(),
+                  Get.to(() => const AddProfileKeluargaView(),
                       binding: ProfileKeluargaBinding());
                 },
                 child: const Text('Tambah Profil Keluarga'),

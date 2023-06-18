@@ -3,19 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 
 import '../../../../data/common/widget/custom_card.dart';
+import '../controllers/kelahiran_anak_controller.dart';
 import '../models/kelahiran_anak_model.dart';
 import 'add_jurnal_kelahiran_anak_view.dart';
 
-class StimulusAnakView extends StatelessWidget {
-  final String documentId;
-  final String jurnalAnakId;
-
-  const StimulusAnakView(
-      {super.key, required this.documentId, required this.jurnalAnakId});
-
+class StimulusAnakView extends GetView<StimulusAnakController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +23,9 @@ class StimulusAnakView extends StatelessWidget {
               fontWeight: bold, fontSize: 20.sp, color: white),
         ),
       ),
-      body: StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('anak')
-            .doc(documentId)
-            .collection('jurnal_anak')
-            .doc(jurnalAnakId)
-            .snapshots(),
-        builder:
-            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+      body: FutureBuilder<void>(
+        future: controller.fetchData(),
+        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           if (snapshot.hasError) {
             return const Center(
               child: Text('Terjadi kesalahan'),
@@ -48,41 +38,22 @@ class StimulusAnakView extends StatelessWidget {
             );
           }
 
-          if (!snapshot.hasData || !snapshot.data!.exists) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Tidak ada data kelahiran anak',
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  const SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigasi ke menu tambah kelahiran anak
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddStimulusAnakView(
-                            kelahiranAnakId: jurnalAnakId,
-                            anakId: documentId,
-                          ),
-                        ),
-                      );
-                    },
-                    child: const Text('Tambah Kelahiran Anak'),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          // Mendapatkan data dari Firestore
-          final data = snapshot.data!.data()! as Map<String, dynamic>;
-          final kelahiranAnak = KelahiranAnak.fromJson(data);
-
-          return KelahiranAnakView(kelahiranAnak: kelahiranAnak);
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Tidak ada data kelahiran anak',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                const SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: () => controller.navigateToAddStimulusAnakView(),
+                  child: const Text('Tambah Kelahiran Anak'),
+                ),
+              ],
+            ),
+          );
         },
       ),
     );
@@ -97,6 +68,15 @@ class KelahiranAnakView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: red,
+        title: Text(
+          'MAMANOTE',
+          style: redTextStyle.copyWith(
+              fontWeight: bold, fontSize: 20.sp, color: white),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0.r),
         child: Column(

@@ -243,12 +243,10 @@ class GridJurnalWidget extends StatelessWidget {
             text1: 'Kelahiranku',
             image: 'assets/images/kelahiranku.png',
             onTap: () {
-              Get.to(
-                  () => StimulusAnakView(
-                        documentId: anakId,
-                        jurnalAnakId: 'kelahiranAnak$anakId',
-                      ),
-                  binding: StimulusAnakBinding());
+              Get.to(() => StimulusAnakView(),
+                  binding: StimulusAnakBinding(
+                      documentId: anakId,
+                      jurnalAnakId: 'kelahiranAnak$anakId'));
             },
           ),
           // listCardWidget(
