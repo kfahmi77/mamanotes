@@ -7,6 +7,7 @@ import 'package:mamanotes/app/modules/kenangan/controllers/kolase4_controller.da
 import 'package:mamanotes/app/modules/kenangan/controllers/kolase5_controller.dart';
 
 import '../controllers/kenangan_controller.dart';
+import '../controllers/kolase2_controller.dart';
 import '../views/kolase/kolase2_view.dart';
 
 class KenanganBinding extends Bindings {

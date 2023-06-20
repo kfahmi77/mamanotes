@@ -6,11 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:screenshot/screenshot.dart';
-
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class Kolase1Controller extends GetxController {
-  final RxList<String> imagePaths = List.generate(6, (_) => '').obs;
+class Kolase2Controller extends GetxController {
+  final RxList<String> imagePaths = List.generate(3, (_) => '').obs;
   final Rx<DateTime> selectedDate = DateTime.now().obs;
   final ScreenshotController screenshotController = ScreenshotController();
   final firebase_storage.FirebaseStorage firebaseStorage =
