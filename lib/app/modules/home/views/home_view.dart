@@ -289,11 +289,24 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
 
                         return Column(
                           children: [
-                            SizedBox(
-                              height:
-                                  148.h, // Set the desired height for the image
-                              child:
-                                  Image.asset('assets/images/keluargaku.png'),
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(22.h),
+                                topRight: Radius.circular(22.h),
+                              ),
+                              child: AspectRatio(
+                                aspectRatio:
+                                    2.53.r, // Adjust the aspect ratio as needed
+                                child: Image.asset(
+                                  'assets/images/keluargaku.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: proportion <= (5 * 75.0) ? 10.h : 30.h,
+                              ),
                             ),
                             const Padding(padding: EdgeInsets.only(top: 6)),
                             SizedBox(
