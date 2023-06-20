@@ -11,7 +11,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 import 'package:mamanotes/app/modules/kenangan/views/kenangan_detail_view.dart';
-import 'package:mamanotes/app/modules/kenangan/views/testaja.dart';
+import 'package:mamanotes/app/modules/kenangan/views/kolase_foto_view.dart';
 
 import '../controllers/kenangan_controller.dart';
 

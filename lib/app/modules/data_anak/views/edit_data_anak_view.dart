@@ -180,8 +180,8 @@ class EditDataAnakView extends GetView<EditDataAnakController> {
                           borderRadius: BorderRadius.circular(4.0.r),
                           child: CachedNetworkImage(
                             imageUrl: anak.fotoAnak,
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
+                            placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                             width: 350.w,

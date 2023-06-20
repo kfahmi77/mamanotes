@@ -3,9 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/modules/kenangan/bindings/kenangan_binding.dart';
-import 'package:mamanotes/app/modules/kenangan/views/kolase2_view.dart';
-
-import 'kolase1_view.dart';
+import 'package:mamanotes/app/modules/kenangan/views/kolase/kolase2_view.dart';
+import 'package:mamanotes/app/modules/kenangan/views/kolase1_view.dart';
 
 class KolaseFotoView extends StatefulWidget {
   const KolaseFotoView({Key? key}) : super(key: key);
@@ -24,10 +23,7 @@ class _KolaseFotoViewState extends State<KolaseFotoView> {
         Get.off(() => const Kolase1View(), binding: KenanganBinding());
         break;
       case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Kolase2View()),
-        );
+        Get.to(() => Kolase2View(), binding: KenanganBinding());
         break;
       default:
         // Handle default case
@@ -164,7 +160,7 @@ class BottomKolaseList extends StatefulWidget {
   final ValueChanged<int> onCollageTypeSelected;
 
   @override
-   createState() => _BottomKolaseListState();
+  createState() => _BottomKolaseListState();
 }
 
 class _BottomKolaseListState extends State<BottomKolaseList> {
