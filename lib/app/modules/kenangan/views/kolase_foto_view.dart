@@ -8,6 +8,7 @@ import 'package:mamanotes/app/modules/kenangan/views/kolase/kolase1_view.dart';
 
 import 'kolase/kolase3_view.dart';
 import 'kolase/kolase4_view.dart';
+import 'kolase5_view.dart';
 
 class KolaseFotoView extends StatefulWidget {
   const KolaseFotoView({Key? key}) : super(key: key);
@@ -33,6 +34,9 @@ class _KolaseFotoViewState extends State<KolaseFotoView> {
         break;
       case 4:
         Get.to(() => const Kolase4View(), binding: KenanganBinding());
+        break;
+      case 5:
+        Get.to(() => const Kolase5View(), binding: KenanganBinding());
         break;
       default:
         // Handle default case

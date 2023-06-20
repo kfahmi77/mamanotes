@@ -4,6 +4,7 @@ import 'package:mamanotes/app/modules/kenangan/controllers/kenangan_add_controll
 import 'package:mamanotes/app/modules/kenangan/controllers/kolase1_controller.dart';
 import 'package:mamanotes/app/modules/kenangan/controllers/kolase3_controller.dart';
 import 'package:mamanotes/app/modules/kenangan/controllers/kolase4_controller.dart';
+import 'package:mamanotes/app/modules/kenangan/controllers/kolase5_controller.dart';
 
 import '../controllers/kenangan_controller.dart';
 import '../views/kolase/kolase2_view.dart';
@@ -11,6 +12,9 @@ import '../views/kolase/kolase2_view.dart';
 class KenanganBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut<Kolase5Controller>(
+      () => Kolase5Controller(),
+    );
     Get.lazyPut<Kolase4Controller>(
       () => Kolase4Controller(),
     );
