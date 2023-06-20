@@ -46,7 +46,6 @@ class Keluarga {
     );
   }
 }
-
 class Ayah {
   final String nama;
   final String foto;
@@ -62,11 +61,19 @@ class Ayah {
       foto: map['foto'],
     );
   }
+
   Map<String, dynamic> toJson() {
     return {
       'nama': nama,
       'foto': foto,
     };
+  }
+
+  Ayah copyWith({required String foto}) {
+    return Ayah(
+      nama: this.nama,
+      foto: foto,
+    );
   }
 }
 
@@ -78,6 +85,14 @@ class Ibu {
     required this.nama,
     required this.foto,
   });
+
+  factory Ibu.fromMap(Map<String, dynamic> map) {
+    return Ibu(
+      nama: map['nama'],
+      foto: map['foto'],
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'nama': nama,
@@ -85,10 +100,10 @@ class Ibu {
     };
   }
 
-  factory Ibu.fromMap(Map<String, dynamic> map) {
+  Ibu copyWith({required String foto}) {
     return Ibu(
-      nama: map['nama'],
-      foto: map['foto'],
+      nama: this.nama,
+      foto: foto,
     );
   }
 }

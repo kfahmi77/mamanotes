@@ -116,6 +116,5 @@ class AppPages {
       page: () => const TambahDataAnakView(),
       binding: DataAnakBinding(),
     ),
-
   ];
 }

@@ -1,14 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/bindings/profile_keluarga_binding.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/views/add_profile_keluarga_view.dart';
+import 'package:mamanotes/app/modules/profile_keluarga/views/edit_profile_keluarga_view.dart';
 
 import '../../../data/common/style.dart';
 import '../../../data/common/widget/logo_widget.dart';
+import '../../jurnal_anak/kelahiran_anak/views/stimulus_anak_view.dart';
 import '../models/profile_keluarga_model.dart';
+import 'detail_profile_keluarga_view.dart';
 
 class ProfileKeluargaView extends StatelessWidget {
   const ProfileKeluargaView({super.key});
@@ -37,6 +43,18 @@ class ProfileKeluargaView extends StatelessWidget {
               backgroundColor: background,
               centerTitle: true,
               title: const LogoWidget(),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    Get.to(
+                        () => EditProfileKeluargaView(
+                              keluargaModel: keluarga,
+                            ),
+                        binding: ProfileKeluargaBinding());
+                  },
+                  icon: const Icon(FontAwesomeIcons.pencil),
+                ),
+              ],
               elevation: 0,
             ),
             body: SingleChildScrollView(
@@ -46,65 +64,30 @@ class ProfileKeluargaView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 24),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                    keluarga.ayah.foto),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  keluarga.ayah.nama,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                    CarouselSlider(
+                      items: [
+                        _buildImageStack(
+                          keluarga.ayah.foto,
+                          keluarga.ayah.nama,
+                          OnTap: () => Navigator.push(
+                              context, _createRoute(keluarga.ayah.foto)),
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Container(
-                            height: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                    keluarga.ibu.foto),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  keluarga.ibu.nama,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        _buildImageStack(
+                          keluarga.ibu.foto,
+                          keluarga.ibu.nama,
+                          OnTap: () => Navigator.push(
+                              context, _createRoute(keluarga.ibu.foto)),
+                        )
                       ],
+                      options: CarouselOptions(
+                        height: 200.h,
+                        viewportFraction:
+                            0.5, // Mengatur fraksi dari lebar viewport
+                        aspectRatio: 16 / 9, // Mengatur rasio aspek gambar
+                        enlargeCenterPage:
+                            true, // Perbesar gambar saat ditampilkan di tengah
+                        enableInfiniteScroll: true,
+                      ),
                     ),
                     const SizedBox(height: 24),
                     SizedBox(
@@ -256,4 +239,56 @@ class ProfileKeluargaView extends StatelessWidget {
       },
     );
   }
+}
+
+Widget _buildImageStack(String imageUrl, String labelText,
+    {required Future? Function() OnTap}) {
+  return GestureDetector(
+    onTap: () => OnTap(),
+    child: Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            color: Colors.black54,
+            child: Text(labelText,
+                style: redTextStyle.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: bold,
+                  color: white,
+                )),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Route _createRoute(String imageUrl) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        DetailProfileKeluargaView(
+      urlImage: imageUrl,
+    ),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }
