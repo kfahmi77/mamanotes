@@ -174,15 +174,15 @@ class KelahiranAnakView extends StatelessWidget {
             const SizedBox(height: 16.0),
             CarouselSlider(
               items: [
-                _buildImageStack(
+                buildImageStack(
                   kelahiranAnak.birthPhotoUrl,
                   'Foto Anak Lahir',
                 ),
-                _buildImageStack(
+                buildImageStack(
                   kelahiranAnak.footPrintPhotoUrl,
                   'Foto Cap Kaki Anak',
                 ),
-                _buildImageStack(
+                buildImageStack(
                   kelahiranAnak.deliveryPhotoUrl,
                   'Foto Persalinan',
                 ),
@@ -203,7 +203,7 @@ class KelahiranAnakView extends StatelessWidget {
   }
 }
 
-Widget _buildImageStack(String imageUrl, String labelText) {
+Widget buildImageStack(String imageUrl, String labelText) {
   return Stack(
     fit: StackFit.expand,
     children: [

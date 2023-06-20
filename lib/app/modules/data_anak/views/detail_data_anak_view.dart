@@ -85,8 +85,8 @@ class DetailAnakView extends GetView<DetailAnakController> {
                     ),
                     onSelected: (AnakModel selectedAnak) {
                       controller.setSelectedAnak(
-                          selectedAnak); // Set the selected AnakModel object
-                      Get.to(() => DetailAnakView(anakId: anakId));
+                          selectedAnak); // Perbarui selectedAnak dengan anak yang baru dipilih
+                      Get.off(() => DetailAnakView(anakId: selectedAnak.docId));
                     },
                     itemBuilder: (BuildContext context) {
                       return <PopupMenuEntry<AnakModel>>[
@@ -230,6 +230,7 @@ class GridJurnalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<DetailAnakController>();
     return Expanded(
       child: GridView(
         padding: EdgeInsets.only(left: 10.h, top: 10.h),
@@ -245,31 +246,11 @@ class GridJurnalWidget extends StatelessWidget {
             onTap: () {
               Get.to(() => StimulusAnakView(),
                   binding: StimulusAnakBinding(
-                      documentId: anakId,
-                      jurnalAnakId: 'kelahiranAnak$anakId'));
+                      documentId: controller.getSelectedAnak()?.docId ?? anakId,
+                      jurnalAnakId:
+                          'kelahiranAnak${controller.getSelectedAnak()?.docId ?? anakId}'));
             },
           ),
-          // listCardWidget(
-          //   text1: 'Kelahiranku',
-          //   image: 'assets/images/kelahiranku.png',
-          //   onTap: () {
-          //     jurnalController.navigateTo('kelahiranku');
-          //   },
-          // ),
-          // listCardWidget(
-          //     text1: 'Stimulasi ',
-          //     image: 'assets/images/stimulus.png',
-          //     onTap: () => jurnalController.navigateTo('stimulus')),
-          // listCardWidget(
-          //     text1: 'Catatan',
-          //     image: 'assets/images/notepad 1.png',
-          //     onTap: () =>
-          //         Get.to(() => const MyDiaryView(), binding: MyDiaryBinding())),
-          // listCardWidget(
-          //     text1: 'Catatan',
-          //     image: 'assets/images/notepad 1.png',
-          //     onTap: () =>
-          //         Get.to(() => const MyDiaryView(), binding: MyDiaryBinding())),
         ],
       ),
     );
