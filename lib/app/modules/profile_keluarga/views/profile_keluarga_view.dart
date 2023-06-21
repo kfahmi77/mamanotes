@@ -69,13 +69,13 @@ class ProfileKeluargaView extends StatelessWidget {
                         _buildImageStack(
                           keluarga.ayah.foto,
                           keluarga.ayah.nama,
-                          OnTap: () => Navigator.push(
+                          onTap: () => Navigator.push(
                               context, _createRoute(keluarga.ayah.foto)),
                         ),
                         _buildImageStack(
                           keluarga.ibu.foto,
                           keluarga.ibu.nama,
-                          OnTap: () => Navigator.push(
+                          onTap: () => Navigator.push(
                               context, _createRoute(keluarga.ibu.foto)),
                         )
                       ],
@@ -242,22 +242,32 @@ class ProfileKeluargaView extends StatelessWidget {
 }
 
 Widget _buildImageStack(String imageUrl, String labelText,
-    {required Future? Function() OnTap}) {
+    {required Future? Function() onTap}) {
   return GestureDetector(
-    onTap: () => OnTap(),
+    onTap: () => onTap(),
     child: Stack(
       fit: StackFit.expand,
       children: [
-        Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
+        CachedNetworkImage(
+          imageUrl: imageUrl,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Positioned(
           bottom: 0,
           left: 0,
           right: 0,
           child: Container(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             color: Colors.black54,
             child: Text(labelText,
                 style: redTextStyle.copyWith(

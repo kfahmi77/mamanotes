@@ -57,10 +57,9 @@ class HomeView extends GetView<HomeController> {
                             (BuildContext context, int index) {
                               if (index == 0) {
                                 // Widget pertama
-                                return listCardNetworkWidget(
+                                return listCardWidget(
                                     text1: 'Catatan',
-                                    image:
-                                        'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2Fnotepad%201.png?alt=media&token=3332698c-ace9-40f9-bcc7-f958dbb92886',
+                                    image: 'assets/images/notepad 1.png',
                                     onTap: () {
                                       Get.to(() => const MyDiaryView(),
                                           binding: MyDiaryBinding(),
@@ -68,10 +67,9 @@ class HomeView extends GetView<HomeController> {
                                     });
                               } else if (index == menuItems.length + 1) {
                                 // Widget terakhir
-                                return listCardNetworkWidget(
+                                return listCardWidget(
                                     text1: 'Tambah Anak',
-                                    image:
-                                        'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
+                                    image: 'assets/images/plus.png',
                                     onTap: () => Get.to(
                                           () => const TambahDataAnakView(),
                                           binding: DataAnakBinding(),
@@ -104,28 +102,31 @@ class HomeView extends GetView<HomeController> {
                         );
                       } else {
                         return SliverGrid(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                          ),
-                          delegate: SliverChildListDelegate([
-                            listCardNetworkWidget(
-                                text1: 'Catatan',
-                                image:
-                                    'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2Fnotepad%201.png?alt=media&token=3332698c-ace9-40f9-bcc7-f958dbb92886',
-                                onTap: () => Get.to(() => const MyDiaryView(),
-                                    binding: MyDiaryBinding())),
-                            listCardNetworkWidget(
-                                text1: 'Tambah Anak',
-                                image:
-                                    'https://firebasestorage.googleapis.com/v0/b/mamanote-21b82.appspot.com/o/icon%2F%2B.png?alt=media&token=f6362d57-fa92-43f0-b708-224a2287597c',
-                                onTap: () => Get.to(
-                                    () => const TambahDataAnakView(),
-                                    binding: DataAnakBinding())),
-                          ]),
-                        );
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                            ),
+                            delegate: SliverChildListDelegate([
+                              listCardWidget(
+                                  text1: 'Catatan',
+                                  image: 'assets/images/notepad 1.png',
+                                  onTap: () {
+                                    Get.to(() => const MyDiaryView(),
+                                        binding: MyDiaryBinding(),
+                                        transition: Transition.rightToLeft);
+                                  }),
+                              listCardWidget(
+                                  text1: 'Tambah Anak',
+                                  image: 'assets/images/plus.png',
+                                  onTap: () => Get.to(
+                                        () => const TambahDataAnakView(),
+                                        binding: DataAnakBinding(),
+                                        transition:
+                                            Transition.leftToRightWithFade,
+                                      )),
+                            ]));
                       }
                     } else if (snapshot.hasError) {
                       return const SliverFillRemaining(

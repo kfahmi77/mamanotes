@@ -22,8 +22,8 @@ abstract class Routes {
   static const editProfile = _Paths.editProfile;
   static const addProfilKeluarga = _Paths.addProfilKeluarga;
   static const STIMULUS_ANAK = _Paths.STIMULUS_ANAK;
-    static const detailAnak = _Paths.STIMULUS_ANAK;
-
+  static const detailAnak = _Paths.STIMULUS_ANAK;
+  static const KATA_PERTAMA_ANAK = _Paths.KATA_PERTAMA_ANAK;
 }
 
 abstract class _Paths {
@@ -53,5 +53,6 @@ abstract class _Paths {
   static const tambahAnak = '/data-anak';
   static const jurnalAnak = '/jurnal-anak';
   static const STIMULUS_ANAK = '/stimulus-anak';
-   static const detailAnak = '/stimulus-anak';
+  static const detailAnak = '/stimulus-anak';
+  static const KATA_PERTAMA_ANAK = '/kata-pertama-anak';
 }

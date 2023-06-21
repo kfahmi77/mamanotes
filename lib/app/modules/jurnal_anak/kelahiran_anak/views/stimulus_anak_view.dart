@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,9 @@ import '../controllers/kelahiran_anak_controller.dart';
 import '../models/kelahiran_anak_model.dart';
 import 'add_jurnal_kelahiran_anak_view.dart';
 
-class StimulusAnakView extends GetView<StimulusAnakController> {
+class KelahiranView extends GetView<StimulusAnakController> {
+  const KelahiranView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -207,16 +210,26 @@ Widget buildImageStack(String imageUrl, String labelText) {
   return Stack(
     fit: StackFit.expand,
     children: [
-      Image.network(
-        imageUrl,
-        fit: BoxFit.cover,
+      CachedNetworkImage(
+        imageUrl: imageUrl,
+        imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        placeholder: (context, url) =>
+            const Center(child: CircularProgressIndicator()),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
       Positioned(
         bottom: 0,
         left: 0,
         right: 0,
         child: Container(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           color: Colors.black54,
           child: Text(labelText,
               style: redTextStyle.copyWith(

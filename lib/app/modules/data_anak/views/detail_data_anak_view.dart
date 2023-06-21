@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/utils/date_formatter.dart';
 import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controller.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/kata_pertama_anak/bindings/kata_pertama_anak_binding.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/kata_pertama_anak/views/kata_pertama_anak_view.dart';
 
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
@@ -100,12 +103,20 @@ class DetailAnakView extends GetView<DetailAnakController> {
                                     value: anak,
                                     child: Row(
                                       children: [
-                                        CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              anak.fotoAnak), // Gambar avatar
-                                          radius: 15.0,
+                                        CachedNetworkImage(
+                                          imageUrl: anak.fotoAnak,
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  CircleAvatar(
+                                            backgroundImage: imageProvider,
+                                            radius: 15.0,
+                                          ),
+                                          placeholder: (context, url) =>
+                                              const CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                         ),
-                                        SizedBox(width: 10.0),
+                                        const SizedBox(width: 10.0),
                                         Text(
                                           anak.namaLengkap.length > 20
                                               ? '${anak.namaLengkap.substring(0, 15)}...' // Display only the first 10 characters with ellipsis
@@ -244,11 +255,20 @@ class GridJurnalWidget extends StatelessWidget {
             text1: 'Kelahiranku',
             image: 'assets/images/kelahiranku.png',
             onTap: () {
-              Get.to(() => StimulusAnakView(),
+              Get.to(() => KelahiranView(),
                   binding: StimulusAnakBinding(
                       documentId: controller.getSelectedAnak()?.docId ?? anakId,
                       jurnalAnakId:
                           'kelahiranAnak${controller.getSelectedAnak()?.docId ?? anakId}'));
+            },
+          ),
+          listCardWidget(
+            text1: 'Kata Pertamaku',
+            image: 'assets/images/first_word.png',
+            onTap: () {
+              Get.to(
+                () => const KataPertamaAnakView(),
+              );
             },
           ),
         ],
@@ -343,12 +363,28 @@ class CardAnakWidget extends StatelessWidget {
             height: 200.h,
             child: Stack(
               children: [
-                Image.network(
-                  anak.fotoAnak,
-                  fit: BoxFit.cover,
+                CachedNetworkImage(
+                  imageUrl: anak.fotoAnak,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   width: double.infinity,
                   height: double.infinity,
                 ),
+                // Image.network(
+                //   anak.fotoAnak,
+                //   fit: BoxFit.cover,
+                //   width: double.infinity,
+                //   height: double.infinity,
+                // ),
                 Positioned.fill(
                   bottom: 0,
                   child: FractionallySizedBox(
