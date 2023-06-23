@@ -29,8 +29,8 @@ class KelahiranAnak {
 
   factory KelahiranAnak.fromJson(Map<String, dynamic> json) {
     return KelahiranAnak(
-      anakId: json['AnakId'] ?? '',
-      kelahiranAnakId: json['KelahiranAnakId'] ?? '',
+      anakId: json['anakId'] ?? '',
+      kelahiranAnakId: json['kelahiranAnakId'] ?? '',
       birthPhotoUrl: json['birthPhotoUrl'] ?? '',
       birthPlace: json['birthPlace'] ?? '',
       birthTime: json['birthTime'] ?? '',
