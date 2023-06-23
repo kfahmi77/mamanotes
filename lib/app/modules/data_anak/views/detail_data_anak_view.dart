@@ -9,10 +9,12 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/utils/date_formatter.dart';
 import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controller.dart';
+import 'package:mamanotes/app/modules/kata_pertama_anak/bindings/kata_pertama_anak_binding.dart';
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
 import '../../jurnal_anak/kelahiran_anak/bindings/stimulus_anak_binding.dart';
 import '../../jurnal_anak/kelahiran_anak/views/stimulus_anak_view.dart';
+import '../../kata_pertama_anak/views/kata_pertama_anak_view.dart';
 import 'edit_data_anak_view.dart';
 
 class DetailAnakView extends GetView<DetailAnakController> {
@@ -263,7 +265,11 @@ class GridJurnalWidget extends StatelessWidget {
             text1: 'Kata Pertamaku',
             image: 'assets/images/first_word.png',
             onTap: () {
-             
+              Get.to(() => KataPertamaView(),
+                  binding: KataPertamaAnakBinding(
+                      documentId: controller.getSelectedAnak()?.docId ?? anakId,
+                      kataPertamaAnakId:
+                          'kataAnakPertama${controller.getSelectedAnak()?.docId ?? anakId}'));
             },
           ),
         ],
