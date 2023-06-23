@@ -1,4 +1,5 @@
 class KelahiranAnak {
+  final String anakId;
   final String kelahiranAnakId;
   final String birthPhotoUrl;
   final String birthPlace;
@@ -12,6 +13,7 @@ class KelahiranAnak {
   final num weight;
 
   KelahiranAnak({
+    required this.anakId,
     required this.kelahiranAnakId,
     required this.birthPhotoUrl,
     required this.birthPlace,
@@ -27,6 +29,7 @@ class KelahiranAnak {
 
   factory KelahiranAnak.fromJson(Map<String, dynamic> json) {
     return KelahiranAnak(
+      anakId: json['AnakId'] ?? '',
       kelahiranAnakId: json['KelahiranAnakId'] ?? '',
       birthPhotoUrl: json['birthPhotoUrl'] ?? '',
       birthPlace: json['birthPlace'] ?? '',

@@ -11,6 +11,7 @@ import '../../../../data/common/widget/custom_card.dart';
 import '../controllers/kelahiran_anak_controller.dart';
 import '../models/kelahiran_anak_model.dart';
 import 'add_jurnal_kelahiran_anak_view.dart';
+import 'edit_kelahiran_anak.dart';
 
 class KelahiranView extends GetView<StimulusAnakController> {
   const KelahiranView({super.key});
@@ -79,6 +80,17 @@ class KelahiranAnakView extends StatelessWidget {
           style: redTextStyle.copyWith(
               fontWeight: bold, fontSize: 20.sp, color: white),
         ),
+        actions: [
+          IconButton(
+            onPressed: () => Get.to(() => EditKelahiranAnakView(
+                  kelahiranAnak: kelahiranAnak,
+                )),
+            icon: Icon(
+              FontAwesomeIcons.penToSquare,
+              size: 24.sp,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0.r),
@@ -110,12 +122,14 @@ class KelahiranAnakView extends StatelessWidget {
                     iconData: Icons.access_time,
                     backgroundColor: red,
                     textColor: white),
-                CustomCard(
-                    title: 'Tempat Lahir',
-                    subtitle: kelahiranAnak.birthPlace,
-                    iconData: Icons.place,
-                    backgroundColor: red,
-                    textColor: white),
+                Expanded(
+                  child: CustomCard(
+                      title: 'Tempat Lahir',
+                      subtitle: kelahiranAnak.birthPlace,
+                      iconData: Icons.place,
+                      backgroundColor: red,
+                      textColor: white),
+                ),
               ],
             ),
             SizedBox(height: 16.h),
