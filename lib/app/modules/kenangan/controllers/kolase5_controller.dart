@@ -56,6 +56,7 @@ class Kolase5Controller extends GetxController {
         "image_url": downloadURL,
         "uid": auth!.uid,
         "caption": captionController.text,
+        "create_at": selectedDate.value,
       });
       await firestore.collection("kenangan").doc(hasil.id).update({
         "kenanganId": hasil.id,
