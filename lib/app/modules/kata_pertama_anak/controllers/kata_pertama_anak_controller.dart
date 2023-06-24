@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/views/kata_pertama_anak_view.dart';
@@ -45,7 +44,7 @@ class KataPertamaAnakController extends GetxController {
 
     if (fileInfo != null && fileInfo.file.existsSync()) {
       // File audio ditemukan di cache lokal, mainkan dari cache
-      File cachedFile = fileInfo.file!;
+      File cachedFile = fileInfo.file;
       await audioPlayer.value.play(UrlSource(cachedFile.path));
       isPlaying.value = true;
     } else {

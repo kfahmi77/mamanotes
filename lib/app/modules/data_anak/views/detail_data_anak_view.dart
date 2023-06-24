@@ -272,6 +272,36 @@ class GridJurnalWidget extends StatelessWidget {
                           'kataAnakPertama${controller.getSelectedAnak()?.docId ?? anakId}'));
             },
           ),
+          listCardWidget(
+            text1: 'Gigi Pertamaku',
+            image: 'assets/images/gigi.png',
+            onTap: () {},
+          ),
+          listCardWidget(
+            text1: 'Merangkak',
+            image: 'assets/images/crawling.png',
+            onTap: () {},
+          ),
+          listCardWidget(
+            text1: 'Duduk',
+            image: 'assets/images/sit.png',
+            onTap: () {},
+          ),
+          listCardWidget(
+            text1: 'Jalan',
+            image: 'assets/images/walk.png',
+            onTap: () {},
+          ),
+          listCardWidget(
+            text1: 'Bulan Pertamaku',
+            image: 'assets/images/calendar.png',
+            onTap: () {},
+          ),
+          listCardWidget(
+            text1: 'Tahun Pertamaku',
+            image: 'assets/images/years.png',
+            onTap: () {},
+          ),
         ],
       ),
     );

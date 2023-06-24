@@ -233,14 +233,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      sha256: a9d76e72985d7087eb7c5e7903224ae52b337131518d127c554b9405936752b8
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.2.1+1"
   fake_async:
     dependency: transitive
     description:
@@ -374,14 +366,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
-  flutter_card_swiper:
-    dependency: "direct main"
-    description:
-      name: flutter_card_swiper
-      sha256: "1c010a2a5e6159bf3e4dda5de7659112ad28188141329d18612ad99edf88246b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.0"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -853,14 +837,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  swipe_cards:
-    dependency: "direct main"
-    description:
-      name: swipe_cards
-      sha256: c34f28e71e3d4041455aaff49ac4242a79cad0e7d0ec16978f871059f3d956e3
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0+1"
   synchronized:
     dependency: transitive
     description:
@@ -885,14 +861,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
-  transparent_image:
-    dependency: "direct main"
-    description:
-      name: transparent_image
-      sha256: e8991d955a2094e197ca24c645efec2faf4285772a4746126ca12875e54ca02f
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.1"
   typed_data:
     dependency: transitive
     description:
