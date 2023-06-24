@@ -15,7 +15,7 @@ class GigiPertamaAnakBinding extends Bindings {
     Get.lazyPut<GigiPertamaAnakController>(
       () => GigiPertamaAnakController(
         documentId: documentId,
-        gigiPertamaAnakId: gigiPertamaAnakId,
+        gigiAnakId: gigiPertamaAnakId,
       ),
     );
     Get.lazyPut<AddGigiPertamaAnakController>(

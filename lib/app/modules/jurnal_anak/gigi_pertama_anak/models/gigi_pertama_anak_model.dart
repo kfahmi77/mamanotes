@@ -8,4 +8,15 @@ class GigiPertamaAnakModel {
     required this.gigiPertamaAnakId,
     required this.imageUrl,
   });
+
+  factory GigiPertamaAnakModel.fromJson(Map<String, dynamic> data) {
+    final documentId = data['documentId'] ?? '';
+    final imageUrl = data['foto_gigi_anak'] ?? '';
+    final gigiPertamaAnakId = data['gigiPertamaId'] ?? '';
+    return GigiPertamaAnakModel(
+      documentId: documentId,
+      gigiPertamaAnakId: gigiPertamaAnakId,
+      imageUrl: imageUrl,
+    );
+  }
 }

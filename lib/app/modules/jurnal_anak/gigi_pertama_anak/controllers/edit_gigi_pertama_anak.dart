@@ -4,10 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../models/gigi_pertama_anak_model.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class EditGigiPertamaAnakController extends GetxController {
   final fotoGigiAnak = Rx<File?>(null);
@@ -15,10 +14,10 @@ class EditGigiPertamaAnakController extends GetxController {
   XFile? pickedImage;
 
   void init(GigiPertamaAnakModel kelahiranAnak) {
-    if (kelahiranAnak.fotoGigi.isNotEmpty) {
-      fotoGigiAnak.value = File(kelahiranAnak.fotoGigi);
+    if (kelahiranAnak.imageUrl.isNotEmpty) {
+      fotoGigiAnak.value = File(kelahiranAnak.imageUrl);
       _downloadURL =
-          kelahiranAnak.fotoGigi; // Tugaskan nilai URL gambar sebelumnya
+          kelahiranAnak.imageUrl; // Tugaskan nilai URL gambar sebelumnya
     }
   }
 

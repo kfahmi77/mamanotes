@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/utils/date_formatter.dart';
 import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controller.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/bindings/gigi_pertama_anak_binding.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/views/gigi_pertama_anak_view.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/bindings/kata_pertama_anak_binding.dart';
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
@@ -275,7 +277,13 @@ class GridJurnalWidget extends StatelessWidget {
           listCardWidget(
             text1: 'Gigi Pertamaku',
             image: 'assets/images/gigi.png',
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const GigiPertamaView(),
+                  binding: GigiPertamaAnakBinding(
+                      documentId: controller.getSelectedAnak()?.docId ?? anakId,
+                      gigiPertamaAnakId:
+                          'gigiPertamaAnak${controller.getSelectedAnak()?.docId ?? anakId}'));
+            },
           ),
           listCardWidget(
             text1: 'Merangkak',

@@ -28,7 +28,6 @@ class EditGigiPertamaAnakView extends GetView<EditGigiPertamaAnakController> {
         actions: [
           IconButton(
             onPressed: () {
-              print(gigiPertamaAnak.documentId);
               controller.updateImage(gigiPertamaAnak.documentId,
                   gigiPertamaAnak.gigiPertamaAnakId);
             },
@@ -91,7 +90,7 @@ class EditGigiPertamaAnakView extends GetView<EditGigiPertamaAnakController> {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(4.0.r),
                     child: CachedNetworkImage(
-                      imageUrl: gigiPertamaAnak.fotoGigi,
+                      imageUrl: gigiPertamaAnak.imageUrl,
                       placeholder: (context, url) =>
                           const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>

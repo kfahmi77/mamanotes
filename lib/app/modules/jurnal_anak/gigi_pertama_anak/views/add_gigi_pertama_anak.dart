@@ -11,9 +11,9 @@ import '../controllers/add_gigi_pertama_anak.dart';
 
 class AddGigiPertamaAnakView extends GetView<AddGigiPertamaAnakController> {
   final String documentId;
-  final String kataPertamaAnakId;
+  final String gigiAnakId;
   const AddGigiPertamaAnakView(
-      {Key? key, required this.documentId, required this.kataPertamaAnakId})
+      {Key? key, required this.documentId, required this.gigiAnakId})
       : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class AddGigiPertamaAnakView extends GetView<AddGigiPertamaAnakController> {
         actions: [
           IconButton(
             onPressed: () {
-              controller.uploadImage(documentId, kataPertamaAnakId);
+              controller.uploadImage(documentId, gigiAnakId);
             },
             icon: Icon(
               FontAwesomeIcons.solidFloppyDisk,
@@ -47,7 +47,7 @@ class AddGigiPertamaAnakView extends GetView<AddGigiPertamaAnakController> {
                           leading: const Icon(Icons.photo_library),
                           title: const Text('Ambil dari Galeri'),
                           onTap: () {
-                            controller.pickGigiAnak(ImageSource.gallery);
+                            controller.pickFotoGigiAnak(ImageSource.gallery);
                             Navigator.of(context).pop();
                           },
                         ),
@@ -55,7 +55,7 @@ class AddGigiPertamaAnakView extends GetView<AddGigiPertamaAnakController> {
                           leading: const Icon(Icons.photo_camera),
                           title: const Text('Ambil dari Kamera'),
                           onTap: () {
-                            controller.pickGigiAnak(ImageSource.camera);
+                            controller.pickFotoGigiAnak(ImageSource.camera);
                             Navigator.of(context).pop();
                           },
                         ),
@@ -75,13 +75,13 @@ class AddGigiPertamaAnakView extends GetView<AddGigiPertamaAnakController> {
                 border: Border.all(color: Colors.red, width: 1.0),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: controller.fotogigiAnak.value != null
-                      ? FileImage(controller.fotogigiAnak.value!)
+                  image: controller.fotoGigiAnak.value != null
+                      ? FileImage(controller.fotoGigiAnak.value!)
                       : const AssetImage("assets/images/grey.png")
                           as ImageProvider<Object>,
                 ),
               ),
-              child: controller.fotogigiAnak.value == null
+              child: controller.fotoGigiAnak.value == null
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
