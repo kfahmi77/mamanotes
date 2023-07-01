@@ -16,6 +16,7 @@ import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
 import '../../jurnal_anak/kelahiran_anak/bindings/stimulus_anak_binding.dart';
 import '../../jurnal_anak/kelahiran_anak/views/stimulus_anak_view.dart';
+import '../../jurnal_anak/pdf_view.dart';
 import '../../kata_pertama_anak/views/kata_pertama_anak_view.dart';
 import 'edit_data_anak_view.dart';
 
@@ -333,7 +334,9 @@ class JurnalPdfWidget extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all(grey),
             ),
             onPressed: () {
-              // Logika aksi tombol
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const PdfPreviewPage();
+              }));
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

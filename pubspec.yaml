@@ -32,6 +32,8 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   file_picker: ^5.3.2
   audioplayers: ^4.1.0
+  pdf: ^3.9.0 
+  printing: ^5.4.2
 
 dev_dependencies: 
   flutter_lints: 2.0.1
@@ -47,6 +49,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/svg/
 
 flutter_native_splash:
   color: "#FFCDD7"
