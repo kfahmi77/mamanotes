@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mamanotes/app/data/common/style.dart';
-import 'package:mamanotes/app/data/common/widget/custom_card_pdf.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import 'package:printing/printing.dart';
-import 'package:flutter/material.dart' as mt;
 
 class PdfPreviewPage extends StatelessWidget {
   const PdfPreviewPage({Key? key}) : super(key: key);
@@ -17,7 +14,12 @@ class PdfPreviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PDF Preview'),
+        backgroundColor: background,
+        title: Text(
+          'Preview Jurnal Anak',
+          style: redTextStyle.copyWith(color: red, fontWeight: bold),
+        ),
+        elevation: 0,
       ),
       body: PdfPreview(
         build: (context) => generateDocument(),
@@ -26,7 +28,7 @@ class PdfPreviewPage extends StatelessWidget {
   }
 
   Future<Uint8List> generateDocument() async {
-    final doc = pw.Document(pageMode: PdfPageMode.outlines);
+    final doc = pw.Document();
 
     final font1 = await PdfGoogleFonts.openSansRegular();
     final font2 = await PdfGoogleFonts.openSansBold();
@@ -34,7 +36,9 @@ class PdfPreviewPage extends StatelessWidget {
         await rootBundle.load('assets/images/logo_mamanote.png');
     final Uint8List logo = bytes.buffer.asUint8List();
     final ByteData stringImg =
-        await rootBundle.load('assets/images/photo1.png');
+        await rootBundle.load('assets/images/kelahiranku.png');
+    final ByteData stringImg2 = await rootBundle.load('assets/images/bg.jpg');
+    final Uint8List coba2 = stringImg2.buffer.asUint8List();
     final Uint8List coba = stringImg.buffer.asUint8List();
     pw.SvgImage waktuIcon = await loadStringSvg('assets/svg/clock-regular.svg');
     pw.SvgImage tempatIcon = await loadStringSvg('assets/svg/marker.svg');
@@ -44,6 +48,8 @@ class PdfPreviewPage extends StatelessWidget {
     pw.SvgImage ayahIcon = await loadStringSvg('assets/svg/man.svg');
     pw.SvgImage ibuIcon = await loadStringSvg('assets/svg/woman.svg');
 
+    // Get the dimensions of the asset image
+
     doc.addPage(
       pw.MultiPage(
         theme: pw.ThemeData.withFont(
@@ -52,33 +58,6 @@ class PdfPreviewPage extends StatelessWidget {
         ),
         orientation: pw.PageOrientation.portrait,
         crossAxisAlignment: pw.CrossAxisAlignment.start,
-        header: (pw.Context context) {
-          if (context.pageNumber == 1) {
-            return pw.SizedBox();
-          }
-          return pw.Container(
-              alignment: pw.Alignment.centerRight,
-              margin: const pw.EdgeInsets.only(bottom: 0.5 * PdfPageFormat.mm),
-              padding: const pw.EdgeInsets.only(bottom: 0.5 * PdfPageFormat.mm),
-              decoration: const pw.BoxDecoration(
-                  border: pw.Border(
-                      bottom:
-                          pw.BorderSide(width: 0.5, color: PdfColors.grey))),
-              child: pw.Text('Mamanote',
-                  style: pw.Theme.of(context)
-                      .defaultTextStyle
-                      .copyWith(color: PdfColors.grey)));
-        },
-        footer: (pw.Context context) {
-          return pw.Container(
-              alignment: pw.Alignment.centerRight,
-              margin: const pw.EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
-              child: pw.Text(
-                  'Halaman ${context.pageNumber} dari ${context.pagesCount}',
-                  style: pw.Theme.of(context)
-                      .defaultTextStyle
-                      .copyWith(color: PdfColors.grey)));
-        },
         build: (pw.Context context) => <pw.Widget>[
           pw.Row(mainAxisAlignment: pw.MainAxisAlignment.center, children: [
             pw.Image(pw.MemoryImage(logo),
@@ -100,6 +79,7 @@ class PdfPreviewPage extends StatelessWidget {
             ),
           ]),
           pw.Container(
+              width: 500.w,
               decoration: pw.BoxDecoration(
                   borderRadius: pw.BorderRadius.circular(10),
                   color: PdfColor.fromInt(red.value)),
@@ -148,6 +128,48 @@ class PdfPreviewPage extends StatelessWidget {
                     endIndent: 10.h,
                     indent: 10),
                 rowKelahiranPdf(ibuIcon, 'amin'),
+                pw.Divider(
+                    thickness: 2,
+                    color: PdfColor.fromInt(white.value),
+                    height: 20.h,
+                    endIndent: 10.h,
+                    indent: 10),
+                pw.Padding(
+                  padding: pw.EdgeInsets.all(16.r),
+                  child: pw.Container(
+                    decoration: pw.BoxDecoration(
+                      borderRadius: pw.BorderRadius.circular(10),
+                      border: pw.Border.all(
+                        width: 4,
+                        color: PdfColor.fromInt(white.value),
+                      ),
+                    ),
+                    child: pw.Image(
+                      pw.MemoryImage(
+                          coba), // Replace imageBytes with your image bytes
+                      fit: pw.BoxFit.contain,
+                      width: 370.w,
+                    ),
+                  ),
+                ),
+                pw.Padding(
+                  padding: pw.EdgeInsets.all(16.r),
+                  child: pw.Container(
+                    decoration: pw.BoxDecoration(
+                      borderRadius: pw.BorderRadius.circular(10),
+                      border: pw.Border.all(
+                        width: 4,
+                        color: PdfColor.fromInt(white.value),
+                      ),
+                    ),
+                    child: pw.Image(
+                      pw.MemoryImage(
+                          coba), // Replace imageBytes with your image bytes
+                      fit: pw.BoxFit.contain,
+                      width: 370.w,
+                    ),
+                  ),
+                ),
                 pw.Padding(
                   padding: pw.EdgeInsets.all(16.r),
                   child: pw.Container(
@@ -168,6 +190,45 @@ class PdfPreviewPage extends StatelessWidget {
                 ),
               ]))
         ],
+      ),
+    );
+    doc.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          // Mendapatkan ukuran halaman PDF
+          const pageFormat = PdfPageFormat.a4;
+          final screenWidth = pageFormat.width;
+          final screenHeight = pageFormat.height;
+
+          return pw.Stack(
+            children: [
+              pw.Center(
+                child: pw.Image(
+                  pw.MemoryImage(coba2),
+                  width: screenWidth,
+                  height: screenHeight,
+                  fit: pw.BoxFit.fill,
+                ),
+              ),
+              pw.Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: pw.Center(
+                    child: pw.Container(
+                  width: 200.w,
+                  child: pw.Expanded(
+                    child: pw.Text(
+                      'Kata Pertama' * 4,
+                      style: const pw.TextStyle(fontSize: 20),
+                    ),
+                  ),
+                )),
+              ),
+            ],
+          );
+        },
       ),
     );
 

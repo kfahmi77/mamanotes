@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:mamanotes/app/data/common/style.dart';
 
 import 'app/data/repository/auth.dart';
 import 'app/routes/app_pages.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
               );
             }
             return GetMaterialApp(
+              theme: ThemeData(primaryColor: background),
               debugShowCheckedModeBanner: false,
               title: "Mamanote",
               initialRoute: determineInitialRoute(),
