@@ -221,7 +221,9 @@ class DetailAnakView extends GetView<DetailAnakController> {
           SizedBox(
             height: 4.h,
           ),
-          const JurnalPdfWidget(),
+          JurnalPdfWidget(
+            documentId: anakId,
+          ),
           SizedBox(
             height: 8.h,
           ),
@@ -320,7 +322,9 @@ class GridJurnalWidget extends StatelessWidget {
 class JurnalPdfWidget extends StatelessWidget {
   const JurnalPdfWidget({
     super.key,
+    required this.documentId,
   });
+  final String documentId;
 
   @override
   Widget build(BuildContext context) {
@@ -335,7 +339,9 @@ class JurnalPdfWidget extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const PdfPreviewPage();
+                return PdfPreviewPage(
+                  documentId: documentId,
+                );
               }));
             },
             child: Row(
