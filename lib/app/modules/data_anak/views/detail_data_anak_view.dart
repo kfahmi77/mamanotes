@@ -12,6 +12,8 @@ import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controll
 import 'package:mamanotes/app/modules/jurnal_anak/berdiri_anak/views/berdiri_anak_view.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/bindings/gigi_pertama_anak_binding.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/views/gigi_pertama_anak_view.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/bindings/merangkak_anak_binding.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/views/merangkak_anak_view.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/bindings/kata_pertama_anak_binding.dart';
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
@@ -293,7 +295,13 @@ class GridJurnalWidget extends StatelessWidget {
           listCardWidget(
             text1: 'Merangkak',
             image: 'assets/images/crawling.png',
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const MerangkakView(),
+                  binding: MerangkakAnakBinding(
+                      documentId: controller.getSelectedAnak()?.docId ?? anakId,
+                      merangkakAnakId:
+                          'merangkakAnakId${controller.getSelectedAnak()?.docId ?? anakId}'));
+            },
           ),
           listCardWidget(
             text1: 'Duduk',

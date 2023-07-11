@@ -8,28 +8,28 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../data/common/style.dart';
-import '../controllers/edit_berdiri_anak_controller.dart';
-import '../models/berdiri_anak_model.dart';
+import '../controllers/edit_merangkak_anak_controller.dart';
+import '../models/merangkak_anak_model.dart';
 
-class EditBerdiriAnakView extends GetView<EditBerdiriAnakController> {
-  final BerdiriAnakModel gigiPertamaAnak;
+class EditMerangkakAnakView extends GetView<EditMerangkakAnakController> {
+  final MerangkakAnakModel merangkakAnak;
 
-  const EditBerdiriAnakView({Key? key, required this.gigiPertamaAnak})
+  const EditMerangkakAnakView({Key? key, required this.merangkakAnak})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(EditBerdiriAnakController());
-    controller.init(gigiPertamaAnak);
+    final controller = Get.put(EditMerangkakAnakController());
+    controller.init(merangkakAnak);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: red,
-        title: const Text('Unggah Gambar Gigi Anak'),
+        title: const Text('Edit Gambar Berdiri Anak'),
         actions: [
           IconButton(
             onPressed: () {
-              controller.updateImage(gigiPertamaAnak.documentId,
-                  gigiPertamaAnak.gigiPertamaAnakId);
+              controller.updateImage(merangkakAnak.documentId,
+                  merangkakAnak.merangkakAnakId);
             },
             icon: const Icon(
               FontAwesomeIcons.penToSquare,
@@ -90,7 +90,7 @@ class EditBerdiriAnakView extends GetView<EditBerdiriAnakController> {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(4.0.r),
                     child: CachedNetworkImage(
-                      imageUrl: gigiPertamaAnak.imageUrl,
+                      imageUrl: merangkakAnak.imageUrl,
                       placeholder: (context, url) =>
                           const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>
