@@ -5,9 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/models/gigi_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/views/edit_gigi_pertama_anak.dart';
+import 'package:mamanotes/app/modules/profile_keluarga/views/detail_profile_keluarga_view.dart';
 
 import '../../../../data/common/style.dart';
-import '../../kelahiran_anak/views/edit_kelahiran_anak.dart';
+import '../../../../data/common/widget/detail_foto_widget.dart';
 import '../controllers/gigi_pertama_anak_controller.dart';
 
 class GigiPertamaView extends GetView<GigiPertamaAnakController> {
@@ -115,28 +116,35 @@ class GigiPertamaAnakView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 300,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: red, width: 2.r),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: gigiAnak.imageUrl,
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => DetailFotoView(
+                            urlImage: gigiAnak.imageUrl,
+                          ));
+                    },
+                    child: Container(
+                      width: 300.w,
+                      height: 300.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: red, width: 2.r),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: gigiAnak.imageUrl,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
                     ),
                   ),
                 ],

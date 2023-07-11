@@ -284,8 +284,7 @@ Widget _buildImageStack(String imageUrl, String labelText,
 
 Route _createRoute(String imageUrl) {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        DetailProfileKeluargaView(
+    pageBuilder: (context, animation, secondaryAnimation) => DetailFotoView(
       urlImage: imageUrl,
     ),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
