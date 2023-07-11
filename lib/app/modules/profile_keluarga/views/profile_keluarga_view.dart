@@ -11,6 +11,7 @@ import 'package:mamanotes/app/modules/profile_keluarga/views/add_profile_keluarg
 import 'package:mamanotes/app/modules/profile_keluarga/views/edit_profile_keluarga_view.dart';
 
 import '../../../data/common/style.dart';
+import '../../../data/common/widget/detail_foto_widget.dart';
 import '../../../data/common/widget/logo_widget.dart';
 import '../../jurnal_anak/kelahiran_anak/views/stimulus_anak_view.dart';
 import '../models/profile_keluarga_model.dart';

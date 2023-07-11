@@ -9,11 +9,13 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/utils/date_formatter.dart';
 import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controller.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/berdiri_anak/views/berdiri_anak_view.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/bindings/gigi_pertama_anak_binding.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/views/gigi_pertama_anak_view.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/bindings/kata_pertama_anak_binding.dart';
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
+import '../../jurnal_anak/berdiri_anak/bindings/berdiri_anak_binding.dart';
 import '../../jurnal_anak/kelahiran_anak/bindings/stimulus_anak_binding.dart';
 import '../../jurnal_anak/kelahiran_anak/views/stimulus_anak_view.dart';
 import '../../jurnal_anak/pdf_view.dart';
@@ -259,7 +261,7 @@ class GridJurnalWidget extends StatelessWidget {
             text1: 'Kelahiranku',
             image: 'assets/images/kelahiranku.png',
             onTap: () {
-              Get.to(() => KelahiranView(),
+              Get.to(() => const KelahiranView(),
                   binding: StimulusAnakBinding(
                       documentId: controller.getSelectedAnak()?.docId ?? anakId,
                       jurnalAnakId:
@@ -299,9 +301,15 @@ class GridJurnalWidget extends StatelessWidget {
             onTap: () {},
           ),
           listCardWidget(
-            text1: 'Jalan',
+            text1: 'Berdiri',
             image: 'assets/images/walk.png',
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const BerdiriView(),
+                  binding: BerdiriAnakBinding(
+                      documentId: controller.getSelectedAnak()?.docId ?? anakId,
+                      berdiriAnakId:
+                          'berdiriAnakId${controller.getSelectedAnak()?.docId ?? anakId}'));
+            },
           ),
           listCardWidget(
             text1: 'Bulan Pertamaku',
