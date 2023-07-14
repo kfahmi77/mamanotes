@@ -18,6 +18,8 @@ import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/bindings/gig
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/views/gigi_pertama_anak_view.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/bindings/merangkak_anak_binding.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/views/merangkak_anak_view.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/tahun_pertama_anak/bindings/tahun_pertama_anak_binding.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/tahun_pertama_anak/views/tahun_pertama_anak_view.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/bindings/kata_pertama_anak_binding.dart';
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
@@ -343,7 +345,13 @@ class GridJurnalWidget extends StatelessWidget {
           listCardWidget(
             text1: 'Tahun Pertamaku',
             image: 'assets/images/years.png',
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const TahunPertamaAnak(),
+                  binding: TahunPertamaAnakBinding(
+                      documentId: controller.getSelectedAnak()?.docId ?? anakId,
+                      tahunPertamaAnakId:
+                          'tahunPertamaAnakId${controller.getSelectedAnak()?.docId ?? anakId}'));
+            },
           ),
         ],
       ),

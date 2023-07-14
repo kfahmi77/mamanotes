@@ -4,13 +4,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../data/common/style.dart';
-import '../controllers/add_bulan_pertama_anak_controller.dart';
+import '../controllers/add_tahun_pertama_anak_controller.dart';
 
-class AddBulanPertamaAnakView extends GetView<AddBulanPertamaAnakController> {
+class AddTahunPertamaAnakView extends GetView<AddTahunPertamaAnakController> {
   final String documentId;
-  final String bulanPertamaAnakId;
-  const AddBulanPertamaAnakView(
-      {Key? key, required this.documentId, required this.bulanPertamaAnakId})
+  final String tahunPertamaAnakId;
+  const AddTahunPertamaAnakView(
+      {Key? key, required this.documentId, required this.tahunPertamaAnakId})
       : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class AddBulanPertamaAnakView extends GetView<AddBulanPertamaAnakController> {
         actions: [
           IconButton(
             onPressed: () {
-              controller.uploadImage(documentId, bulanPertamaAnakId);
+              controller.uploadImage(documentId, tahunPertamaAnakId);
             },
             icon: Icon(
               FontAwesomeIcons.solidFloppyDisk,
@@ -47,7 +47,7 @@ class AddBulanPertamaAnakView extends GetView<AddBulanPertamaAnakController> {
                           title: const Text('Ambil dari Galeri'),
                           onTap: () {
                             controller
-                                .pickFotoBulanPertamaAnak(ImageSource.gallery);
+                                .pickFotoTahunPertamaAnak(ImageSource.gallery);
                             Navigator.of(context).pop();
                           },
                         ),
@@ -56,7 +56,7 @@ class AddBulanPertamaAnakView extends GetView<AddBulanPertamaAnakController> {
                           title: const Text('Ambil dari Kamera'),
                           onTap: () {
                             controller
-                                .pickFotoBulanPertamaAnak(ImageSource.camera);
+                                .pickFotoTahunPertamaAnak(ImageSource.camera);
                             Navigator.of(context).pop();
                           },
                         ),
@@ -76,13 +76,13 @@ class AddBulanPertamaAnakView extends GetView<AddBulanPertamaAnakController> {
                 border: Border.all(color: Colors.red, width: 1.0),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: controller.fotoBulanPertamaAnak.value != null
-                      ? FileImage(controller.fotoBulanPertamaAnak.value!)
+                  image: controller.fotoTahunPertamaAnak.value != null
+                      ? FileImage(controller.fotoTahunPertamaAnak.value!)
                       : const AssetImage("assets/images/grey.png")
                           as ImageProvider<Object>,
                 ),
               ),
-              child: controller.fotoBulanPertamaAnak.value == null
+              child: controller.fotoTahunPertamaAnak.value == null
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +93,7 @@ class AddBulanPertamaAnakView extends GetView<AddBulanPertamaAnakController> {
                           color: Colors.white,
                         ),
                         Text(
-                          "Ambil Foto Bulan Pettama Anak",
+                          "Ambil Foto Tahun Pertama Anak",
                           style: redTextStyle.copyWith(
                             color: white,
                             fontSize: 13.0.sp,
