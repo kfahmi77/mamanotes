@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mamanotes/app/data/common/style.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/models/gigi_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/models/kata_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/views/kata_pertama_anak_view.dart';
 import 'package:pdf/pdf.dart';
@@ -42,8 +43,12 @@ class PdfPreviewPage extends StatelessWidget {
     final ByteData bytes =
         await rootBundle.load('assets/images/logo_mamanote.png');
     final Uint8List logo = bytes.buffer.asUint8List();
-    final ByteData bytes2 = await rootBundle.load('assets/images/bg.jpg');
-    final Uint8List backgroundKataPertama = bytes2.buffer.asUint8List();
+
+    Uint8List backgroundKataPertamaImage =
+        await loadImage('assets/images/bg.jpg');
+    Uint8List backgroundGigiPertamaImage =
+        await loadImage('assets/images/bg2.png');
+
     pw.SvgImage waktuIcon = await loadStringSvg('assets/svg/clock-regular.svg');
     pw.SvgImage tempatIcon = await loadStringSvg('assets/svg/marker.svg');
     pw.SvgImage tinggiIcon = await loadStringSvg('assets/svg/height.svg');
@@ -56,8 +61,13 @@ class PdfPreviewPage extends StatelessWidget {
         await getJurnalAnakDocument(documentId, 'kelahiranAnak$documentId');
     final DocumentSnapshot<Map<String, dynamic>> snapshot2 =
         await getJurnalAnakDocument(documentId, 'kataAnakPertama$documentId');
+
+    final DocumentSnapshot<Map<String, dynamic>> snapshot3 =
+        await getJurnalAnakDocument(documentId, 'gigiPertamaAnak$documentId');
+
     final Map<String, dynamic>? data = snapshot.data();
     final Map<String, dynamic>? data2 = snapshot2.data();
+    final Map<String, dynamic>? data3 = snapshot3.data();
 
     if (snapshot.exists) {
       final KelahiranAnak item = KelahiranAnak.fromJson(data!);
@@ -268,7 +278,7 @@ class PdfPreviewPage extends StatelessWidget {
                 ),
                 pw.Center(
                   child: pw.Image(
-                    pw.MemoryImage(backgroundKataPertama),
+                    pw.MemoryImage(backgroundKataPertamaImage),
                     width: screenWidth,
                     height: screenHeight,
                     fit: pw.BoxFit.fill,
@@ -311,6 +321,87 @@ class PdfPreviewPage extends StatelessWidget {
       );
     }
 
+    if (snapshot3.exists) {
+      final GigiPertamaAnakModel gigiPertamaAnak =
+          GigiPertamaAnakModel.fromJson(data3!);
+      final fotoGigi = await networkImage(gigiPertamaAnak.imageUrl);
+      doc.addPage(
+        pw.Page(
+          build: (pw.Context context) {
+            // Retrieve PDF page size
+            const pageFormat = PdfPageFormat.a4;
+            final screenWidth = pageFormat.width;
+            final screenHeight = pageFormat.height;
+
+            return pw.Stack(
+              children: [
+                pw.Center(
+                  child: pw.Image(
+                    pw.MemoryImage(backgroundGigiPertamaImage),
+                    width: screenWidth,
+                    height: screenHeight,
+                    fit: pw.BoxFit.fill,
+                  ),
+                ),
+                pw.Positioned(
+                  top: 120, // Jarak atas teks dari atas
+                  left: 0,
+                  right: 0,
+                  child: pw.Center(
+                    child: pw.Text(
+                      "Gigi Pertama Anak",
+                      style: pw.TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColor.fromInt(red.value),
+                      ),
+                    ),
+                  ),
+                ),
+                pw.Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: pw.Center(
+                    child: pw.Container(
+                      width: 300.w,
+                      height: 300.h,
+                      decoration: pw.BoxDecoration(
+                        border: pw.Border.all(
+                          color: PdfColor.fromInt(0xFFFF0000),
+                          width: 6,
+                        ),
+                        borderRadius: pw.BorderRadius.circular(10),
+                      ),
+                      child: pw.ClipRRect(
+                        horizontalRadius: 10,
+                        verticalRadius: 10,
+                        child: pw.Image(fotoGigi),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      );
+    } else {
+      doc.addPage(
+        pw.Page(
+          build: (pw.Context context) {
+            return pw.Center(
+              child: pw.Text(
+                'Tidak ada data gigi pertama anak',
+                style: pw.TextStyle(fontSize: 24),
+              ),
+            );
+          },
+        ),
+      );
+    }
+
     return await doc.save();
   }
 
@@ -343,4 +434,9 @@ Future<pw.SvgImage> loadStringSvg(String svg) async {
   final icon = pw.SvgImage(
       svg: svgRaw, width: 30.w, colorFilter: PdfColor.fromInt(white.value));
   return icon;
+}
+
+Future<Uint8List> loadImage(String imagePath) async {
+  final ByteData bytes = await rootBundle.load(imagePath);
+  return bytes.buffer.asUint8List();
 }
