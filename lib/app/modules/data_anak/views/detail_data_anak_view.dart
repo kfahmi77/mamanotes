@@ -10,6 +10,8 @@ import 'package:mamanotes/app/data/common/style.dart';
 import 'package:mamanotes/app/data/common/utils/date_formatter.dart';
 import 'package:mamanotes/app/modules/data_anak/controllers/detail_anak_controller.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/berdiri_anak/views/berdiri_anak_view.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/bulan_pertama_anak/bindings/bulan_pertama_anak_binding.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/bulan_pertama_anak/views/bulan_pertama_anak_view.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/duduk_anak/bindings/duduk_anak_binding.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/duduk_anak/views/duduk_anak_view.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/bindings/gigi_pertama_anak_binding.dart';
@@ -330,7 +332,13 @@ class GridJurnalWidget extends StatelessWidget {
           listCardWidget(
             text1: 'Bulan Pertamaku',
             image: 'assets/images/calendar.png',
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const BulanPertamaAnak(),
+                  binding: BulanPertamaAnakBinding(
+                      documentId: controller.getSelectedAnak()?.docId ?? anakId,
+                      bulanPertamaAnakId:
+                          'bulanPertamaAnakId${controller.getSelectedAnak()?.docId ?? anakId}'));
+            },
           ),
           listCardWidget(
             text1: 'Tahun Pertamaku',

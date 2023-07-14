@@ -52,7 +52,6 @@ class PdfPreviewPage extends StatelessWidget {
     pw.SvgImage ayahIcon = await loadStringSvg('assets/svg/man.svg');
     pw.SvgImage ibuIcon = await loadStringSvg('assets/svg/woman.svg');
 
-
     final DocumentSnapshot<Map<String, dynamic>> snapshot =
         await getJurnalAnakDocument(documentId, 'kelahiranAnak$documentId');
     final DocumentSnapshot<Map<String, dynamic>> snapshot2 =
@@ -81,7 +80,7 @@ class PdfPreviewPage extends StatelessWidget {
                   pw.MemoryImage(logo),
                   fit: pw.BoxFit.fitHeight,
                   height: 50.h,
-                  width: 270.w,
+                  width: 320.w,
                 ),
               ],
             ),
@@ -250,10 +249,23 @@ class PdfPreviewPage extends StatelessWidget {
             // Retrieve PDF page size
             const pageFormat = PdfPageFormat.a4;
             final screenWidth = pageFormat.width;
-            final screenHeight = pageFormat.height;
+            final screenHeight = pageFormat.height - 200;
 
             return pw.Stack(
               children: [
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.center,
+                  children: [
+                    pw.Text(
+                      "Kata Pertama Anak",
+                      style: pw.TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColor.fromInt(red.value),
+                      ),
+                    ),
+                  ],
+                ),
                 pw.Center(
                   child: pw.Image(
                     pw.MemoryImage(backgroundKataPertama),
