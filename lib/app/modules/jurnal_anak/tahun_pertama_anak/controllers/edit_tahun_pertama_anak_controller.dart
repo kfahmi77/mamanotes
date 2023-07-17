@@ -32,7 +32,8 @@ class EditTahunPertamaAnakController extends GetxController {
   }
 
   Future<void> updateImage(String anakId, String bulanPertamaAnakId) async {
-    if (fotoTahunPertamaAnak.value == null || !fotoTahunPertamaAnak.value!.existsSync()) {
+    if (fotoTahunPertamaAnak.value == null ||
+        !fotoTahunPertamaAnak.value!.existsSync()) {
       Get.snackbar('Gagal', 'Foto masih sama seperti sebelumnya');
       return;
     }
@@ -110,7 +111,7 @@ class EditTahunPertamaAnakController extends GetxController {
   }
 
   Future<void> saveImageUrlToFirestore(
-      String imageUrl, String anakId, bulanPertamaAnakId) async {
+      String imageUrl, String anakId, tahunPertamaAnakId) async {
     try {
       // Mendapatkan referensi koleksi di Firestore (misalnya, koleksi 'images')
       DocumentReference<Map<String, dynamic>> imagesRef = FirebaseFirestore
@@ -118,12 +119,12 @@ class EditTahunPertamaAnakController extends GetxController {
           .collection('anak')
           .doc(anakId)
           .collection('jurnal_anak')
-          .doc(bulanPertamaAnakId);
+          .doc(tahunPertamaAnakId);
 
       // Menambahkan data gambar ke Firestore
       await imagesRef.set({
         'documentId': anakId,
-        'bulanPertamaAnakId': bulanPertamaAnakId,
+        'tahunPertamaAnakId': tahunPertamaAnakId,
         'foto_bulan_pertama_anak': imageUrl
       });
       debugPrint('URL gambar berhasil disimpan di Firestore');
