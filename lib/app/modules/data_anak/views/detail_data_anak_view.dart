@@ -385,7 +385,7 @@ class JurnalPdfWidget extends StatelessWidget {
               }));
             },
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Preview Jurnal',
@@ -395,31 +395,6 @@ class JurnalPdfWidget extends StatelessWidget {
                 const SizedBox(width: 8),
                 Image.asset(
                   "assets/images/eye.png",
-                  width: 30.h,
-                  height: 30.h,
-                ),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 40.h,
-          child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(grey),
-            ),
-            onPressed: () {
-              // Logika aksi tombol
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text('Simpan ke PDF',
-                    style: redTextStyle.copyWith(
-                        fontWeight: normal, fontSize: 12.h, color: black)),
-                const SizedBox(width: 8),
-                Image.asset(
-                  "assets/images/print.png",
                   width: 30.h,
                   height: 30.h,
                 ),
