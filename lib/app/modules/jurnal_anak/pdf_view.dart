@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mamanotes/app/data/common/style.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/duduk_anak/models/duduk_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/models/gigi_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/models/merangkak_anak_model.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/models/kata_pertama_anak_model.dart';
@@ -50,6 +51,7 @@ class PdfPreviewPage extends StatelessWidget {
     Uint8List backgroundGigiPertamaImage =
         await loadImage('assets/images/bg2.png');
     Uint8List backgroundMerangkak = await loadImage('assets/images/coba.jpg');
+    Uint8List backgroundDuduk = await loadImage('assets/images/duduk.jpg');
 
     pw.SvgImage waktuIcon = await loadStringSvg('assets/svg/clock-regular.svg');
     pw.SvgImage tempatIcon = await loadStringSvg('assets/svg/marker.svg');
@@ -68,11 +70,14 @@ class PdfPreviewPage extends StatelessWidget {
         await getJurnalAnakDocument(documentId, 'gigiPertamaAnak$documentId');
     final DocumentSnapshot<Map<String, dynamic>> snapshot4 =
         await getJurnalAnakDocument(documentId, 'merangkakAnakId$documentId');
+    final DocumentSnapshot<Map<String, dynamic>> snapshot5 =
+        await getJurnalAnakDocument(documentId, 'dudukAnakId$documentId');
 
     final Map<String, dynamic>? data = snapshot.data();
     final Map<String, dynamic>? data2 = snapshot2.data();
     final Map<String, dynamic>? data3 = snapshot3.data();
     final Map<String, dynamic>? data4 = snapshot4.data();
+    final Map<String, dynamic>? data5 = snapshot5.data();
 
     if (snapshot.exists) {
       final KelahiranAnak item = KelahiranAnak.fromJson(data!);
@@ -460,6 +465,74 @@ class PdfPreviewPage extends StatelessWidget {
             return pw.Center(
               child: pw.Text(
                 'Tidak ada data gigi pertama anak',
+                style: const pw.TextStyle(fontSize: 24),
+              ),
+            );
+          },
+        ),
+      );
+    }
+    if (snapshot4.exists) {
+      final DudukAnakModel dudukAnak = DudukAnakModel.fromJson(data5!);
+      final fotoGigi = await networkImage(dudukAnak.imageUrl);
+      doc.addPage(
+        pw.Page(
+          build: (pw.Context context) {
+            // Retrieve PDF page size
+            const pageFormat = PdfPageFormat.a4;
+            final screenWidth = pageFormat.width;
+            final screenHeight = pageFormat.height;
+
+            return pw.Stack(
+              children: [
+                pw.Center(
+                  child: pw.Image(
+                    pw.MemoryImage(backgroundDuduk),
+                    width: screenWidth,
+                    height: screenHeight,
+                    fit: pw.BoxFit.contain,
+                  ),
+                ),
+                pw.Positioned(
+                  top: 120, // Jarak atas teks dari atas
+                  left: 0,
+                  right: 0,
+                  child: pw.Center(
+                    child: pw.Text(
+                      "Anak Duduk",
+                      style: pw.TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColor.fromInt(red.value),
+                      ),
+                    ),
+                  ),
+                ),
+                pw.Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: pw.Center(
+                    child: pw.Container(
+                      width: 400.w,
+                      height: 300.h,
+                      child: pw.Image(fotoGigi),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      );
+    } else {
+      doc.addPage(
+        pw.Page(
+          build: (pw.Context context) {
+            return pw.Center(
+              child: pw.Text(
+                'Tidak ada foto Anak duduk',
                 style: const pw.TextStyle(fontSize: 24),
               ),
             );
