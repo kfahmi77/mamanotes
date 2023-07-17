@@ -41,6 +41,14 @@ class Kolase1Controller extends GetxController {
   }
 
   Future<void> uploadScreenshot() async {
+    if (captionController.text.isEmpty) {
+      Get.snackbar(
+        'Gagal',
+        'Caption tidak boleh kosong',
+      );
+      return;
+    }
+
     Uint8List? imageBytes = await screenshotController.capture();
     if (imageBytes != null) {
       String fileName = '${DateTime.now()}.png';
