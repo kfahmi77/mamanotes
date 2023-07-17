@@ -8,6 +8,7 @@ import 'package:mamanotes/app/modules/jurnal_anak/bulan_pertama_anak/models/bula
 import 'package:mamanotes/app/modules/jurnal_anak/duduk_anak/models/duduk_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/models/gigi_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/models/merangkak_anak_model.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/tahun_pertama_anak/models/tahun_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/models/kata_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/kata_pertama_anak/views/kata_pertama_anak_view.dart';
 import 'package:pdf/pdf.dart';
@@ -57,6 +58,8 @@ class PdfPreviewPage extends StatelessWidget {
     Uint8List backgrounBerdiri = await loadImage('assets/images/berdiri.jpg');
     Uint8List backgrounBBulanPertama =
         await loadImage('assets/images/bulan.jpg');
+    Uint8List backgroundTahunPertama =
+        await loadImage('assets/images/tahun.jpg');
 
     pw.SvgImage waktuIcon = await loadStringSvg('assets/svg/clock-regular.svg');
     pw.SvgImage tempatIcon = await loadStringSvg('assets/svg/marker.svg');
@@ -82,6 +85,9 @@ class PdfPreviewPage extends StatelessWidget {
     final DocumentSnapshot<Map<String, dynamic>> snapshot7 =
         await getJurnalAnakDocument(
             documentId, 'bulanPertamaAnakId$documentId');
+    final DocumentSnapshot<Map<String, dynamic>> snapshot8 =
+        await getJurnalAnakDocument(
+            documentId, 'tahunPertamaAnakId$documentId');
 
     final Map<String, dynamic>? data = snapshot.data();
     final Map<String, dynamic>? data2 = snapshot2.data();
@@ -90,6 +96,7 @@ class PdfPreviewPage extends StatelessWidget {
     final Map<String, dynamic>? data5 = snapshot5.data();
     final Map<String, dynamic>? data6 = snapshot6.data();
     final Map<String, dynamic>? data7 = snapshot7.data();
+    final Map<String, dynamic>? data8 = snapshot8.data();
 
     if (snapshot.exists) {
       final KelahiranAnak item = KelahiranAnak.fromJson(data!);
@@ -684,6 +691,77 @@ class PdfPreviewPage extends StatelessWidget {
             return pw.Center(
               child: pw.Text(
                 'Tidak ada foto Bulan Pertama Anak',
+                style: const pw.TextStyle(fontSize: 24),
+              ),
+            );
+          },
+        ),
+      );
+    }
+    if (snapshot8.exists) {
+      final TahunPertamaAnakModel tahunPertamaAnak =
+          TahunPertamaAnakModel.fromJson(data8!);
+      final fotoGigi = await networkImage(tahunPertamaAnak.imageUrl);
+      doc.addPage(
+        pw.Page(
+          build: (pw.Context context) {
+            // Retrieve PDF page size
+            const pageFormat = PdfPageFormat.a4;
+            final screenWidth = pageFormat.width;
+            final screenHeight = pageFormat.height;
+
+            return pw.Stack(
+              children: [
+                pw.Center(
+                  child: pw.Image(
+                    pw.MemoryImage(backgroundTahunPertama),
+                    width: screenWidth,
+                    height: screenHeight,
+                    fit: pw.BoxFit.contain,
+                  ),
+                ),
+                pw.Positioned(
+                  top: 150, // Jarak atas teks dari atas
+                  left: 0,
+                  right: 0,
+                  child: pw.Center(
+                    child: pw.Text(
+                      "Tahun Pertama Anak",
+                      style: pw.TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColor.fromInt(red.value),
+                      ),
+                    ),
+                  ),
+                ),
+                pw.Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: pw.Center(
+                    child: pw.Container(
+                      width: 300.w,
+                      height: 300.h,
+                      child: pw.ClipOval(
+                        child: pw.Image(fotoGigi),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      );
+    } else {
+      doc.addPage(
+        pw.Page(
+          build: (pw.Context context) {
+            return pw.Center(
+              child: pw.Text(
+                'Tidak ada foto Tahun Pertama Anak',
                 style: const pw.TextStyle(fontSize: 24),
               ),
             );
