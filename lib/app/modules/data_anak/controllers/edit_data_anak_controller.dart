@@ -61,7 +61,8 @@ class EditDataAnakController extends GetxController {
     final tempat = tempatController.text.trim();
 
     if (namaLengkap.isEmpty || namaPanggilan.isEmpty || tempat.isEmpty) {
-      isFormValid.value = false;
+      Get.snackbar('Error', 'Mohon isi semua data anak.',
+          backgroundColor: red, colorText: white);
       return;
     }
 
