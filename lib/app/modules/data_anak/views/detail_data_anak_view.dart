@@ -328,7 +328,7 @@ class GridJurnalWidget extends StatelessWidget {
                   binding: BerdiriAnakBinding(
                       documentId: controller.getSelectedAnak()?.docId ?? anakId,
                       berdiriAnakId:
-                          'berdiriAnakId${controller.getSelectedAnak()?.docId ?? anakId}'));
+                          'D${controller.getSelectedAnak()?.docId ?? anakId}'));
             },
           ),
           listCardWidget(
