@@ -125,7 +125,7 @@ class EditTahunPertamaAnakController extends GetxController {
       await imagesRef.set({
         'documentId': anakId,
         'tahunPertamaAnakId': tahunPertamaAnakId,
-        'foto_bulan_pertama_anak': imageUrl
+        'foto_tahun_pertama_anak': imageUrl
       });
       debugPrint('URL gambar berhasil disimpan di Firestore');
     } catch (e) {
