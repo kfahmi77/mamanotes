@@ -44,14 +44,14 @@ class BulanPertamaAnak extends GetView<BulanPertamaAnakController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Tidak ada data bulan pertama anak',
+                  'Tidak ada foto bulan pertama anak',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: red),
                   onPressed: () => controller.navigateToAddStimulusAnakView(),
-                  child: const Text('Tambah  Data Bulan Pertama Anak'),
+                  child: const Text('Tambah  Data'),
                 ),
               ],
             ),

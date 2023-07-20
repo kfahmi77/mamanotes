@@ -45,14 +45,14 @@ class TahunPertamaAnak extends GetView<TahunPertamaAnakController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Tidak ada data tahun pertama anak',
+                  'Tidak ada foto tahun pertama anak',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: red),
                   onPressed: () => controller.navigateToAddStimulusAnakView(),
-                  child: const Text('Tambah  Data Tahun Pertama Anak'),
+                  child: const Text('Tambah  Data'),
                 ),
               ],
             ),
@@ -102,7 +102,7 @@ class TahunPertamaAnakView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Bulan Pertama Anak",
+                    "Tahun Pertama Anak",
                     style: redTextStyle.copyWith(
                         fontSize: 16.sp, fontWeight: bold, color: red),
                   ),

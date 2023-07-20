@@ -4,7 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
-import 'package:mamanotes/app/modules/kata_pertama_anak/views/kata_pertama_anak_view.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/kata_pertama_anak/views/kata_pertama_anak_view.dart';
 
 import '../models/kata_pertama_anak_model.dart';
 

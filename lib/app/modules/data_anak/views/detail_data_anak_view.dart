@@ -20,14 +20,14 @@ import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/bindings/merang
 import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/views/merangkak_anak_view.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/tahun_pertama_anak/bindings/tahun_pertama_anak_binding.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/tahun_pertama_anak/views/tahun_pertama_anak_view.dart';
-import 'package:mamanotes/app/modules/kata_pertama_anak/bindings/kata_pertama_anak_binding.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/kata_pertama_anak/bindings/kata_pertama_anak_binding.dart';
 import '../../../data/common/widget/card_list_widget.dart';
 import '../../home/models/anak_model.dart';
 import '../../jurnal_anak/berdiri_anak/bindings/berdiri_anak_binding.dart';
 import '../../jurnal_anak/kelahiran_anak/bindings/stimulus_anak_binding.dart';
 import '../../jurnal_anak/kelahiran_anak/views/stimulus_anak_view.dart';
 import '../../jurnal_anak/pdf_view.dart';
-import '../../kata_pertama_anak/views/kata_pertama_anak_view.dart';
+import '../../jurnal_anak/kata_pertama_anak/views/kata_pertama_anak_view.dart';
 import 'edit_data_anak_view.dart';
 
 class DetailAnakView extends GetView<DetailAnakController> {

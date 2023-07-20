@@ -45,14 +45,14 @@ class DudukView extends GetView<DudukAnakController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Tidak ada data anak duduk',
+                  'Tidak ada foto anak duduk',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: red),
                   onPressed: () => controller.navigateToAddStimulusAnakView(),
-                  child: const Text('Tambah  Data Anak Duduk'),
+                  child: const Text('Tambah  Data'),
                 ),
               ],
             ),

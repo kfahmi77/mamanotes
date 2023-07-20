@@ -208,6 +208,17 @@ class EditKelahiranAnakView extends GetView<EditJurnalKelahiranAnakController> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  'Foto Kelahiran Anak',
+                  style: TextStyle(
+                    color: red,
+                    fontSize: 14.sp,
+                    fontWeight: normal,
+                  ),
+                ),
+              ),
               Container(
                 padding: const EdgeInsets.all(12),
                 child: GestureDetector(
@@ -246,6 +257,17 @@ class EditKelahiranAnakView extends GetView<EditJurnalKelahiranAnakController> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  'Foto Kelahiran',
+                  style: TextStyle(
+                    color: red,
+                    fontSize: 14.sp,
+                    fontWeight: normal,
+                  ),
+                ),
+              ),
               Container(
                 padding: const EdgeInsets.all(12),
                 child: GestureDetector(
@@ -281,6 +303,17 @@ class EditKelahiranAnakView extends GetView<EditJurnalKelahiranAnakController> {
                         );
                       }
                     }),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  'Foto Kaki Anak',
+                  style: TextStyle(
+                    color: red,
+                    fontSize: 14.sp,
+                    fontWeight: normal,
                   ),
                 ),
               ),

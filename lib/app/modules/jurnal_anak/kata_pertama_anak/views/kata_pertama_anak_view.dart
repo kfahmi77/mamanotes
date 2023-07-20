@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:mamanotes/app/modules/kata_pertama_anak/models/kata_pertama_anak_model.dart';
+import 'package:mamanotes/app/modules/jurnal_anak/kata_pertama_anak/models/kata_pertama_anak_model.dart';
 
-import '../../../data/common/style.dart';
-import '../../../data/common/utils/number_formatter.dart';
-import '../../../data/common/widget/custom_card.dart';
+import '../../../../data/common/style.dart';
+import '../../../../data/common/utils/number_formatter.dart';
+import '../../../../data/common/widget/custom_card.dart';
 import '../controllers/kata_pertama_anak_controller.dart';
 import 'add_kata_pertama_anak_view.dart';
 import 'edit_kata_pertama_anak_view.dart';

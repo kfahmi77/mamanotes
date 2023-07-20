@@ -20,7 +20,8 @@ class AddGigiPertamaAnakView extends GetView<AddGigiPertamaAnakController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload Gambar'),
+        title: Text('Gigi Pertama Anak'),
+        backgroundColor: red,
         actions: [
           IconButton(
             onPressed: () {
@@ -28,7 +29,7 @@ class AddGigiPertamaAnakView extends GetView<AddGigiPertamaAnakController> {
             },
             icon: Icon(
               FontAwesomeIcons.solidFloppyDisk,
-              color: red,
+              color: white,
             ),
           ),
         ],

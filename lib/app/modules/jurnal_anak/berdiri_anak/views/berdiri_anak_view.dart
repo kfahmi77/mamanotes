@@ -44,14 +44,14 @@ class BerdiriView extends GetView<BerdiriAnakController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Tidak ada data anak berdiri',
+                  'Tidak ada foto anak berdiri',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: red),
                   onPressed: () => controller.navigateToAddStimulusAnakView(),
-                  child: const Text('Tambah Kelahiran Data Anak Berdiri'),
+                  child: const Text('Tambah Data'),
                 ),
               ],
             ),

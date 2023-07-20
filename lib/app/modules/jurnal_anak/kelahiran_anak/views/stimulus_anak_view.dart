@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:mamanotes/app/data/common/style.dart';
 
 import '../../../../data/common/widget/custom_card.dart';
+import '../../../../data/common/widget/detail_foto_widget.dart';
 import '../controllers/kelahiran_anak_controller.dart';
 import '../models/kelahiran_anak_model.dart';
 import 'add_jurnal_kelahiran_anak_view.dart';
@@ -52,6 +53,9 @@ class KelahiranView extends GetView<StimulusAnakController> {
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(red),
+                  ),
                   onPressed: () => controller.navigateToAddStimulusAnakView(),
                   child: const Text('Tambah Kelahiran Anak'),
                 ),
@@ -194,13 +198,20 @@ class KelahiranAnakView extends StatelessWidget {
                 buildImageStack(
                   kelahiranAnak.birthPhotoUrl,
                   'Foto Anak Lahir',
+                  onTap: () => Get.to(() => DetailFotoView(
+                        urlImage: kelahiranAnak.birthPhotoUrl,
+                      )),
                 ),
                 buildImageStack(
-                  kelahiranAnak.footPrintPhotoUrl,
-                  'Foto Cap Kaki Anak',
-                ),
+                    kelahiranAnak.footPrintPhotoUrl, 'Foto Cap Kaki Anak',
+                    onTap: () => Get.to(() => DetailFotoView(
+                          urlImage: kelahiranAnak.footPrintPhotoUrl,
+                        ))),
                 buildImageStack(
                   kelahiranAnak.deliveryPhotoUrl,
+                  onTap: () => Get.to(() => DetailFotoView(
+                        urlImage: kelahiranAnak.deliveryPhotoUrl,
+                      )),
                   'Foto Persalinan',
                 ),
               ],
@@ -220,39 +231,42 @@ class KelahiranAnakView extends StatelessWidget {
   }
 }
 
-Widget buildImageStack(String imageUrl, String labelText) {
-  return Stack(
-    fit: StackFit.expand,
-    children: [
-      CachedNetworkImage(
-        imageUrl: imageUrl,
-        imageBuilder: (context, imageProvider) => Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover,
+Widget buildImageStack(String imageUrl, String labelText,
+    {required Future? Function() onTap}) {
+  return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          CachedNetworkImage(
+            imageUrl: imageUrl,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              color: Colors.black54,
+              child: Text(labelText,
+                  style: redTextStyle.copyWith(
+                    fontSize: 16.sp,
+                    fontWeight: bold,
+                    color: white,
+                  )),
             ),
           ),
-        ),
-        placeholder: (context, url) =>
-            const Center(child: CircularProgressIndicator()),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-      ),
-      Positioned(
-        bottom: 0,
-        left: 0,
-        right: 0,
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          color: Colors.black54,
-          child: Text(labelText,
-              style: redTextStyle.copyWith(
-                fontSize: 16.sp,
-                fontWeight: bold,
-                color: white,
-              )),
-        ),
-      ),
-    ],
-  );
+        ],
+      ));
 }

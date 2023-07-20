@@ -361,6 +361,9 @@ class AddKelahiranAnakView extends GetView<AddStimulusAnakController> {
                       ),
                     ),
                     ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(red),
+                      ),
                       onPressed: () =>
                           controller.submitForm(anakId, kelahiranAnakId),
                       child: const Text('Simpan Data'),

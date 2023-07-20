@@ -45,13 +45,16 @@ class GigiPertamaView extends GetView<GigiPertamaAnakController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Tidak ada data kelahiran anak',
+                  'Tidak ada foto gigi pertama anak',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(red),
+                  ),
                   onPressed: () => controller.navigateToAddStimulusAnakView(),
-                  child: const Text('Tambah Kelahiran Anak'),
+                  child: const Text('Tambah Data'),
                 ),
               ],
             ),
