@@ -42,7 +42,7 @@ class EditProfileController extends GetxController {
     if (nameController.text.isNotEmpty || image.value != null) {
       await updateProfile();
 
-      Get.to(() => const DashboardView(), transition: Transition.rightToLeft);
+      Get.off(() => const DashboardView(), transition: Transition.rightToLeft);
       Get.snackbar('Sukses', 'data profil berhasil diubah');
     }
   }

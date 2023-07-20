@@ -74,7 +74,7 @@ class AddStimulusAnakController extends GetxController {
     }
   }
 
-  void submitForm(String anakId,String kelahiranAnakId) async {
+  void submitForm(String anakId, String kelahiranAnakId) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       if (!isBirthPhotoSelected.value ||
@@ -89,15 +89,15 @@ class AddStimulusAnakController extends GetxController {
         final birthPhotoRef = firebase_storage.FirebaseStorage.instance
             .ref()
             .child('birth_photos/${path.basename(birthPhotoPath.value!.path)}');
-        final birthUploadTask =
-            birthPhotoRef.putFile(birthPhotoPath.value!);
+        final birthUploadTask = birthPhotoRef.putFile(birthPhotoPath.value!);
         final birthPhotoUrl =
             await (await birthUploadTask).ref.getDownloadURL();
 
         // Upload foto cap kaki anak
         final footPrintPhotoRef = firebase_storage.FirebaseStorage.instance
             .ref()
-            .child('footprint_photos/${path.basename(footPrintPhotoPath.value!.path)}');
+            .child(
+                'footprint_photos/${path.basename(footPrintPhotoPath.value!.path)}');
         final footPrintUploadTask =
             footPrintPhotoRef.putFile(footPrintPhotoPath.value!);
         final footPrintPhotoUrl =
@@ -106,7 +106,8 @@ class AddStimulusAnakController extends GetxController {
         // Upload foto persalinan
         final deliveryPhotoRef = firebase_storage.FirebaseStorage.instance
             .ref()
-            .child('delivery_photos/${path.basename(deliveryPhotoPath.value!.path)}');
+            .child(
+                'delivery_photos/${path.basename(deliveryPhotoPath.value!.path)}');
         final deliveryUploadTask =
             deliveryPhotoRef.putFile(deliveryPhotoPath.value!);
         final deliveryPhotoUrl =
@@ -114,24 +115,25 @@ class AddStimulusAnakController extends GetxController {
 
         // Simpan data ke Firestore
         var docRef = FirebaseFirestore.instance
-    .collection('anak')
-    .doc(anakId)
-    .collection('jurnal_anak')
-    .doc(kelahiranAnakId);
+            .collection('anak')
+            .doc(anakId)
+            .collection('jurnal_anak')
+            .doc(kelahiranAnakId);
 
-await docRef.set({
-  'birthTime': timeController.text,
-  'birthPlace': birthPlace,
-  'medicalPersonnel': medicalPersonnel,
-  'weight': weight,
-  'height': height,
-  'motherPrayer': motherPrayer,
-  'fatherPrayer': fatherPrayer,
-  'birthPhotoUrl': birthPhotoUrl,
-  'footPrintPhotoUrl': footPrintPhotoUrl,
-  'deliveryPhotoUrl': deliveryPhotoUrl,
-});
-
+        await docRef.set({
+          'anakId': anakId,
+          'kelahiranAnakId': kelahiranAnakId,
+          'birthTime': timeController.text,
+          'birthPlace': birthPlace,
+          'medicalPersonnel': medicalPersonnel,
+          'weight': weight,
+          'height': height,
+          'motherPrayer': motherPrayer,
+          'fatherPrayer': fatherPrayer,
+          'birthPhotoUrl': birthPhotoUrl,
+          'footPrintPhotoUrl': footPrintPhotoUrl,
+          'deliveryPhotoUrl': deliveryPhotoUrl,
+        });
 
         Get.back();
         Get.back();

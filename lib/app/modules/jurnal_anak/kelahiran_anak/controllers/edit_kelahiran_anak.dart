@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mamanotes/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/kelahiran_anak/models/kelahiran_anak_model.dart';
 
 class EditJurnalKelahiranAnakController extends GetxController {
