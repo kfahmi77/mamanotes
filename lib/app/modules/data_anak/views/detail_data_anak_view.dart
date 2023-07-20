@@ -368,6 +368,7 @@ class JurnalPdfWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DetailAnakController controller = Get.put(DetailAnakController());
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -380,7 +381,7 @@ class JurnalPdfWidget extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return PdfPreviewPage(
-                  documentId: documentId,
+                  documentId: controller.getSelectedAnak()?.docId ?? documentId,
                 );
               }));
             },

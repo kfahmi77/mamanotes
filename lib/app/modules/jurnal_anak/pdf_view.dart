@@ -466,8 +466,8 @@ class PdfPreviewPage extends StatelessWidget {
                   bottom: 0,
                   child: pw.Center(
                     child: pw.Container(
-                      width: 400.w,
-                      height: 300.h,
+                      width: 200.w,
+                      height: 200.h,
                       child: pw.Image(fotoGigi),
                     ),
                   ),
