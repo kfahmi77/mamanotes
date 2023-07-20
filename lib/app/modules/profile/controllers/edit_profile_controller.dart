@@ -40,6 +40,12 @@ class EditProfileController extends GetxController {
       Get.snackbar('Error', 'Data tidak boleh kosong');
     }
     if (nameController.text.isNotEmpty || image.value != null) {
+      Get.dialog(
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+        barrierDismissible: false,
+      );
       await updateProfile();
 
       Get.off(() => const DashboardView(), transition: Transition.rightToLeft);

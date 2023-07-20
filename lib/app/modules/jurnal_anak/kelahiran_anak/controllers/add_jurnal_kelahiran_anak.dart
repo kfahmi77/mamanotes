@@ -83,6 +83,12 @@ class AddStimulusAnakController extends GetxController {
         Get.snackbar('Error', 'Pastikan semua gambar telah dipilih.');
         return;
       }
+      Get.dialog(
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+        barrierDismissible: false,
+      );
 
       try {
         // Upload foto anak lahir

@@ -48,6 +48,12 @@ class Kolase1Controller extends GetxController {
       );
       return;
     }
+    Get.dialog(
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
+      barrierDismissible: false,
+    );
 
     Uint8List? imageBytes = await screenshotController.capture();
     if (imageBytes != null) {

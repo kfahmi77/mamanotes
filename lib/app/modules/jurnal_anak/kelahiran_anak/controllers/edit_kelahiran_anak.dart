@@ -158,6 +158,12 @@ class EditJurnalKelahiranAnakController extends GetxController {
     }
 
     try {
+      Get.dialog(
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+        barrierDismissible: false,
+      );
       await FirebaseFirestore.instance
           .collection('anak')
           .doc(anakId)

@@ -337,9 +337,8 @@ class TambahDataAnakView extends GetView<TambahDataAnakController> {
                           'tempat': tempatController.text,
                           "tanggal_lahir": controller.selectedDate.value,
                         });
+                       
                         controller.isLoading(false);
-
-                        Get.back();
 
                         Get.snackbar(
                             hasil["error"] == true ? "Error" : "Success",

@@ -31,7 +31,11 @@ class EditDataAnakView extends GetView<EditDataAnakController> {
         backgroundColor: background,
         actions: [
           IconButton(
-            onPressed: () => controller.updateAnakData(anak),
+            onPressed: () async {
+              await controller
+                  .updateAnakData(anak); // Menunggu pembaruan data selesai
+           
+            },
             icon: Icon(
               FontAwesomeIcons.solidFloppyDisk,
               color: red,
