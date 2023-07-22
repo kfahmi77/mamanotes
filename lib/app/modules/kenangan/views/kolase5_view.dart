@@ -28,27 +28,28 @@ class Kolase5View extends GetView<Kolase5Controller> {
               onTap: () {
                 Get.back();
               },
-              child: const Text(
+              child: Text(
                 'kembali',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                  color: Colors.black,
+                style: redTextStyle.copyWith(
+                  color: Colors.white,
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () async {
-                controller.uploadScreenshot();
+              onTap: () {
+                if (controller.isSaving.value != true) {
+                  controller.saveData();
+                }
               },
-              child: const Text(
-                'Simpan',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
-              ),
+              child: Obx(() {
+                return Text(
+                    controller.isSaving.value != true
+                        ? 'Simpan'
+                        : 'Menyimpan...',
+                    style: redTextStyle.copyWith(
+                      color: Colors.white,
+                    ));
+              }),
             ),
           ],
         ),

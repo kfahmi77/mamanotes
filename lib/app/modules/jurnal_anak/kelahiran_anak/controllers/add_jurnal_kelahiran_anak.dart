@@ -129,16 +129,16 @@ class AddStimulusAnakController extends GetxController {
         await docRef.set({
           'anakId': anakId,
           'kelahiranAnakId': kelahiranAnakId,
-          'birthTime': timeController.text,
-          'birthPlace': birthPlace,
-          'medicalPersonnel': medicalPersonnel,
-          'weight': weight,
-          'height': height,
-          'motherPrayer': motherPrayer,
-          'fatherPrayer': fatherPrayer,
-          'birthPhotoUrl': birthPhotoUrl,
-          'footPrintPhotoUrl': footPrintPhotoUrl,
-          'deliveryPhotoUrl': deliveryPhotoUrl,
+          'waktuLahir': timeController.text,
+          'tempatLahir': birthPlace,
+          'petugasKesehatan': medicalPersonnel,
+          'beratAnakLahir': weight,
+          'tinggiAnakLahir': height,
+          'doaIbu': motherPrayer,
+          'doaAyah': fatherPrayer,
+          'urlFotoAnak': birthPhotoUrl,
+          'urlFotoCapKaki': footPrintPhotoUrl,
+          'urlFotoKelahiran': deliveryPhotoUrl,
         });
 
         Get.back();

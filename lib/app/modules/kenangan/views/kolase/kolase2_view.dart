@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:mamanotes/app/modules/kenangan/views/kolase_foto_view.dart';
 import 'package:screenshot/screenshot.dart';
 
+import '../../../../data/common/style.dart';
 import '../../controllers/kolase2_controller.dart';
 
 class Kolase2View extends GetView<Kolase2Controller> {
@@ -26,27 +27,28 @@ class Kolase2View extends GetView<Kolase2Controller> {
               onTap: () {
                 Get.back();
               },
-              child: const Text(
+              child: Text(
                 'kembali',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                  color: Colors.black,
+                style: redTextStyle.copyWith(
+                  color: Colors.white,
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () async {
-                controller.uploadScreenshot();
+              onTap: () {
+                if (controller.isSaving.value != true) {
+                  controller.saveData();
+                }
               },
-              child: const Text(
-                'Simpan',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
-              ),
+              child: Obx(() {
+                return Text(
+                    controller.isSaving.value != true
+                        ? 'Simpan'
+                        : 'Menyimpan...',
+                    style: redTextStyle.copyWith(
+                      color: Colors.white,
+                    ));
+              }),
             ),
           ],
         ),

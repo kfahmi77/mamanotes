@@ -27,11 +27,11 @@ class _DashboardViewState extends State<DashboardView> {
 
   Widget buildBottomBar() {
     return CustomAnimatedBottomBar(
-      containerHeight: 70.h,
+      containerHeight: 60.h,
       backgroundColor: Colors.white,
       selectedIndex: _currentIndex,
       showElevation: true,
-      itemCornerRadius: 24.r,
+      itemCornerRadius: 16.r,
       curve: Curves.easeIn,
       onItemSelected: (index) => setState(() => _currentIndex = index),
       items: <BottomNavyBarItem>[

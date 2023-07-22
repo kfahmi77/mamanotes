@@ -25,20 +25,22 @@ class EditDataAnakView extends GetView<EditDataAnakController> {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const LogoWidget(),
+        title: Text(
+          'Edit Data Anak',
+          style: redTextStyle.copyWith(
+              fontSize: 20.sp, fontWeight: bold, color: white),
+        ),
         elevation: 0,
-        backgroundColor: background,
+        backgroundColor: red,
         actions: [
           IconButton(
             onPressed: () async {
               await controller
                   .updateAnakData(anak); // Menunggu pembaruan data selesai
-           
             },
             icon: Icon(
               FontAwesomeIcons.solidFloppyDisk,
-              color: red,
+              color: white,
             ),
           ),
         ],

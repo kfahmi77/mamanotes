@@ -1,62 +1,62 @@
 class KelahiranAnak {
   final String anakId;
   final String kelahiranAnakId;
-  final String birthPhotoUrl;
-  final String birthPlace;
-  final String birthTime;
-  final String deliveryPhotoUrl;
-  final String fatherPrayer;
-  final String footPrintPhotoUrl;
-  final num height;
-  final String medicalPersonnel;
-  final String motherPrayer;
-  final num weight;
+  final String urlFotoAnak;
+  final String tempatLahir;
+  final String waktuLahir;
+  final String urlFotoKelahiran;
+  final String doaAyah;
+  final String urlFotoCapKaki;
+  final num tinggiAnakLahir;
+  final String petugasKesehatan;
+  final String doaIbu;
+  final num beratAnakLahir;
 
   KelahiranAnak({
     required this.anakId,
     required this.kelahiranAnakId,
-    required this.birthPhotoUrl,
-    required this.birthPlace,
-    required this.birthTime,
-    required this.deliveryPhotoUrl,
-    required this.fatherPrayer,
-    required this.footPrintPhotoUrl,
-    required this.height,
-    required this.medicalPersonnel,
-    required this.motherPrayer,
-    required this.weight,
+    required this.urlFotoAnak,
+    required this.tempatLahir,
+    required this.waktuLahir,
+    required this.urlFotoKelahiran,
+    required this.doaAyah,
+    required this.urlFotoCapKaki,
+    required this.tinggiAnakLahir,
+    required this.petugasKesehatan,
+    required this.doaIbu,
+    required this.beratAnakLahir,
   });
 
   factory KelahiranAnak.fromJson(Map<String, dynamic> json) {
     return KelahiranAnak(
       anakId: json['anakId'] ?? '',
       kelahiranAnakId: json['kelahiranAnakId'] ?? '',
-      birthPhotoUrl: json['birthPhotoUrl'] ?? '',
-      birthPlace: json['birthPlace'] ?? '',
-      birthTime: json['birthTime'] ?? '',
-      deliveryPhotoUrl: json['deliveryPhotoUrl'] ?? '',
-      fatherPrayer: json['fatherPrayer'] ?? '',
-      footPrintPhotoUrl: json['footPrintPhotoUrl'] ?? '',
-      height: json['height'] ?? 0,
-      medicalPersonnel: json['medicalPersonnel'] ?? '',
-      motherPrayer: json['motherPrayer'] ?? '',
-      weight: json['weight'] ?? 0,
+      urlFotoAnak: json['urlFotoAnak'] ?? '',
+      tempatLahir: json['tempatLahir'] ?? '',
+      waktuLahir: json['waktuLahir'] ?? '',
+      urlFotoKelahiran: json['urlFotoKelahiran'] ?? '',
+      doaAyah: json['doaAyah'] ?? '',
+      urlFotoCapKaki: json['urlFotoCapKaki'] ?? '',
+      tinggiAnakLahir: json['tinggiAnakLahir'] ?? 0,
+      petugasKesehatan: json['petugasKesehatan'] ?? '',
+      doaIbu: json['doaIbu'] ?? '',
+      beratAnakLahir: json['beratAnakLahir'] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'KelahiranAnakId': kelahiranAnakId,
-      'birthPhotoUrl': birthPhotoUrl,
-      'birthPlace': birthPlace,
-      'birthTime': birthTime,
-      'deliveryPhotoUrl': deliveryPhotoUrl,
-      'fatherPrayer': fatherPrayer,
-      'footPrintPhotoUrl': footPrintPhotoUrl,
-      'height': height,
-      'medicalPersonnel': medicalPersonnel,
-      'motherPrayer': motherPrayer,
-      'weight': weight,
+      'urlFotoAnak': urlFotoAnak,
+      'tempatLahir': tempatLahir,
+      'waktuLahir': waktuLahir,
+      'urlFotoKelahiran': urlFotoKelahiran,
+      'doaAyah': doaAyah,
+      'urlFotoCapKaki': urlFotoCapKaki,
+      'tinggiAnakLahir': tinggiAnakLahir,
+      'petugasKesehatan': petugasKesehatan,
+      'doaIbu': doaIbu,
+      'beratAnakLahir': beratAnakLahir,
     };
   }
 }

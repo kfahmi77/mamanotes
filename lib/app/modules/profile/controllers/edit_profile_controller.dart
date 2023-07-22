@@ -48,7 +48,7 @@ class EditProfileController extends GetxController {
       );
       await updateProfile();
 
-      Get.off(() => const DashboardView(), transition: Transition.rightToLeft);
+      Get.offAll(() => const DashboardView(), transition: Transition.rightToLeft);
       Get.snackbar('Sukses', 'data profil berhasil diubah');
     }
   }

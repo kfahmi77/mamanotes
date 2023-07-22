@@ -118,13 +118,14 @@ class ProfileView extends GetView<ProfileController> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(9),
                     ),
-                    backgroundColor: background,
+                    backgroundColor: red,
                   ),
                   onPressed: () {
                     Get.toNamed(Routes.editProfile);
                   },
                   child: Text("Edit ",
-                      style: redTextStyle.copyWith(fontWeight: bold)),
+                      style: redTextStyle.copyWith(
+                          fontWeight: bold, color: white)),
                 ),
               ),
             ],
@@ -151,7 +152,7 @@ class ProfileView extends GetView<ProfileController> {
                   children: [
                     FaIcon(
                       FontAwesomeIcons.userGroup,
-                      color: background,
+                      color: red,
                     ),
                     Padding(padding: EdgeInsets.only(left: 10.r)),
                     SizedBox(
@@ -172,18 +173,13 @@ class ProfileView extends GetView<ProfileController> {
               width: 200.h,
               child: GestureDetector(
                 onTap: () async {
-                  Map<String, dynamic> hasil = await authController.logout();
-                  if (hasil['error'] == false) {
-                    Get.offAllNamed(Routes.signin);
-                  } else {
-                    Get.snackbar('Error', hasil['message']);
-                  }
+                  _showLogoutConfirmationDialog(context);
                 },
                 child: Row(
                   children: [
                     FaIcon(
                       FontAwesomeIcons.rightFromBracket,
-                      color: background,
+                      color: red,
                     ),
                     Padding(padding: EdgeInsets.only(left: 15.r)),
                     SizedBox(
@@ -199,6 +195,39 @@ class ProfileView extends GetView<ProfileController> {
           )
         ],
       ),
+    );
+  }
+
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Keluar"),
+          content: const Text("Ingin keluar dari Mamanote?"),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("batal"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: const Text("Keluar"),
+              onPressed: () async {
+                Navigator.of(context).pop(); // Close the dialog
+
+                Map<String, dynamic> hasil = await authController.logout();
+                if (hasil['error'] == false) {
+                  Get.offAllNamed(Routes.signin);
+                } else {
+                  Get.snackbar('Error', hasil['message']);
+                }
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -241,7 +241,7 @@ class EditKelahiranAnakView extends GetView<EditJurnalKelahiranAnakController> {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(4.0.r),
                           child: CachedNetworkImage(
-                            imageUrl: kelahiranAnak.birthPhotoUrl,
+                            imageUrl: kelahiranAnak.urlFotoAnak,
                             placeholder: (context, url) => const Center(
                                 child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
@@ -290,7 +290,7 @@ class EditKelahiranAnakView extends GetView<EditJurnalKelahiranAnakController> {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(4.0.r),
                           child: CachedNetworkImage(
-                            imageUrl: kelahiranAnak.deliveryPhotoUrl,
+                            imageUrl: kelahiranAnak.urlFotoKelahiran,
                             placeholder: (context, url) => const Center(
                                 child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
@@ -339,7 +339,7 @@ class EditKelahiranAnakView extends GetView<EditJurnalKelahiranAnakController> {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(4.0.r),
                           child: CachedNetworkImage(
-                            imageUrl: kelahiranAnak.footPrintPhotoUrl,
+                            imageUrl: kelahiranAnak.urlFotoCapKaki,
                             placeholder: (context, url) => const Center(
                                 child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>

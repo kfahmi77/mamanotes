@@ -122,14 +122,14 @@ class KelahiranAnakView extends StatelessWidget {
               children: [
                 CustomCard(
                     title: 'Waktu Lahir',
-                    subtitle: kelahiranAnak.birthTime,
+                    subtitle: kelahiranAnak.waktuLahir,
                     iconData: Icons.access_time,
                     backgroundColor: red,
                     textColor: white),
                 Expanded(
                   child: CustomCard(
                       title: 'Tempat Lahir',
-                      subtitle: kelahiranAnak.birthPlace,
+                      subtitle: kelahiranAnak.tempatLahir,
                       iconData: Icons.place,
                       backgroundColor: red,
                       textColor: white),
@@ -142,13 +142,13 @@ class KelahiranAnakView extends StatelessWidget {
               children: [
                 CustomCard(
                     title: 'Tinggi Badan',
-                    subtitle: '${kelahiranAnak.height}cm',
+                    subtitle: '${kelahiranAnak.tinggiAnakLahir}cm',
                     iconData: FontAwesomeIcons.ruler,
                     backgroundColor: red,
                     textColor: white),
                 CustomCard(
                     title: 'Berat Badan',
-                    subtitle: '${kelahiranAnak.weight} kg',
+                    subtitle: '${kelahiranAnak.beratAnakLahir} kg',
                     iconData: FontAwesomeIcons.weightScale,
                     backgroundColor: red,
                     textColor: white),
@@ -160,7 +160,7 @@ class KelahiranAnakView extends StatelessWidget {
                 width: 300.w,
                 child: CustomCard(
                     title: 'Dokter / Bidan',
-                    subtitle: kelahiranAnak.medicalPersonnel,
+                    subtitle: kelahiranAnak.petugasKesehatan,
                     iconData: FontAwesomeIcons.userDoctor,
                     backgroundColor: red,
                     textColor: white),
@@ -173,7 +173,7 @@ class KelahiranAnakView extends StatelessWidget {
                 width: 300.w,
                 child: CustomCard(
                     title: 'Doa dari Bunda',
-                    subtitle: kelahiranAnak.motherPrayer,
+                    subtitle: kelahiranAnak.doaIbu,
                     iconData: FontAwesomeIcons.personDress,
                     backgroundColor: red,
                     textColor: white),
@@ -186,7 +186,7 @@ class KelahiranAnakView extends StatelessWidget {
                 width: 300.w,
                 child: CustomCard(
                     title: 'Doa dari Ayah',
-                    subtitle: kelahiranAnak.fatherPrayer,
+                    subtitle: kelahiranAnak.doaAyah,
                     iconData: FontAwesomeIcons.person,
                     backgroundColor: red,
                     textColor: white),
@@ -196,21 +196,21 @@ class KelahiranAnakView extends StatelessWidget {
             CarouselSlider(
               items: [
                 buildImageStack(
-                  kelahiranAnak.birthPhotoUrl,
+                  kelahiranAnak.urlFotoAnak,
                   'Foto Anak Lahir',
                   onTap: () => Get.to(() => DetailFotoView(
-                        urlImage: kelahiranAnak.birthPhotoUrl,
+                        urlImage: kelahiranAnak.urlFotoAnak,
                       )),
                 ),
                 buildImageStack(
-                    kelahiranAnak.footPrintPhotoUrl, 'Foto Cap Kaki Anak',
+                    kelahiranAnak.urlFotoCapKaki, 'Foto Cap Kaki Anak',
                     onTap: () => Get.to(() => DetailFotoView(
-                          urlImage: kelahiranAnak.footPrintPhotoUrl,
+                          urlImage: kelahiranAnak.urlFotoCapKaki,
                         ))),
                 buildImageStack(
-                  kelahiranAnak.deliveryPhotoUrl,
+                  kelahiranAnak.urlFotoKelahiran,
                   onTap: () => Get.to(() => DetailFotoView(
-                        urlImage: kelahiranAnak.deliveryPhotoUrl,
+                        urlImage: kelahiranAnak.urlFotoKelahiran,
                       )),
                   'Foto Persalinan',
                 ),

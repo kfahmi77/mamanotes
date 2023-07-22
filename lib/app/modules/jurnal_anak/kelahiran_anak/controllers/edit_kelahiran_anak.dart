@@ -27,15 +27,15 @@ class EditJurnalKelahiranAnakController extends GetxController {
   final picker = ImagePicker();
 
   void init(KelahiranAnak kelahiranAnak) {
-    tempatController.text = kelahiranAnak.birthPlace;
-    dokterBidanController.text = kelahiranAnak.medicalPersonnel;
-    beratController.text = kelahiranAnak.weight.toString();
-    tinggiController.text = kelahiranAnak.height.toString();
-    doaIbuController.text = kelahiranAnak.motherPrayer;
-    doaAyahController.text = kelahiranAnak.fatherPrayer;
-    waktuController.text = kelahiranAnak.birthTime;
+    tempatController.text = kelahiranAnak.tempatLahir;
+    dokterBidanController.text = kelahiranAnak.petugasKesehatan;
+    beratController.text = kelahiranAnak.beratAnakLahir.toString();
+    tinggiController.text = kelahiranAnak.tinggiAnakLahir.toString();
+    doaIbuController.text = kelahiranAnak.doaIbu;
+    doaAyahController.text = kelahiranAnak.doaAyah;
+    waktuController.text = kelahiranAnak.waktuLahir;
 
-    final List<String> parts = kelahiranAnak.birthTime.split(':');
+    final List<String> parts = kelahiranAnak.waktuLahir.split(':');
     final int initialHour = int.parse(parts[0]);
     final int initialMinute = int.parse(parts[1]);
     selectedTime = TimeOfDay(hour: initialHour, minute: initialMinute);
@@ -44,14 +44,14 @@ class EditJurnalKelahiranAnakController extends GetxController {
           selectedTime.hour, selectedTime.minute),
     );
 
-    if (kelahiranAnak.birthPhotoUrl.isNotEmpty) {
-      birthPhotoPath.value = File(kelahiranAnak.birthPhotoUrl);
+    if (kelahiranAnak.urlFotoAnak.isNotEmpty) {
+      birthPhotoPath.value = File(kelahiranAnak.urlFotoAnak);
     }
-    if (kelahiranAnak.footPrintPhotoUrl.isNotEmpty) {
-      footPrintPhotoPath.value = File(kelahiranAnak.footPrintPhotoUrl);
+    if (kelahiranAnak.urlFotoCapKaki.isNotEmpty) {
+      footPrintPhotoPath.value = File(kelahiranAnak.urlFotoCapKaki);
     }
-    if (kelahiranAnak.deliveryPhotoUrl.isNotEmpty) {
-      deliveryPhotoPath.value = File(kelahiranAnak.deliveryPhotoUrl);
+    if (kelahiranAnak.urlFotoKelahiran.isNotEmpty) {
+      deliveryPhotoPath.value = File(kelahiranAnak.urlFotoKelahiran);
     }
   }
 
@@ -133,28 +133,28 @@ class EditJurnalKelahiranAnakController extends GetxController {
     }
 
     final updatedData = {
-      'birthPlace': tempatController.text,
-      'birthTime': waktuController.text,
-      'fatherPrayer': doaAyahController.text,
-      'height': double.parse(tinggiController.text),
-      'medicalPersonnel': dokterBidanController.text,
-      'motherPrayer': doaIbuController.text,
-      'weight': double.parse(beratController.text),
+      'tempatLahir': tempatController.text,
+      'waktuLahir': waktuController.text,
+      'doaAyah': doaAyahController.text,
+      'tinggiAnakLahir': double.parse(tinggiController.text),
+      'petugasKesehatan': dokterBidanController.text,
+      'doaIbu': doaIbuController.text,
+      'beratAnakLahir': double.parse(beratController.text),
     };
 
     if (birthPhotoPath.value != null && birthPhotoPath.value!.existsSync()) {
       final fotoAnakUrl = await uploadFotoAnak(birthPhotoPath.value!);
-      updatedData['birthPhotoUrl'] = fotoAnakUrl;
+      updatedData['urlFotoAnak'] = fotoAnakUrl;
     }
     if (deliveryPhotoPath.value != null &&
         deliveryPhotoPath.value!.existsSync()) {
       final fotoKelahiranUrl = await uploadFotoAnak(deliveryPhotoPath.value!);
-      updatedData['deliveryPhotoUrl'] = fotoKelahiranUrl;
+      updatedData['urlFotoKelahiran'] = fotoKelahiranUrl;
     }
     if (footPrintPhotoPath.value != null &&
         footPrintPhotoPath.value!.existsSync()) {
       final fotoJejakKakiUrl = await uploadFotoAnak(footPrintPhotoPath.value!);
-      updatedData['footPrintPhotoUrl'] = fotoJejakKakiUrl;
+      updatedData['tinggiAnakLahir'] = fotoJejakKakiUrl;
     }
 
     try {
@@ -172,6 +172,7 @@ class EditJurnalKelahiranAnakController extends GetxController {
           .update(updatedData);
       print('Data anak berhasil diperbarui.');
       update();
+      Get.back();
       Get.back();
       Get.back();
       Get.snackbar(

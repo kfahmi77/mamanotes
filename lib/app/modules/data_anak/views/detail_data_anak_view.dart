@@ -422,7 +422,11 @@ class CardAnakWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          SizedBox(
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: red, width: 4.r),
+              borderRadius: BorderRadius.circular(4.r),
+            ),
             width: 320.w,
             height: 200.h,
             child: Stack(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mamanotes/app/data/common/style.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../../controllers/kolase1_controller.dart';
@@ -25,27 +26,28 @@ class Kolase1View extends GetView<Kolase1Controller> {
               onTap: () {
                 Get.back();
               },
-              child: const Text(
+              child: Text(
                 'kembali',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                  color: Colors.black,
+                style: redTextStyle.copyWith(
+                  color: Colors.white,
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () async {
-                controller.uploadScreenshot();
+              onTap: () {
+                if (controller.isSaving.value != true) {
+                  controller.saveData();
+                }
               },
-              child: const Text(
-                'Simpan',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
-              ),
+              child: Obx(() {
+                return Text(
+                    controller.isSaving.value != true
+                        ? 'Simpan'
+                        : 'Menyimpan...',
+                    style: redTextStyle.copyWith(
+                      color: Colors.white,
+                    ));
+              }),
             ),
           ],
         ),

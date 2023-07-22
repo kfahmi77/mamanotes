@@ -100,9 +100,9 @@ class PdfPreviewPage extends StatelessWidget {
 
     if (snapshot.exists) {
       final KelahiranAnak item = KelahiranAnak.fromJson(data!);
-      final fotoKelahiran = await networkImage(item.deliveryPhotoUrl);
-      final fotoKaki = await networkImage(item.footPrintPhotoUrl);
-      final fotoBayi = await networkImage(item.birthPhotoUrl);
+      final fotoKelahiran = await networkImage(item.urlFotoKelahiran);
+      final fotoKaki = await networkImage(item.urlFotoCapKaki);
+      final fotoBayi = await networkImage(item.urlFotoAnak);
       doc.addPage(
         pw.MultiPage(
           theme: pw.ThemeData.withFont(
@@ -153,7 +153,7 @@ class PdfPreviewPage extends StatelessWidget {
               ),
               child: pw.Column(
                 children: [
-                  rowKelahiranPdf(waktuIcon, item.birthTime),
+                  rowKelahiranPdf(waktuIcon, item.waktuLahir),
                   pw.Divider(
                     thickness: 2,
                     color: PdfColor.fromInt(white.value),
@@ -161,7 +161,7 @@ class PdfPreviewPage extends StatelessWidget {
                     endIndent: 10.h,
                     indent: 10,
                   ),
-                  rowKelahiranPdf(tempatIcon, item.birthPlace),
+                  rowKelahiranPdf(tempatIcon, item.tempatLahir),
                   pw.Divider(
                     thickness: 2,
                     color: PdfColor.fromInt(white.value),
@@ -169,7 +169,7 @@ class PdfPreviewPage extends StatelessWidget {
                     endIndent: 10.h,
                     indent: 10,
                   ),
-                  rowKelahiranPdf(dokterIcon, item.medicalPersonnel),
+                  rowKelahiranPdf(dokterIcon, item.petugasKesehatan),
                   pw.Divider(
                     thickness: 2,
                     color: PdfColor.fromInt(white.value),
@@ -177,7 +177,7 @@ class PdfPreviewPage extends StatelessWidget {
                     endIndent: 10.h,
                     indent: 10,
                   ),
-                  rowKelahiranPdf(tinggiIcon, '${item.height} cm'),
+                  rowKelahiranPdf(tinggiIcon, '${item.tinggiAnakLahir} cm'),
                   pw.Divider(
                     thickness: 2,
                     color: PdfColor.fromInt(white.value),
@@ -185,7 +185,7 @@ class PdfPreviewPage extends StatelessWidget {
                     endIndent: 10.h,
                     indent: 10,
                   ),
-                  rowKelahiranPdf(beratIcon, '${item.weight} kg'),
+                  rowKelahiranPdf(beratIcon, '${item.beratAnakLahir} kg'),
                   pw.Divider(
                     thickness: 2,
                     color: PdfColor.fromInt(white.value),
@@ -193,7 +193,7 @@ class PdfPreviewPage extends StatelessWidget {
                     endIndent: 10.h,
                     indent: 10,
                   ),
-                  rowKelahiranPdf(ayahIcon, item.fatherPrayer),
+                  rowKelahiranPdf(ayahIcon, item.doaAyah),
                   pw.Divider(
                     thickness: 2,
                     color: PdfColor.fromInt(white.value),
@@ -201,7 +201,7 @@ class PdfPreviewPage extends StatelessWidget {
                     endIndent: 10.h,
                     indent: 10,
                   ),
-                  rowKelahiranPdf(ibuIcon, item.motherPrayer),
+                  rowKelahiranPdf(ibuIcon, item.doaIbu),
                   pw.Divider(
                     thickness: 2,
                     color: PdfColor.fromInt(white.value),

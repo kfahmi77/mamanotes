@@ -15,13 +15,25 @@ class EditProfileView extends GetView<EditProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: background,
+        backgroundColor: red,
         elevation: 0,
         title: Text(
           'Edit Profil',
           style: redTextStyle.copyWith(
               fontWeight: bold, fontSize: 16.0, color: white),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              controller.validateAndSaveChanges(context);
+            },
+            icon: Icon(
+              FontAwesomeIcons.floppyDisk,
+              size: 24.0,
+              color: white,
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -146,17 +158,6 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                 ),
               ],
-            ),
-            SizedBox(height: 32.0.w),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: red,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              onPressed: () => controller.validateAndSaveChanges(context),
-              child: Text('Simpan Perubahan', style: TextStyle(color: white)),
             ),
           ],
         ),

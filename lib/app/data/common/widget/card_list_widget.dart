@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../style.dart';
 
-
-
 Widget listCardNetworAnakkWidget(
     {required String text1, required image, required Function() onTap}) {
   return InkWell(
@@ -31,13 +29,14 @@ Widget listCardNetworAnakkWidget(
                       ),
                       child: CachedNetworkImage(
                         imageUrl: image,
-                        placeholder: (context, url) => const Center(child: CircularProgressIndicator(),),
-                          fit: BoxFit
-                              .cover, // Make the image fill the available space
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
                         ),
+                        fit: BoxFit
+                            .cover, // Make the image fill the available space
                       ),
                     ),
-                  
+                  ),
                 ],
               ),
             ),
@@ -45,7 +44,7 @@ Widget listCardNetworAnakkWidget(
           Container(
             height: 30.h,
             decoration: BoxDecoration(
-              color: background,
+              color: red,
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -90,7 +89,7 @@ Widget listCardWidget(
           Container(
               height: 30.h,
               decoration: BoxDecoration(
-                  color: background,
+                  color: red,
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20))),

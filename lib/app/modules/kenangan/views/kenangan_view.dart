@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart'
     show CachedNetworkImage;
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,10 +61,10 @@ class KenanganView extends GetView<KenanganController> {
                       controller.dataList.isNotEmpty) {
                     final groupedData = groupBy(
                         controller.dataList,
-                        (data) => DateFormat('d MMM yy', 'id_ID')
+                        (data) => DateFormat('d MMMM yyyy', 'id_ID')
                             .format(data.createdAt.toDate()));
                     final keys = groupedData.keys.toList()
-                      ..sort((a, b) => b.compareTo(a))
+                      ..sort((a, b) => a.compareTo(b))
                       ..toList();
                     return ListView.builder(
                         itemCount: groupedData.length,
@@ -283,9 +284,12 @@ class KenanganView extends GetView<KenanganController> {
   List<Widget> _buildActions() {
     return [
       IconButton(
-        icon: FaIcon(_isSearchVisible.value
-            ? FontAwesomeIcons.x
-            : FontAwesomeIcons.magnifyingGlass),
+        icon: FaIcon(
+          _isSearchVisible.value
+              ? FontAwesomeIcons.x
+              : FontAwesomeIcons.magnifyingGlass,
+          color: red,
+        ),
         onPressed: () {
           _isSearchVisible.toggle();
         },
@@ -299,8 +303,9 @@ class KenanganView extends GetView<KenanganController> {
         Expanded(
           child: TextField(
             controller: controller.searchController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Cari',
+              hintStyle: TextStyle(color: red),
               border: InputBorder.none,
             ),
             onChanged: (value) {
@@ -309,7 +314,10 @@ class KenanganView extends GetView<KenanganController> {
           ),
         ),
         IconButton(
-          icon: const Icon(Icons.clear),
+          icon: Icon(
+            Icons.clear,
+            color: red,
+          ),
           onPressed: () {
             controller.clearSearch();
           },

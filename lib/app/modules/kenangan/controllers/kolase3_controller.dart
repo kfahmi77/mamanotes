@@ -17,6 +17,7 @@ class Kolase3Controller extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final User? auth = FirebaseAuth.instance.currentUser;
   final TextEditingController captionController = TextEditingController();
+  var isSaving = false.obs;
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -39,15 +40,36 @@ class Kolase3Controller extends GetxController {
     }
   }
 
+  Future<void> saveData() async {
+    if (isSaving.value) return;
+
+    isSaving.value = true;
+
+    try {
+      await uploadScreenshot();
+      Get.snackbar(
+        'Berhasil',
+        'Kolase berhasil disimpan',
+      );
+    } catch (error) {
+      Get.snackbar(
+        'Gagal',
+        'Terjadi kesalahan saat menyimpan kolase',
+      );
+    } finally {
+      isSaving.value = false;
+    }
+  }
+
   Future<void> uploadScreenshot() async {
-       if (captionController.text.isEmpty) {
+    if (captionController.text.isEmpty) {
       Get.snackbar(
         'Gagal',
         'Caption tidak boleh kosong',
       );
       return;
     }
-     Get.dialog(
+    Get.dialog(
       const Center(
         child: CircularProgressIndicator(),
       ),
@@ -78,10 +100,7 @@ class Kolase3Controller extends GetxController {
       // Kembali ke halaman sebelumnya
       Get.back();
       Get.back();
-      Get.snackbar(
-        'Berhasil',
-        'Kolase berhasil disimpan',
-      );
+      Get.back();
     }
   }
 }
