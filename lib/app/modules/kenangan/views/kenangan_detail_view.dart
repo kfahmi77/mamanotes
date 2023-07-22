@@ -22,7 +22,7 @@ class _KenanganDetailViewState extends State<KenanganDetailView> {
             tag: 'detailKenangan+${widget.imageUrl}}',
             child: InteractiveViewer(
               panEnabled: true,
-              boundaryMargin: EdgeInsets.all(20),
+              boundaryMargin: const EdgeInsets.all(20),
               minScale: 0.5,
               maxScale: 5.0,
               child: CachedNetworkImage(

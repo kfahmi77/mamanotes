@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:mamanotes/app/modules/jurnal_anak/bulan_pertama_anak/models/bulan_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/tahun_pertama_anak/models/tahun_pertama_anak_model.dart';
 
 import '../../../../data/common/style.dart';

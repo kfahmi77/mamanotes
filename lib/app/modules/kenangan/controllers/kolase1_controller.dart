@@ -85,7 +85,7 @@ class Kolase1Controller extends GetxController {
       await ref.putData(imageBytes);
 
       String downloadURL = await ref.getDownloadURL();
-      print('Screenshot URL: $downloadURL');
+      debugPrint('Screenshot URL: $downloadURL');
 
       // Simpan URL ke Firestore dengan nama koleksi anak
       var hasil = await firestore.collection("kenangan").add({

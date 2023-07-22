@@ -46,10 +46,8 @@ class EditKataPertamaAnakController extends GetxController {
     }
     if (audioFile.value != null) {
       FirebaseStorage storage = FirebaseStorage.instance;
-      Reference audioRef = storage
-          .ref()
-          .child('audios')
-          .child(DateTime.now().toString() + '.mp3');
+      Reference audioRef =
+          storage.ref().child('audios').child('${DateTime.now()}.mp3');
 
       UploadTask uploadTask = audioRef.putFile(audioFile.value!);
 
@@ -76,7 +74,7 @@ class EditKataPertamaAnakController extends GetxController {
       Get.back();
       Get.snackbar('Sukses', 'Perubahan berhasil disimpan');
     }).catchError((error) {
-      print('Error: $error');
+      debugPrint('Error: $error');
       // Penanganan kesalahan jika perubahan tidak berhasil disimpan
     });
   }

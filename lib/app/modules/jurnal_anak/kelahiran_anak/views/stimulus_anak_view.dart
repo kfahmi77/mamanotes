@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,7 +10,6 @@ import '../../../../data/common/widget/custom_card.dart';
 import '../../../../data/common/widget/detail_foto_widget.dart';
 import '../controllers/kelahiran_anak_controller.dart';
 import '../models/kelahiran_anak_model.dart';
-import 'add_jurnal_kelahiran_anak_view.dart';
 import 'edit_kelahiran_anak.dart';
 
 class KelahiranView extends GetView<StimulusAnakController> {

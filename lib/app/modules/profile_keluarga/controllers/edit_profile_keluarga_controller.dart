@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mamanotes/app/modules/profile_keluarga/models/profile_keluarga_model.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../../../data/common/style.dart';
 
 class EditProfileKeluargaController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -103,7 +101,7 @@ class EditProfileKeluargaController extends GetxController {
           .collection('keluarga')
           .doc(keluarga.docId)
           .update(updatedData);
-      print('Data anak berhasil diperbarui.');
+      debugPrint('Data anak berhasil diperbarui.');
       Get.back();
       Get.snackbar(
         'Berhasil',
@@ -112,7 +110,7 @@ class EditProfileKeluargaController extends GetxController {
         colorText: Colors.white,
       );
     } catch (e) {
-      print('Terjadi kesalahan saat memperbarui data anak: $e');
+      debugPrint('Terjadi kesalahan saat memperbarui data anak: $e');
       // Tampilkan pesan atau handling error lainnya
     }
   }

@@ -71,7 +71,7 @@ class Ayah {
 
   Ayah copyWith({required String foto}) {
     return Ayah(
-      nama: this.nama,
+      nama: nama,
       foto: foto,
     );
   }
@@ -102,7 +102,7 @@ class Ibu {
 
   Ibu copyWith({required String foto}) {
     return Ibu(
-      nama: this.nama,
+      nama: nama,
       foto: foto,
     );
   }

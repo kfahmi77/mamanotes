@@ -268,7 +268,7 @@ class KenanganView extends GetView<KenanganController> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => KolaseFotoView(),
+              builder: (context) => const KolaseFotoView(),
             ),
           );
           // Get.toNamed(Routes.addKenangan);

@@ -170,7 +170,7 @@ class EditJurnalKelahiranAnakController extends GetxController {
           .collection('jurnal_anak')
           .doc(kelahiranAnakId)
           .update(updatedData);
-      print('Data anak berhasil diperbarui.');
+      debugPrint('Data anak berhasil diperbarui.');
       update();
       Get.back();
       Get.back();
@@ -182,7 +182,7 @@ class EditJurnalKelahiranAnakController extends GetxController {
         colorText: Colors.white,
       );
     } catch (e) {
-      print('Terjadi kesalahan saat memperbarui data anak: $e');
+      debugPrint('Terjadi kesalahan saat memperbarui data anak: $e');
       // Tampilkan pesan atau handling error lainnya
     }
   }

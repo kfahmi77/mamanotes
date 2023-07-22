@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/models/gigi_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/views/edit_gigi_pertama_anak.dart';
-import 'package:mamanotes/app/modules/profile_keluarga/views/detail_profile_keluarga_view.dart';
 
 import '../../../../data/common/style.dart';
 import '../../../../data/common/widget/detail_foto_widget.dart';

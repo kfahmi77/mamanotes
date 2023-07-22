@@ -48,7 +48,7 @@ class EditBulanPertamaAnakController extends GetxController {
       // Mendapatkan URL gambar sebelumnya
 
       String previousImageUrl = '';
-      print('URL gambar sebelumnya: $previousImageUrl');
+      debugPrint('URL gambar sebelumnya: $previousImageUrl');
       if (_downloadURL.isNotEmpty) {
         previousImageUrl = _downloadURL;
       }
@@ -66,14 +66,14 @@ class EditBulanPertamaAnakController extends GetxController {
       // Menyimpan URL gambar baru ke Firestore
       await saveImageUrlToFirestore(_downloadURL, anakId, bulanPertamaAnakId);
 
-      print('URL unduhan gambar: $_downloadURL');
+      debugPrint('URL unduhan gambar: $_downloadURL');
 
       Get.back();
       Get.back();
       Get.back();
       Get.snackbar('Berhasil', 'Data  Anak Duduk berhasil diupdate');
     } catch (e) {
-      print('Error updating image: $e');
+      debugPrint('Error updating image: $e');
       Get.back();
       Get.snackbar('Gagal', 'Terjadi kesalahan saat mengupdate gambar');
     }
@@ -85,9 +85,9 @@ class EditBulanPertamaAnakController extends GetxController {
       firebase_storage.Reference storageRef =
           firebase_storage.FirebaseStorage.instance.refFromURL(imageUrl);
       await storageRef.delete();
-      print('Gambar sebelumnya berhasil dihapus dari Firebase Storage');
+      debugPrint('Gambar sebelumnya berhasil dihapus dari Firebase Storage');
     } catch (e) {
-      print(
+      debugPrint(
           'Terjadi kesalahan saat menghapus gambar dari Firebase Storage: $e');
     }
   }

@@ -17,7 +17,7 @@ class Kolase4Controller extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final User? auth = FirebaseAuth.instance.currentUser;
   final TextEditingController captionController = TextEditingController();
-    var isSaving = false.obs;
+  var isSaving = false.obs;
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -39,7 +39,8 @@ class Kolase4Controller extends GetxController {
       imagePaths[index] = pickedFile.path;
     }
   }
- Future<void> saveData() async {
+
+  Future<void> saveData() async {
     if (isSaving.value) return;
 
     isSaving.value = true;
@@ -59,15 +60,16 @@ class Kolase4Controller extends GetxController {
       isSaving.value = false;
     }
   }
+
   Future<void> uploadScreenshot() async {
-       if (captionController.text.isEmpty) {
+    if (captionController.text.isEmpty) {
       Get.snackbar(
         'Gagal',
         'Caption tidak boleh kosong',
       );
       return;
     }
-     Get.dialog(
+    Get.dialog(
       const Center(
         child: CircularProgressIndicator(),
       ),
@@ -81,7 +83,8 @@ class Kolase4Controller extends GetxController {
       await ref.putData(imageBytes);
 
       String downloadURL = await ref.getDownloadURL();
-      print('Screenshot URL: $downloadURL');
+      debugPrint('Screenshot URL: $downloadURL');
+      ('Screenshot URL: $downloadURL');
 
       // Simpan URL ke Firestore dengan nama koleksi anak
       var hasil = await firestore.collection("kenangan").add({
@@ -98,8 +101,7 @@ class Kolase4Controller extends GetxController {
       // Kembali ke halaman sebelumnya
       Get.back();
       Get.back();
-        Get.back();
-  
+      Get.back();
     }
   }
 }

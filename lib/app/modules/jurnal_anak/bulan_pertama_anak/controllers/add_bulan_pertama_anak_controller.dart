@@ -41,14 +41,14 @@ class AddBulanPertamaAnakController extends GetxController {
       // Menyimpan URL gambar baru ke Firestore
       await saveImageUrlToFirestore(_downloadURL, anakId, dudukAnakId);
 
-      print('URL unduhan gambar: $_downloadURL');
+      debugPrint('URL unduhan gambar: $_downloadURL');
 
       Get.back();
       Get.back();
       Get.back();
       Get.snackbar('Berhasil', 'Data Bulan Pertama Anak  berhasil ditambahkan');
     } catch (e) {
-      print('Error updating image: $e');
+      debugPrint('Error updating image: $e');
       Get.back();
       Get.snackbar('Gagal', 'Terjadi kesalahan saat mengupdate gambar');
     }

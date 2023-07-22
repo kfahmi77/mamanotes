@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/kata_pertama_anak/views/kata_pertama_anak_view.dart';
@@ -57,7 +59,7 @@ class KataPertamaAnakController extends GetxController {
       } catch (e) {
         // Gagal mendownload file
         isPlaying.value = false;
-        print("Gagal mendownload file: $e");
+        debugPrint("Gagal mendownload file: $e");
       }
     }
   }
@@ -77,10 +79,10 @@ class KataPertamaAnakController extends GetxController {
         final kataPertamaAnak = KataPertamaAnakModel.fromJson(data);
         showKelahiranAnakView(kataPertamaAnak);
       } else {
-        print('dokumen tidak ditemukan');
+        debugPrint('dokumen tidak ditemukan');
       }
     } catch (e) {
-      print('Error fetching data: $e');
+      debugPrint('Error fetching data: $e');
     }
   }
 

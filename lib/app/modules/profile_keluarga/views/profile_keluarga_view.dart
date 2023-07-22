@@ -13,9 +13,7 @@ import 'package:mamanotes/app/modules/profile_keluarga/views/edit_profile_keluar
 import '../../../data/common/style.dart';
 import '../../../data/common/widget/detail_foto_widget.dart';
 import '../../../data/common/widget/logo_widget.dart';
-import '../../jurnal_anak/kelahiran_anak/views/stimulus_anak_view.dart';
 import '../models/profile_keluarga_model.dart';
-import 'detail_profile_keluarga_view.dart';
 
 class ProfileKeluargaView extends StatelessWidget {
   const ProfileKeluargaView({super.key});
@@ -53,7 +51,10 @@ class ProfileKeluargaView extends StatelessWidget {
                             ),
                         binding: ProfileKeluargaBinding());
                   },
-                  icon: const Icon(FontAwesomeIcons.pencil),
+                  icon: Icon(
+                    FontAwesomeIcons.pencil,
+                    color: red,
+                  ),
                 ),
               ],
               elevation: 0,

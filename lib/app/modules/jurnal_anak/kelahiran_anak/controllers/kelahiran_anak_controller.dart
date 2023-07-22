@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/kelahiran_anak/bindings/stimulus_anak_binding.dart';
 
@@ -27,10 +28,10 @@ class StimulusAnakController extends GetxController {
         final kelahiranAnak = KelahiranAnak.fromJson(data);
         showKelahiranAnakView(kelahiranAnak);
       } else {
-        print('dokumen tidak ditemukan');
+        debugPrint('dokumen tidak ditemukan');
       }
     } catch (e) {
-      print('Error fetching data: $e');
+      debugPrint('Error fetching data: $e');
     }
   }
 

@@ -83,7 +83,7 @@ class EditDataAnakController extends GetxController {
           .collection('anak')
           .doc(anak.docId)
           .update(updatedData);
-      print('Data anak berhasil diperbarui.');
+      debugPrint('Data anak berhasil diperbarui.');
       Get.back();
       Get.snackbar(
         'Berhasil',
@@ -92,7 +92,7 @@ class EditDataAnakController extends GetxController {
         colorText: white,
       );
     } catch (e) {
-      print('Terjadi kesalahan saat memperbarui data anak: $e');
+      debugPrint('Terjadi kesalahan saat memperbarui data anak: $e');
       // Tampilkan pesan atau handling error lainnya
     }
   }

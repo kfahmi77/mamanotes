@@ -27,7 +27,7 @@ class _KolaseFotoViewState extends State<KolaseFotoView> {
         Get.off(() => const Kolase1View(), binding: KenanganBinding());
         break;
       case 2:
-        Get.to(() => Kolase2View(), binding: KenanganBinding());
+        Get.to(() => const Kolase2View(), binding: KenanganBinding());
         break;
       case 3:
         Get.to(() => const Kolase3View(), binding: KenanganBinding());

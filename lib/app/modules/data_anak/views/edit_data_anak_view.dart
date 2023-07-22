@@ -8,7 +8,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mamanotes/app/data/common/style.dart';
-import 'package:mamanotes/app/data/common/widget/logo_widget.dart';
 
 import '../../home/models/anak_model.dart';
 import '../controllers/edit_data_anak_controller.dart';

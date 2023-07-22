@@ -64,7 +64,7 @@ class EditProfileController extends GetxController {
       }
     } catch (error) {
       Get.snackbar('Error', 'Failed to update profile.');
-      print('Error updating profile: $error');
+      debugPrint('Error updating profile: $error');
     }
   }
 

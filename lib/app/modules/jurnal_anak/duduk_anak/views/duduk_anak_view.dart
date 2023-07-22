@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/duduk_anak/models/duduk_anak_model.dart';
-import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/models/merangkak_anak_model.dart';
 
 import '../../../../data/common/style.dart';
 import '../../../../data/common/widget/detail_foto_widget.dart';

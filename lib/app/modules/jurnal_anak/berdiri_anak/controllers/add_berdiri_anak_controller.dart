@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -47,14 +45,14 @@ class AddBerdiriAnakController extends GetxController {
       // Menyimpan URL gambar baru ke Firestore
       await saveImageUrlToFirestore(_downloadURL, anakId, gigianAnakId);
 
-      print('URL unduhan gambar: $_downloadURL');
+      debugPrint('URL unduhan gambar: $_downloadURL');
 
       Get.back();
       Get.back();
       Get.back();
       Get.snackbar('Berhasil', 'Data Gigi pertama Anak berhasil diupdate');
     } catch (e) {
-      print('Error updating image: $e');
+      debugPrint('Error updating image: $e');
       Get.back();
       Get.snackbar('Gagal', 'Terjadi kesalahan saat mengupdate gambar');
     }

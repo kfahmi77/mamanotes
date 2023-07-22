@@ -10,7 +10,6 @@ import 'package:mamanotes/app/modules/jurnal_anak/gigi_pertama_anak/models/gigi_
 import 'package:mamanotes/app/modules/jurnal_anak/merangkak_anak/models/merangkak_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/tahun_pertama_anak/models/tahun_pertama_anak_model.dart';
 import 'package:mamanotes/app/modules/jurnal_anak/kata_pertama_anak/models/kata_pertama_anak_model.dart';
-import 'package:mamanotes/app/modules/jurnal_anak/kata_pertama_anak/views/kata_pertama_anak_view.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 

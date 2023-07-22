@@ -280,7 +280,7 @@ class GridJurnalWidget extends StatelessWidget {
             text1: 'Kata Pertamaku',
             image: 'assets/images/first_word.png',
             onTap: () {
-              Get.to(() => KataPertamaView(),
+              Get.to(() => const KataPertamaView(),
                   binding: KataPertamaAnakBinding(
                       documentId: controller.getSelectedAnak()?.docId ?? anakId,
                       kataPertamaAnakId:

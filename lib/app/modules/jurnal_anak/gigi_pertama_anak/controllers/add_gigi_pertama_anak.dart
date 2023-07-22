@@ -1,13 +1,10 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../models/gigi_pertama_anak_model.dart';
 
 class AddGigiPertamaAnakController extends GetxController {
  final fotoGigiAnak = Rx<File?>(null);
@@ -48,14 +45,14 @@ class AddGigiPertamaAnakController extends GetxController {
       // Menyimpan URL gambar baru ke Firestore
       await saveImageUrlToFirestore(_downloadURL, anakId, gigianAnakId);
 
-      print('URL unduhan gambar: $_downloadURL');
+      debugPrint('URL unduhan gambar: $_downloadURL');
 
       Get.back();
       Get.back();
       Get.back();
       Get.snackbar('Berhasil', 'Data Gigi pertama Anak berhasil diupdate');
     } catch (e) {
-      print('Error updating image: $e');
+      debugPrint('Error updating image: $e');
       Get.back();
       Get.snackbar('Gagal', 'Terjadi kesalahan saat mengupdate gambar');
     }
@@ -67,9 +64,9 @@ class AddGigiPertamaAnakController extends GetxController {
       firebase_storage.Reference storageRef =
           firebase_storage.FirebaseStorage.instance.refFromURL(imageUrl);
       await storageRef.delete();
-      print('Gambar sebelumnya berhasil dihapus dari Firebase Storage');
+      debugPrint('Gambar sebelumnya berhasil dihapus dari Firebase Storage');
     } catch (e) {
-      print(
+      debugPrint(
           'Terjadi kesalahan saat menghapus gambar dari Firebase Storage: $e');
     }
   }

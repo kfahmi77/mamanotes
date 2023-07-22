@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../home/models/anak_model.dart';
@@ -17,17 +18,17 @@ AnakModel? getSelectedAnak() {
 
   void previewJurnal() {
     // Implementasi logika untuk tombol "Preview Jurnal"
-    print('Mengambil data jurnal anak...');
+    debugPrint('Mengambil data jurnal anak...');
   }
 
   void buatJurnal() {
     // Implementasi logika untuk tombol "Buat Jurnal"
-    print('Menyimpan data jurnal anak...');
+    debugPrint('Menyimpan data jurnal anak...');
   }
 
   void navigateTo(String route) {
     // Implementasi logika navigasi ke halaman tertentu
-    print('Navigasi ke halaman $route...');
+    debugPrint('Navigasi ke halaman $route...');
   }
 
 

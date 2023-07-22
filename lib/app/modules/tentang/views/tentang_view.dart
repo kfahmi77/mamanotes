@@ -33,7 +33,7 @@ class TentangView extends GetView<TentangController> {
                 const SizedBox(height: 8),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Mamanote adalah aplikasi yang dibuat untuk membantu orang tua dalam mencatat perkembangan anaknya. Tujuan dari aplikasi ini adalah untuk membantu orang tua dalam mencatat perkembangan anaknya. Dengan adanya aplikasi ini, orang tua dapat mencatat perkembangan anaknya secara digital dan dapat diakses kapanpun dan dimanapun.',
                       style: redTextStyle.copyWith(

@@ -262,6 +262,7 @@ class Kolase1View extends GetView<Kolase1Controller> {
                           ),
                           Obx(
                             () => Text(
+                              // ignore: unnecessary_null_comparison
                               controller.selectedDate.value == null
                                   ? 'Select Date'
                                   : DateFormat.yMd('id').format(

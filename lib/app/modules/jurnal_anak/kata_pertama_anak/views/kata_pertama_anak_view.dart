@@ -62,7 +62,7 @@ class KataPertamaView extends GetView<KataPertamaAnakController> {
                       ),
                     );
                   },
-                  child: Text('Tambah Data'),
+                  child: const Text('Tambah Data'),
                 ),
               ],
             ),

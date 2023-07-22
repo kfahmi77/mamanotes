@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pdf/widgets.dart' as pw;
 import '../style.dart';
 
 class CustomCard extends StatelessWidget {

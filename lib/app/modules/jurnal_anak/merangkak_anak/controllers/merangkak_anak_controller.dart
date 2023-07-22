@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../models/merangkak_anak_model.dart';
@@ -26,10 +27,10 @@ class MerangkakAnakController extends GetxController {
         final kelahiranAnak = MerangkakAnakModel.fromJson(data);
         showKelahiranAnakView(kelahiranAnak);
       } else {
-        print('dokumen tidak ditemukan');
+        debugPrint('dokumen tidak ditemukan');
       }
     } catch (e) {
-      print('Error fetching data: $e');
+      debugPrint('Error fetching data: $e');
     }
   }
 
