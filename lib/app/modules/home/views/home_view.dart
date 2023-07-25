@@ -232,23 +232,25 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                     width: MediaQuery.of(context).size.width / 1.2,
                     child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                       stream: FirebaseFirestore.instance
-                          .collection('anak')
+                          .collection('keluarga')
                           .where('uid', isEqualTo: user!.uid)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return const Center(
-                              child:
-                                  CircularProgressIndicator()); // Show a loading indicator while waiting for the data
+                            child: CircularProgressIndicator(),
+                          ); // Show a loading indicator while waiting for the data
                         }
 
                         if (snapshot.hasError) {
                           return Text(
-                              'Error: ${snapshot.error}'); // Show an error message if there's an error
+                            'Error: ${snapshot.error}',
+                          ); // Show an error message if there's an error
                         }
 
-                        if (!snapshot.hasData) {
+                        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                          // Check if there's no data or the snapshot's data list is empty
                           return Column(
                             children: [
                               SizedBox(
@@ -270,7 +272,8 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                                 height: 30,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.red),
+                                    backgroundColor: red,
+                                  ),
                                   onPressed: () {
                                     Get.to(const ProfileKeluargaView());
                                   },
@@ -288,6 +291,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                           );
                         }
 
+                        // If data is available, display the content for the family profile
                         return Column(
                           children: [
                             ClipRRect(
@@ -314,7 +318,8 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                               height: 30.h,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: red),
+                                  backgroundColor: red,
+                                ),
                                 onPressed: () {
                                   Get.to(const ProfileKeluargaView());
                                 },
