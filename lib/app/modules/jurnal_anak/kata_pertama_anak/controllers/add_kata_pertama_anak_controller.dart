@@ -32,13 +32,12 @@ class AddKataPertamaAnakController extends GetxController {
         'Error',
         'Pilih file audio dan masukkan kata pertama',
       );
-      if (audioFile.value!.lengthSync() > maxSizeInBytes) {
-        Get.snackbar(
-          'Error',
-          'Ukuran file audio melebihi 5 MB',
-        );
-      }
-      return;
+    }
+    if (audioFile.value!.lengthSync() > maxSizeInBytes) {
+      Get.snackbar(
+        'Error',
+        'Ukuran file audio melebihi 5 MB',
+      );
     }
 
     isUploading.value = true;

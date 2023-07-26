@@ -77,6 +77,7 @@ class AddProfileKeluargaView extends GetView<AddProfileKeluargaController> {
                 ),
                 ElevatedButton(
                   onPressed: controller.pickFotoAyah,
+                    style: ElevatedButton.styleFrom(backgroundColor: red),
                   child: const Text('Pilih Foto Ayah'),
                 ),
                 Obx(() {
@@ -97,6 +98,7 @@ class AddProfileKeluargaView extends GetView<AddProfileKeluargaController> {
                   },
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: red),
                   onPressed: controller.pickFotoIbu,
                   child: const Text('Pilih Foto Ibu'),
                 ),

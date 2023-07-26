@@ -202,6 +202,7 @@ class SignupView extends GetView<SignupController> {
                               if (controller.isLoading.isFalse) {
                                 if (controller
                                         .emailController.text.isNotEmpty &&
+                                    controller.nameController.text.isNotEmpty &&
                                     controller
                                         .passwordController.text.isNotEmpty) {
                                   controller.isLoading(true);

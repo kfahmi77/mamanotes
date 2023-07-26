@@ -49,7 +49,6 @@ class AddGigiPertamaAnakController extends GetxController {
 
       Get.back();
       Get.back();
-      Get.back();
       Get.snackbar('Berhasil', 'Data Gigi pertama Anak berhasil diupdate');
     } catch (e) {
       debugPrint('Error updating image: $e');

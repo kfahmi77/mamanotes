@@ -43,7 +43,7 @@ class AddBulanPertamaAnakController extends GetxController {
 
       debugPrint('URL unduhan gambar: $_downloadURL');
 
-      Get.back();
+
       Get.back();
       Get.back();
       Get.snackbar('Berhasil', 'Data Bulan Pertama Anak  berhasil ditambahkan');

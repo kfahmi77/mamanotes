@@ -45,7 +45,6 @@ class AddTahunPertamaAnakController extends GetxController {
 
       Get.back();
       Get.back();
-      Get.back();
       Get.snackbar('Berhasil', 'Data Tahun Pertama Anak  berhasil ditambahkan');
     } catch (e) {
       debugPrint('Error updating image: $e');

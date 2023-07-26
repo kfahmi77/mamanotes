@@ -45,7 +45,6 @@ class AddDudukAnakController extends GetxController {
 
       Get.back();
       Get.back();
-      Get.back();
       Get.snackbar('Berhasil', 'Data Anak Duduk berhasil ditambahkan');
     } catch (e) {
       debugPrint('Error updating image: $e');

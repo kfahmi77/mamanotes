@@ -49,7 +49,6 @@ class AddMerangkakAnakController extends GetxController {
 
       Get.back();
       Get.back();
-      Get.back();
       Get.snackbar('Berhasil', 'Data Anak Merangkak berhasil ditambahkan');
     } catch (e) {
       debugPrint('Error updating image: $e');

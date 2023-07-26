@@ -32,6 +32,7 @@ class AuthController extends GetxController {
 
   Future<Map<String, dynamic>> login(String email, String pass) async {
     try {
+      isLoading.value = true;
       UserCredential userCredential =
           await auth.signInWithEmailAndPassword(email: email, password: pass);
       if (userCredential.user!.emailVerified == true) {
@@ -77,7 +78,7 @@ class AuthController extends GetxController {
           ],
         );
       }
-
+      isLoading.value = false;
       return {
         "error": false,
         "message": "Berhasil login.",
@@ -136,8 +137,12 @@ class AuthController extends GetxController {
   Future<Map<String, dynamic>> register(
       String email, String password, String name) async {
     try {
+      isLoading.value = true;
+
       UserCredential result = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       String imageUrl = await (image.value != null
           ? uploadImage(image.value!, result.user!.uid)
           : uploadDefaultImage(result.user!.uid));
@@ -151,11 +156,15 @@ class AuthController extends GetxController {
       });
       await result.user!.sendEmailVerification();
 
+      isLoading.value = false;
+
       return {
         "error": false,
         "message": "Berhasil daftar.",
       };
     } on FirebaseAuthException catch (e) {
+      isLoading.value = false;
+
       if (e.code == 'wrong-password') {
         return {
           "error": true,
@@ -167,6 +176,8 @@ class AuthController extends GetxController {
         "message": e.toString(),
       };
     } catch (e) {
+      isLoading.value = false;
+
       // Error general
       return {
         "error": true,
@@ -177,20 +188,28 @@ class AuthController extends GetxController {
 
   Future<void> signInWithGoogle() async {
     try {
+      isLoading.value = true;
+
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return;
+      if (googleUser == null) {
+        isLoading.value = false;
+        return;
+      }
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
       await auth.signInWithCredential(credential);
+
+      isLoading.value = false;
+
       Get.offAll(() => const DashboardView());
     } catch (e) {
+      isLoading.value = false;
       debugPrint('Google sign in error: $e');
     }
   }
