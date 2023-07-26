@@ -34,6 +34,7 @@ dependencies:
   audioplayers: ^4.1.0
   pdf: ^3.9.0 
   printing: ^5.4.2
+  fake_cloud_firestore: ^2.4.1+1
 
 dev_dependencies: 
   firebase_auth_mocks: ^0.11.0
